@@ -1,5 +1,4 @@
 import React from 'react'
-import '../App.css'
 import image1 from '../images/logo.png'
 
 function WeatherReport() {
