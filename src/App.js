@@ -4,13 +4,13 @@ import Navbar from "./pages/Navbar.js";
 
 function App() {
 
-
   return (
     <div className="App">
       <div className="Navbar">
         <Navbar />
       </div>
       <div>
+        {/* This will be {Page}*/}
         <WeatherReport />
       </div>
     </div>
