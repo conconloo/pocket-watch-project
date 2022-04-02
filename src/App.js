@@ -1,10 +1,18 @@
 import React from "react";
 import WeatherReport from "./pages/WeatherReport.js";
+import Navbar from "./pages/Navbar.js";
 
 function App() {
+
+
   return (
-    <div>
-      <WeatherReport />
+    <div className="App">
+      <div className="Navbar">
+        <Navbar />
+      </div>
+      <div>
+        <WeatherReport />
+      </div>
     </div>
   );
 }

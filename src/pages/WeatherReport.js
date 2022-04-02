@@ -1,13 +1,9 @@
 import React from 'react'
-import image1 from '../images/logo.png'
+
 
 function WeatherReport() {
   return (
     <div className='weathercontent'>
-    <div className='logo'>
-      <img src={image1} alt='pocket-watch-logo'/>
-      <h1>Pocket-Watch</h1>
-    </div>
     <div className='weather'>
       <h2>Detailed Weather Report</h2>
       <p>(IMG: geolocation pin) in [insert location]</p>
