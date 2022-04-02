@@ -1,6 +1,6 @@
 // Testing script for API
 
-let apiToken = 'HNMbwNTeRNlQPstmylKvUkIzqcAEjRKH';
+let apiToken = "";
 
 const axios = require('axios').get('https://www.ncdc.noaa.gov/cdo-web/api/v2/locations', {
     headers: {
@@ -9,4 +9,3 @@ const axios = require('axios').get('https://www.ncdc.noaa.gov/cdo-web/api/v2/loc
 }).then((response) => {
     console.log(response.data);
 })
-
