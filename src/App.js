@@ -1,15 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from './Navbar';
+import Home from './Home';
 
 function App() {
   return (
-    <div className="Landing">
-      
+    <div className="App">
+      <Navbar />
       <div className="container">
-        <div className="obj">Home</div>
-        <div className="obj">Weather</div>
-        <div className="obj">News</div>
-        <div className="obj">Videos</div>
+        <Home />
       </div>
     </div>
   );
