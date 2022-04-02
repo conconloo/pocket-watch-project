@@ -1,4 +1,4 @@
-import image1 from '../images/logo.png'
+import image1 from './images/logo.png'
 
 const Navbar = () => {
     const handleNav = () => {
