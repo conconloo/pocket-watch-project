@@ -6,6 +6,19 @@ import image1 from './images/logo.png'
 
 const App = () => {
   const [active, setActive] = useState("home");
+  const [hamburgerClicked, sethamburgerClicked] = useState(false);
+
+  const handleHamburger = () => {
+    const dropDownNav = document.getElementById("links");
+    if(!hamburgerClicked){
+      dropDownNav.classList.toggle('show');
+      sethamburgerClicked(true);
+    } else {
+      dropDownNav.classList.toggle('show');
+      sethamburgerClicked(false);
+    }
+
+  }
 
   return (
     <div className="App">
@@ -14,7 +27,10 @@ const App = () => {
           <img src={image1} alt='pocket-watch-logo' onClick={() => setActive("home")}/>
           <h1>Pocket-Watch</h1>
         </div>
-        <div className='links'>
+        <button className="hamburger" id="hamburger" onClick={handleHamburger}>
+          <i className="fa fa-bars"></i>
+        </button>
+        <div className='links' id="links">
           <button onClick={() => setActive("home")} href="/Home">Home</button>
           <button onClick={() => setActive("weatherreport")} href="/Weather">Weather</button>
         </div>

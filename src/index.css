@@ -18,8 +18,6 @@
 
 .weathercontent {
   min-height: 100%;
-  background-color: #e3e3e3;
-  color: #003550;
   margin: 0px;
   padding: 40px;
 }
@@ -35,11 +33,23 @@
   float: left;
   height: 75px;
   width: auto;
+  cursor: pointer;
 }
 
 .Navbar {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   padding: 0 5%;
+}
+
+.hamburger {
+  background-color: transparent;
+  border: 0;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  display: none;
 }
 
 .Navbar .links{
@@ -63,4 +73,36 @@
   background-color: white;
   color: #0c0c17;
   border-radius: 10%;
+  cursor: pointer;
+}
+
+@keyframes growDown{
+  0%{
+    transform: scale(0);
+  }
+  80%{
+    transform: scaleY(1.1);
+  }
+  100%{
+    transform: scaleY(1);
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .Navbar .links{
+    display: none;
+    width: 100%;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .links.show{
+    display: flex;
+    flex-wrap: wrap;
+    animation: growDown 1s ease-in-out forwards;
+  }
+
+
 }
