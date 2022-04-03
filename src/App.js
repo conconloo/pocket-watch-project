@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
-import WeatherData from "./WeatherAPI";
+import React from "react";
+import Card from "./Card.js";
+import { useState } from "react";
+import image1 from './images/logo.png'
 
-function App() {
+
+const App = () => {
+  const [active, setActive] = useState("home");
+  const [hamburgerClicked, sethamburgerClicked] = useState(false);
+
+  const handleHamburger = () => {
+    const dropDownNav = document.getElementById("links");
+    if(!hamburgerClicked){
+      dropDownNav.classList.toggle('show');
+      sethamburgerClicked(true);
+    } else {
+      dropDownNav.classList.toggle('show');
+      sethamburgerClicked(false);
+    }
+
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="Navbar">
+        <div className='logo'>
+          <img src={image1} alt='pocket-watch-logo' onClick={() => setActive("home")}/>
+          <h1>Pocket-Watch</h1>
+        </div>
+        <button className="hamburger" id="hamburger" onClick={handleHamburger}>
+          <i className="fa fa-bars"></i>
+        </button>
+        <div className='links' id="links">
+          <button onClick={() => setActive("home")} href="/Home">Home</button>
+          <button onClick={() => setActive("weatherreport")} href="/Weather">Weather</button>
+        </div>
+      </div>
+      <div className="card">
+        {active === "home" && <Card title = "home"/>}
+        {active === "weatherreport" && <Card title = "weatherreport"/>}   
+      </div>
     </div>
   );
 }
