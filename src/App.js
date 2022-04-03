@@ -33,6 +33,7 @@ const App = () => {
         <div className='links' id="links">
           <button onClick={() => setActive("home")} href="/Home">Home</button>
           <button onClick={() => setActive("weatherreport")} href="/Weather">Weather</button>
+          <button onClick={() => setActive("safetyvideos")} href="/SafetyVideos">Safety Videos</button>
         </div>
       </div>
       <div className="card">
