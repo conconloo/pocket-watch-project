@@ -50,12 +50,14 @@
 }
 
 .Navbar .links button{
+  margin: 2%;
   font: inherit;
   font-size: calc(8pt + 1.2vh + 1.2vw);
   background-color: inherit;
   color: inherit;
   border: inherit;
   transition: 0.5s;
+  border-radius: 10%;
 }
 .Navbar .links button:hover{
   background-color: white;

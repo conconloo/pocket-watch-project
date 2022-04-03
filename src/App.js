@@ -11,7 +11,7 @@ const App = () => {
     <div className="App">
       <div className="Navbar">
         <div className='logo'>
-          <img src={image1} alt='pocket-watch-logo'/>
+          <img src={image1} alt='pocket-watch-logo' onClick={() => setActive("home")}/>
           <h1>Pocket-Watch</h1>
         </div>
         <div className='links'>
