@@ -9,17 +9,26 @@
   background-color: #0c0c17;
 }
 
+.card {
+  display: flex;
+  border: 1px solid white;
+  margin: 10px 0;
+  padding: 20px;
+}
+
 .weathercontent {
+  min-height: 100%;
   background-color: #e3e3e3;
   color: #003550;
   margin: 0px;
   padding: 40px;
 }
 
-.logo {
+.Navbar .logo {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  min-width: 50%;
 }
 
 .logo img {
@@ -30,11 +39,26 @@
 
 .Navbar {
   display: flex;
-  min-width: 100vw;
-  border: 2px solid slateblue;
+  padding: 0 5%;
 }
 
 .Navbar .links{
-  margin-right: 0 auto;
-  right: 0;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  min-width: 50%;
+}
+
+.Navbar .links button{
+  font: inherit;
+  font-size: calc(8pt + 1.2vh + 1.2vw);
+  background-color: inherit;
+  color: inherit;
+  border: inherit;
+  transition: 0.5s;
+}
+.Navbar .links button:hover{
+  background-color: white;
+  color: #0c0c17;
+  border-radius: 10%;
 }

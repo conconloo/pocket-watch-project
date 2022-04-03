@@ -1,14 +1,11 @@
-const Home = () => {
-    const handleClick = () => {
-        console.log('hello, all');
-    }
+import React from "react";
 
-    return ( 
-        <div className="Home">
-            <h2>Home Page</h2>
-            <button onClick={handleClick}>Click me</button>
+const Home = () => {
+    return (
+        <div>
+            This is a Home page.
         </div>
-     );
+    )
 }
- 
+
 export default Home;
