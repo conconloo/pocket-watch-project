@@ -1,0 +1,111 @@
+*{
+  margin: 0;
+  font-family: 'Times New Roman', Times, serif;
+  color: white;
+}
+
+.App {
+  min-height: 100vh;
+  background-color: #0c0c17;
+}
+
+.card {
+  display: flex;
+  border: 1px solid white;
+  margin: 10px 0;
+  padding: 20px;
+}
+
+.weathercontent {
+  min-height: 100%;
+  margin: 0px;
+  padding: 40px;
+}
+
+.Navbar .logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-width: 50%;
+}
+
+.logo img {
+  float: left;
+  height: 75px;
+  width: auto;
+  cursor: pointer;
+}
+
+.Navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5%;
+}
+
+.hamburger {
+  background-color: transparent;
+  border: 0;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  display: none;
+}
+
+.Navbar .links{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  min-width: 50%;
+}
+
+.Navbar .links button{
+  margin: 2%;
+  font: inherit;
+  font-size: calc(8pt + 1.2vh + 1.2vw);
+  background-color: inherit;
+  color: inherit;
+  border: inherit;
+  transition: 0.5s;
+  border-radius: 10%;
+}
+.Navbar .links button:hover{
+  background-color: white;
+  color: #0c0c17;
+  border-radius: 10%;
+  cursor: pointer;
+}
+
+@keyframes growDown{
+  0%{
+    transform: scale(0);
+  }
+  80%{
+    transform: scaleY(1.1);
+  }
+  100%{
+    transform: scaleY(1);
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .Navbar .links{
+    display: none;
+    width: 100%;
+  }
+
+  .Navbar {
+    flex-wrap: wrap;
+  }
+  
+  .hamburger {
+    display: block;
+  }
+
+  .links.show{
+    display: flex;
+    flex-wrap: wrap;
+    animation: growDown 1s ease-in-out forwards;
+  }
+
+
+}
