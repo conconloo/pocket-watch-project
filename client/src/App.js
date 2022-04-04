@@ -38,7 +38,8 @@ const App = () => {
       </div>
       <div className="card">
         {active === "home" && <Card title = "home"/>}
-        {active === "weatherreport" && <Card title = "weatherreport"/>}   
+        {active === "weatherreport" && <Card title = "weatherreport"/>}  
+        {active === "safetyvideos" && <Card title = "safetyvideos"/>} 
       </div>
     </div>
   );
