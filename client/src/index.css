@@ -1,5 +1,5 @@
 *{
-  margin: 0;
+  margin: 0px;
   font-family: 'Times New Roman', Times, serif;
   color: white;
 }
@@ -12,7 +12,7 @@
 .card {
   display: flex;
   border: 1px solid white;
-  margin: 10px 0;
+  margin: 10px 0px;
   padding: 20px;
 }
 
@@ -20,6 +20,37 @@
   min-height: 100%;
   margin: 0px;
   padding: 40px;
+}
+
+.SOS {
+  margin: 0px;
+  align-content: center;
+  padding: 10px;
+}
+
+.SOS h2 {
+  margin: 20px;
+}
+
+.SOS button {
+  margin: 10px 20px;
+  font: inherit;
+  font-size: 20pt;
+  padding: 10px;
+  width: 100%;
+  height: auto;
+  background-color: red;
+  color: inherit;
+  border: inherit;
+  transition: 0.5s;
+  border-radius: 10%;
+}
+
+.SOS button:hover {
+  background-color: rgba(255, 0, 0, 0.404);
+  color: white;
+  border-radius: 10%;
+  cursor: pointer;
 }
 
 .Navbar .logo {
@@ -68,6 +99,7 @@
   transition: 0.5s;
   border-radius: 10%;
 }
+
 .Navbar .links button:hover{
   background-color: white;
   color: #0c0c17;
