@@ -6,27 +6,32 @@ class SafetyVideos extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: []
+            videos: []
         }
     }
 
     componentDidMount() {
-        fetch('api/users')
+        fetch('api/videos')
             .then(res => res.json())
-            .then(users => {
-                this.setState({users : users});
+            .then(videos => {
+                this.setState({videos : videos});
             });
     }
 
     render(){
         return (
-            <ul>
+            <div className="videos">
                 {
-                    this.state.users.map(user =>(
-                        <li>Username {user.username}, Age: {user.age}</li>
+                    this.state.videos.map(video =>(
+                        <a className="video-info" href={video.url}>
+                            <img src = {video.thumbnail.url} />
+                            <h1>{video.title}</h1>
+                            <h2>{video.channelTitle}</h2>
+                            <p>{video.description}</p>                      
+                        </a>
                     ))
                 }
-            </ul>
+            </div>
         )
     }
 }
