@@ -6,6 +6,8 @@ const videos = require('./routes/videos')
 
 app.use('/api/users', users);
 
+app.use('/api/videos', videos); // for videos
+
 app.get('/api', (req, res) => {
     res.send('hello world from express');
 });
