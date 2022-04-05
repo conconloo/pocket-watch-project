@@ -1,35 +1,67 @@
 // figure out a way to always get axios on launch
 const express = require('express');
-const axios = require('axios')
+const axios = require('axios');
+const { response } = require('express');
 const router = express.Router();
 
 let apiKey = '' // remove this before pushing
 
 // actually get API data stuff
+
+/*
+    To get important video info:
+
+    title: response.data.items[index].snippet.title
+    description: response.data.items[index].snippet.description
+    thumbnail: response.data.items[index].snippet.thumbnails
+    channelTitle: response.data.items[index].snippet.channelTitle
+    videoID: response.data.items[index].id.videoId
+*/
+
 async function getYouTubeData () {
+    let maxResults = 25;
+
+    // Uses Axios to get YouTube API data
     const getYouTubeData = axios.create({
         baseURL: 'https://www.googleapis.com/youtube/v3',
         params: {
             part: 'snippet',
-            maxResults: 25,
+            maxResults: maxResults,
             q: 'safety videos',
             key: apiKey
         }
     });
 
     const response = await getYouTubeData.get('/search')
-    console.log(response.data.items[0]) // works!
 
-    // So basically return an array with all of the response data items
+    let videoItemArray = new Array();
 
-    // so response.data.items[index].snippet has title, description, thumbnails, and even the uploader's channel title
-    // response.data.items[index].id.videoId has the actual video link once you prepend youtube.com/watch?v=
+    // Push all API data into a video array
+    for (let i = 0; i < maxResults; ++i) {
+        videoItemArray.push(response.data.items[i]);
+    }
+
+    // Used for the next loop
+    let lessDataArray = new Array();
+
+    // Removes any unneccesary video data
+    for (let i = 0; i < videoItemArray.length; ++i) {
+        const videoInfo = {
+            title: videoItemArray[i].snippet.title,
+            description: videoItemArray[i].snippet.description,
+            thumbnail: videoItemArray[i].snippet.thumbnails.default,
+            channelTitle: videoItemArray[i].snippet.channelTitle,
+            videoID: videoItemArray[i].id.videoId
+        }
+        lessDataArray.push(videoInfo);
+    }
+    return lessDataArray;
 }
 
-getYouTubeData();
+router.get('/', async (req, res) => {
+    dataArray = new Array();
+    dataArray = await getYouTubeData();
+    res.json(dataArray);
+})
 
-// returns stuff to the front end if requested?
-
-// router.get('/', (req, res) => {
-
-// })
+module.exports = router;
