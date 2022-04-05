@@ -49,7 +49,7 @@ async function getYouTubeData () {
         const videoInfo = {
             title: videoItemArray[i].snippet.title,
             description: videoItemArray[i].snippet.description,
-            thumbnail: videoItemArray[i].snippet.thumbnails.default,
+            thumbnail: videoItemArray[i].snippet.thumbnails.high,
             channelTitle: videoItemArray[i].snippet.channelTitle,
             videoID: videoItemArray[i].id.videoId
         }
