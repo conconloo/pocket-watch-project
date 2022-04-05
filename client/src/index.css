@@ -45,6 +45,8 @@
 .InfoBtn button:hover {
   background-color: rgba(252, 252, 252, 0.248);
   color: white;
+  border-radius: 10%;
+  cursor: pointer;
 }
 
 .NoonlightBtn button {
@@ -88,6 +90,7 @@
   border-radius: 10%;
   cursor: pointer;
 }
+
 .videos {
   display: flex;
   flex-wrap: wrap;
