@@ -24,20 +24,57 @@
 
 .SOS {
   margin: 0px;
-  align-content: center;
+  display: flex;
   padding: 10px;
 }
 
 .SOS h2 {
-  margin: 20px;
+  margin: 20px 10px;
 }
 
-.SOS button {
+.InfoBtn button {
+  background-color: rgba(252, 252, 252, 0.593);
+  color: black;
+  margin: 20px 10px;
+  padding: 5px;
+  font: inherit;
+  border: inherit;
+  border-radius: 10%;
+  transition: 0.5s;
+}
+
+.InfoBtn button:hover {
+  background-color: rgba(252, 252, 252, 0.248);
+  color: white;
+}
+
+.NoonlightBtn button {
   margin: 10px 20px;
   font: inherit;
   font-size: 20pt;
   padding: 10px;
-  width: 100%;
+  width: 200px;
+  height: 200px;
+  background-color: #1c8adb;
+  color: inherit;
+  border: inherit;
+  transition: 0.5s;
+  border-radius: 50%;
+}
+
+.NoonlightBtn button:hover {
+  background-color: #1c8bdb8a;
+  color: white;
+  border-radius: 10%;
+  cursor: pointer;
+}
+
+.PoliceBtn button {
+  margin: 10px 20px;
+  font: inherit;
+  font-size: 20pt;
+  padding: 10px;
+  width: 200px;
   height: auto;
   background-color: red;
   color: inherit;
@@ -46,8 +83,8 @@
   border-radius: 10%;
 }
 
-.SOS button:hover {
-  background-color: rgba(255, 0, 0, 0.404);
+.PoliceBtn button:hover {
+  background-color: rgba(255, 0, 0, 0.425);
   color: white;
   border-radius: 10%;
   cursor: pointer;
