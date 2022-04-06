@@ -9,25 +9,43 @@ class WeatherReport extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      latitude: 0,
+      longitude: 0,
       weather: []
     }
   }
 
-  componentDidMount(){
-    fetch('api/weather')
+  getPosition =() =>{
+    return new Promise(function (resolve, reject) {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+  }
+
+  getWeather = async (latitude, longitude) => {
+    fetch('api/weather?lat='+ latitude + '&lon=' + longitude)
       .then(res => res.json())
       .then(weather => {
-        this.setState({weather : weather});
-      })
+        this.setState({weather: weather});
+      });
+  }
+
+
+  componentDidMount(){
+    this.getPosition()
+    .then((position) => {
+      this.getWeather(position.coords.latitude, position.coords.longitude)
+    })
+    .catch((err) => console.log(err.message));
   }
 
   render(){
     return(
       <div className='weathercontent'>
-        <h1>College Station, TX</h1>
+        
         <div className='weatherRes'>
           {this.state.weather.map(obj => (
             <>
+            <h1>Your Location: {obj.lat}, {obj.lon}</h1>
             <h1>{obj.current.temp}: {Date(obj.current.dt).substring(3,25)}</h1>
             {obj.current.weather.map(conditions =>(
               <>
@@ -35,7 +53,6 @@ class WeatherReport extends Component {
               <img src = {IconUrlbeg + conditions.icon + IconUrlend} alt="Conditions"/>
               </>
             ))}
-            {obj.alerts ? console.log(obj.alerts) : console.log('empty')}
             </>
           ))}
         </div>
@@ -43,5 +60,6 @@ class WeatherReport extends Component {
     )
   }
 }
+/* {obj.alerts ? console.log(obj.alerts) : console.log('empty')} */
 
 export default WeatherReport
