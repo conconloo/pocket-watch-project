@@ -1,5 +1,5 @@
 *{
-  margin: 0;
+  margin: 0px;
   font-family: 'Times New Roman', Times, serif;
   color: white;
 }
@@ -10,9 +10,8 @@
 }
 
 .card {
-  display: flex;
   border: 1px solid white;
-  margin: 10px 0;
+  margin: 10px 0px;
   padding: 20px;
 }
 
@@ -20,6 +19,106 @@
   min-height: 100%;
   margin: 0px;
   padding: 40px;
+}
+
+.SOS {
+  margin: 0px;
+  display: flex;
+  padding: 10px;
+}
+
+.SOS h2 {
+  margin: 20px 10px;
+}
+
+.InfoBtn button {
+  background-color: rgba(252, 252, 252, 0.593);
+  color: black;
+  margin: 20px 10px;
+  padding: 5px;
+  font: inherit;
+  border: inherit;
+  border-radius: 10%;
+  transition: 0.5s;
+}
+
+.InfoBtn button:hover {
+  background-color: rgba(252, 252, 252, 0.248);
+  color: white;
+  border-radius: 10%;
+  cursor: pointer;
+}
+
+.NoonlightBtn button {
+  margin: 10px 20px;
+  font: inherit;
+  font-size: 20pt;
+  padding: 10px;
+  width: 200px;
+  height: 200px;
+  background-color: #1c8adb;
+  color: inherit;
+  border: inherit;
+  transition: 0.5s;
+  border-radius: 50%;
+}
+
+.NoonlightBtn button:hover {
+  background-color: #1c8bdb8a;
+  color: white;
+  border-radius: 10%;
+  cursor: pointer;
+}
+
+.PoliceBtn button {
+  margin: 10px 20px;
+  font: inherit;
+  font-size: 20pt;
+  padding: 10px;
+  width: 200px;
+  height: auto;
+  background-color: red;
+  color: inherit;
+  border: inherit;
+  transition: 0.5s;
+  border-radius: 10%;
+}
+
+.PoliceBtn button:hover {
+  background-color: rgba(255, 0, 0, 0.425);
+  color: white;
+  border-radius: 10%;
+  cursor: pointer;
+}
+
+.videos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-evenly;
+  padding: 2%;
+}
+
+.video-info {
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+  background-color: #0c0c50;
+  margin: 25px;
+  padding: 2%;
+  border-radius: 25px;
+  max-width: 80vw;
+  width: 500px;
+}
+
+.video-info img{
+  min-width: 50%;
+  border-radius: 25px;
+}
+
+
+
+.video-info:hover{
+  cursor: pointer;
 }
 
 .Navbar .logo {
@@ -68,6 +167,7 @@
   transition: 0.5s;
   border-radius: 10%;
 }
+
 .Navbar .links button:hover{
   background-color: white;
   color: #0c0c17;
