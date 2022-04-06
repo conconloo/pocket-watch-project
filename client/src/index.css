@@ -49,7 +49,12 @@
   cursor: pointer;
 }
 
+.alert-dialog-title {
+  color: black;
+}
+
 .NoonlightBtn button {
+  user-select: none;
   margin: 10px 20px;
   font: inherit;
   font-size: 20pt;
