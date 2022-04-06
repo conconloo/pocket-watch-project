@@ -8,7 +8,7 @@ const path = require('path');
 const PORT = process.env.PORT || 4000;
 // app.use(express.static(path.join(__dirname, 'public'))); // for heroku
 
-app.use('/api/users', users);
+// app.use('/api/users', users);
 
 app.use('/api/videos', videos); // for videos
 
