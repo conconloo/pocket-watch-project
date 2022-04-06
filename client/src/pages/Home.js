@@ -19,6 +19,7 @@ class Home extends Component {
             title: '',
             description: '',
             confirm: '',
+            okay: true,
             show: false,
             seconds: 10
         };
@@ -34,7 +35,9 @@ class Home extends Component {
 
     onCloseAlert() {
         this.setState({
-            show:false
+            okay: true,
+            show: false,
+            seconds: 10
         })
     }
 
@@ -43,7 +46,8 @@ class Home extends Component {
             title: 'Instructions',
             description: "If you start to feel unsafe, press and hold the blue Hold Until Safe button. Once you let go, you will be asked to confirm that you are safe. If you do not confirm your safety within 10 seconds, your location will be sent to police with an emergency message.",
             confirm: 'Got it',
-            show:true
+            okay: true,
+            show: true
         })
     }
 
@@ -57,24 +61,31 @@ class Home extends Component {
     }
 
     startTimer() {
+        this.setState({
+            seconds: 10,
+            okay: false
+        })
         if(this.timer == 0 && this.state.seconds > 0) {
             this.timer = setInterval(this.countDown, 1000);
         }
     }
 
     countDown() {
-        let seconds = this.state.seconds - 1;
-        this.setState({
-            seconds: seconds,
-            title: 'Are you okay?',
-            description: 'Please confirm your safety. If you do not confirm in ' + this.state.seconds + ' seconds, your location will be sent to police with an emergency message.',
-            confirm: "I'm okay",
-            show:true
-        });
-        if(seconds == -1) {
-            clearInterval(this.timer);
-            this.emergencyAlert();
-            this.onCloseAlert();
+        if(this.state.okay == false) {
+            let seconds = this.state.seconds - 1;
+            this.setState({
+                seconds: seconds,
+                title: 'Are you okay?',
+                description: 'Please confirm your safety. If you do not confirm in ' + this.state.seconds + ' seconds, your location will be sent to police with an emergency message.',
+                confirm: "I'm okay",
+                okay: false,
+                show: true
+            });
+            if(seconds == -1) {
+                clearInterval(this.timer);
+                this.emergencyAlert();
+                this.onCloseAlert();
+            }
         }
     }
 
@@ -106,7 +117,7 @@ class Home extends Component {
                 <div className="PoliceBtn">
                     <a href="tel:8063175356"><button title="Dial 911">911</button></a>
                 </div>
-                <Popup title={this.state.title} description={this.state.description} confirm={this.state.confirm} onClose={this.onCloseAlert.bind(this)} open={this.state.show}/>
+                <Popup title={this.state.title} description={this.state.description} confirm={this.state.confirm} onClose={this.onCloseAlert} open={this.state.show}/>
                 
             </div>
 
