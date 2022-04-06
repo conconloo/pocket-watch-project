@@ -11,11 +11,16 @@ class Home extends Component {
         this.onCloseAlert = this.onCloseAlert.bind(this)
         this.handleButtonPress = this.handleButtonPress.bind(this)
         this.handleButtonRelease = this.handleButtonRelease.bind(this)
+        this.startTimer = this.startTimer.bind(this)
+        this.countDown = this.countDown.bind(this)
+        this.emergencyAlert = this.emergencyAlert.bind(this)
+        this.timer = 0
         this.state = {
             title: '',
             description: '',
             confirm: '',
-            show: false
+            show: false,
+            seconds: 10
         };
     }
 
@@ -48,17 +53,39 @@ class Home extends Component {
 
     handleButtonRelease() {
         clearTimeout(this.buttonPressTimer);
+        this.startTimer();
+    }
+
+    startTimer() {
+        if(this.timer == 0 && this.state.seconds > 0) {
+            this.timer = setInterval(this.countDown, 1000);
+        }
+    }
+
+    countDown() {
+        let seconds = this.state.seconds - 1;
         this.setState({
+            seconds: seconds,
             title: 'Are you okay?',
-            description: 'Please confirm your safety. If you do not confirm in 10 seconds, your location will be sent to police with an emergency message.',
+            description: 'Please confirm your safety. If you do not confirm in ' + this.state.seconds + ' seconds, your location will be sent to police with an emergency message.',
             confirm: "I'm okay",
             show:true
-        })
+        });
+        if(seconds == -1) {
+            clearInterval(this.timer);
+            this.emergencyAlert();
+            this.onCloseAlert();
+        }
+    }
+
+    emergencyAlert() {
+        console.log("contacting police");
     }
 
     render(){
 
         return (
+
             <div>
                 <h1>Pocket-Watch</h1>
                 <div className="SOS">
@@ -73,7 +100,7 @@ class Home extends Component {
                         onTouchEnd={this.handleButtonRelease}
                         onMouseDown={this.handleButtonPress}
                         onMouseUp={this.handleButtonRelease}
-                        onMouseLeave={this.handleButtonRelease}
+                        //onMouseLeave={this.handleButtonRelease}
                     >Hold Until Safe</button>
                 </div>
                 <div className="PoliceBtn">
@@ -83,27 +110,8 @@ class Home extends Component {
                 
             </div>
 
-            /*
-            <ul>
-                {
-                    this.state.users.map(user =>(
-                        <li>Username {user.username}, Age: {user.age}</li>
-                    ))
-                }
-            </ul>
-            */
         )
     }
 }
-
-/*
-const Home = () => {
-    return (
-        <div>
-            This is a Home page.
-        </div>
-    )
-}
-*/
 
 export default Home;
