@@ -1,51 +1,47 @@
 import React from 'react'
 import { Component } from "react";
 
+var IconUrlbeg = "http://openweathermap.org/img/wn/"
+var IconUrlend = "@2x.png"
+
 class WeatherReport extends Component {
   
   constructor(props) {
     super(props);
     this.state = {
-      users: []
+      weather: []
     }
   }
 
   componentDidMount(){
-    fetch('api/users')
+    fetch('api/weather')
       .then(res => res.json())
-      .then(users => {
-        this.setState({users : users});
+      .then(weather => {
+        this.setState({weather : weather});
       })
   }
 
   render(){
     return(
       <div className='weathercontent'>
-      <div className='weather'>
-        <h2>Detailed Weather Report</h2>
-        <p>(IMG: geolocation pin) in [insert location]</p>
-        <h2>Temperature</h2>
+        <h1>College Station, TX</h1>
+        <div className='weatherRes'>
+          {this.state.weather.map(obj => (
+            <>
+            <h1>{obj.current.temp}: {Date(obj.current.dt).substring(3,25)}</h1>
+            {obj.current.weather.map(conditions =>(
+              <>
+              <p>{conditions.description}</p>
+              <img src = {IconUrlbeg + conditions.icon + IconUrlend} alt="Conditions"/>
+              </>
+            ))}
+            {obj.alerts ? console.log(obj.alerts) : console.log('empty')}
+            </>
+          ))}
+        </div>
       </div>
-      <div className='weather_alert'>
-        <h2>Severe Weather Alerts</h2>
-        <p>"No severe weather to report" or "gtfo now"</p>
-        <p>[insert weather heatmap from api]</p>
-      </div>
-      <div>
-        <h1>Testing fetch</h1>
-        <ul>
-          {
-            this.state.users.map(user =>(
-              <li>Username {user.username}, Age: {user.age} </li>
-            ))
-          }
-        </ul>
-      </div>
-    </div>
     )
   }
-
-
 }
 
 export default WeatherReport
