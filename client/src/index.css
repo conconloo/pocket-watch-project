@@ -5,18 +5,19 @@
 }
 
 .App {
-  min-height: 100vh;
+  min-height: 100%;
   background-color: #0c0c17;
 }
 
 .card {
   margin: 10px 0px;
   padding: 20px;
+  min-height: 100%;
 }
 
 .Home {
   display: flex;
-  height: 80vh;
+  min-height: 100%;
   flex-direction: column;
   align-items: center;
 }
