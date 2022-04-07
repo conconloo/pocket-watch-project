@@ -1,3 +1,4 @@
+import { alertClasses } from '@mui/material';
 import React from 'react'
 import { Component } from "react";
 
@@ -11,7 +12,8 @@ class WeatherReport extends Component {
     this.state = {
       latitude: 0,
       longitude: 0,
-      weather: []
+      weather: [],
+      alerts: []
     }
   }
 
@@ -29,6 +31,13 @@ class WeatherReport extends Component {
       });
   }
 
+  getAlerts = async(latitude, longitude) => {
+    fetch('api/weather?lat=' + latitude + '&lon=' + longitude + '&exclude=current,minutely,hourly,daily')
+      .then(res => res.json())
+      .then(alerts => {
+        this.setState({alerts: alerts});
+      })
+  }
 
   componentDidMount(){
     this.getPosition()
@@ -45,17 +54,24 @@ class WeatherReport extends Component {
         <div className='weatherRes'>
           {this.state.weather.map(obj => (
             <>
-            <h1>Your Location: {obj.lat}, {obj.lon}</h1>
-            <h1>{obj.current.temp}: {Date(obj.current.dt).substring(3,25)}</h1>
+            <h1>Weather today in:</h1>
+            <p>{obj.lat}, {obj.lon}</p>
+            <p>{Date(obj.current.dt).substring(3,25)}</p>
+            <h2>Current temp: {obj.current.temp}&#176;</h2>
             {obj.current.weather.map(conditions =>(
               <>
               <p>{conditions.description}</p>
               <img src = {IconUrlbeg + conditions.icon + IconUrlend} alt="Conditions"/>
               </>
             ))}
+
+            <h1>Alerts:</h1>
+            <p>From the [obj.alerts.sender_name]{obj.alerts.sender_name} association:</p>
+            <p>[obj.alerts.description]{obj.alerts.description}</p>
             </>
           ))}
         </div>
+
       </div>
     )
   }

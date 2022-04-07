@@ -1,6 +1,6 @@
 *{
   margin: 0px;
-  font-family: 'Times New Roman', Times, serif;
+  /*font-family: 'Times New Roman', Times, serif;*/
   color: white;
 }
 
@@ -16,11 +16,19 @@
 }
 
 .weathercontent {
+  font-family: 'Verdana', sans-serif;
   min-height: 100%;
-  margin: 0px;
+  margin: 5px;
   padding: 40px;
 }
 
+.weathercontent h1 {
+  margin: 10px 0px;
+}
+
+.weathercontent h2 {
+  margin: 10px 0px;
+}
 
 .SOS {
   margin: 0px;
