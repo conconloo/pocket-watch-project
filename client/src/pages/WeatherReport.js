@@ -64,10 +64,14 @@ class WeatherReport extends Component {
               <img src = {IconUrlbeg + conditions.icon + IconUrlend} alt="Conditions"/>
               </>
             ))}
-
-            <h1>Alerts:</h1>
-            <p>From the [obj.alerts.sender_name]{obj.alerts.sender_name} association:</p>
-            <p>[obj.alerts.description]{obj.alerts.description}</p>
+            <h1>Alerts:</h1> 
+            {obj.alerts.map(alert => (
+              <>
+              <h1>{alert.sender_name ? 'From the ' + alert.sender_name + ' association: ': ''}</h1>
+              <p>{alert.description ? alert.description : ''}</p>
+              </>
+            ))}
+            
             </>
           ))}
         </div>

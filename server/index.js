@@ -14,7 +14,7 @@ app.use('/api/videos', videos); // for videos
 app.use('/api/weather', weather);
 /* app.get('/api/weather', (req, res) =>{
     res.send(req.query.lat);
-}) */
+})  */
 
 app.get('/api', (req, res) => {
     res.send('hello world from express');

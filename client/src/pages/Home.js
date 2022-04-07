@@ -91,14 +91,14 @@ class Home extends Component {
 
     emergencyAlert() {
         console.log("contacting police");
+        window.location.href = 'tel:8063175356';
     }
 
     render(){
 
         return (
 
-            <div>
-                <h1>Pocket-Watch</h1>
+            <div className="Home">
                 <div className="SOS">
                     <h2>SOS Features</h2>
                     <div className="InfoBtn">
