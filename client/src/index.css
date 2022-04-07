@@ -1,42 +1,60 @@
 *{
   margin: 0px;
-  font-family: 'Times New Roman', Times, serif;
+  /*font-family: 'Times New Roman', Times, serif;*/
   color: white;
 }
 
 .App {
-  min-height: 100vh;
+  min-height: 100%;
   background-color: #0c0c17;
 }
 
 .card {
-  border: 1px solid white;
   margin: 10px 0px;
   padding: 20px;
+  min-height: 100%;
+}
+
+.Home {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  align-items: center;
 }
 
 .weathercontent {
+  font-family: 'Verdana', sans-serif;
   min-height: 100%;
-  margin: 0px;
+  margin: 5px;
   padding: 40px;
+}
+
+.weathercontent h1 {
+  margin: 10px 0px;
+}
+
+.weathercontent h2 {
+  margin: 10px 0px;
 }
 
 .SOS {
   margin: 0px;
   display: flex;
-  padding: 10px;
+  align-items: center;
 }
 
 .SOS h2 {
-  margin: 20px 10px;
+  font-size: 5vh;
 }
 
 .InfoBtn button {
   background-color: rgba(252, 252, 252, 0.593);
+  width: 20vw;
+  height: 5vh;
+  font-size: 2vh;
   color: black;
   margin: 20px 10px;
   padding: 5px;
-  font: inherit;
   border: inherit;
   border-radius: 10%;
   transition: 0.5s;
@@ -49,13 +67,17 @@
   cursor: pointer;
 }
 
+.alert-dialog-title {
+  color: black;
+}
+
 .NoonlightBtn button {
-  margin: 10px 20px;
-  font: inherit;
-  font-size: 20pt;
-  padding: 10px;
-  width: 200px;
-  height: 200px;
+  user-select: none;
+  font-family: inherit;
+  font-size: 7vh;
+  width: 50vw;
+  height: 50vh;
+  padding: 5%;
   background-color: #1c8adb;
   color: inherit;
   border: inherit;
@@ -72,10 +94,9 @@
 
 .PoliceBtn button {
   margin: 10px 20px;
-  font: inherit;
-  font-size: 20pt;
-  padding: 10px;
-  width: 200px;
+  font-size: 4vh;
+  padding: 10%;
+  width: 80vw;
   height: auto;
   background-color: red;
   color: inherit;

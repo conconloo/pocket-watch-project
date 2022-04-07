@@ -3,7 +3,7 @@ const axios = require('axios');
 const { response } = require('express');
 const router = express.Router();
 
-let apiKey = ''; // remove this before pushing
+let apiKey = '207a527a4d31d2de8a7264f13e8ad6a2'; // remove this before pushing
 
 // function that returns the position of the current device
 // Might have to be on the front end?
@@ -14,12 +14,13 @@ let apiKey = ''; // remove this before pushing
 //     });
 // }
 
-async function getWeatherData() {
+async function getWeatherData(req) {
     // let locationData = await getPosition();
 
     // temporary coordinates for College Station
-    let latitude = 30.6280;
-    let longitude = -96.3344;   
+    
+    let latitude = req.query.lat;
+    let longitude = req.query.lon;   
 
     let units = 'imperial';
     const getWeatherData = axios.create({
@@ -32,12 +33,12 @@ async function getWeatherData() {
         }
     });
     const response = await getWeatherData.get(""); // gets info from Weather API
-    console.log(response.data);
+    //console.log(response.data);
     return response.data; // returns all of the data from the response
 }
 
 router.get('/', async (req, res) => {
-    const data = await getWeatherData();
+    const data = await getWeatherData(req);
     res.json([
         data
     ]);
