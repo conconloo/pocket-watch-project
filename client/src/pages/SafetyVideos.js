@@ -1,6 +1,8 @@
 import React from "react";
 import { Component } from "react";
 
+const keywords = require('../json/VideoSearchList.json');
+
 let WatchVideo = 'https://www.youtube.com/watch?v=';
 
 class SafetyVideos extends Component {
@@ -23,6 +25,9 @@ class SafetyVideos extends Component {
     render(){
         return (
             <div className="videos">
+                {console.log(keywords)}
+
+
                 {
                     this.state.videos.map(video =>(
                         <a className="video-info" href={WatchVideo + video.videoID} target='_blank'>

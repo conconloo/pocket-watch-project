@@ -1,0 +1,34 @@
+{
+    "WorkSafety": [
+        "Work Safety"
+    ],
+    "SexualSafety": [
+        "Sexual Harrassment Safety Tips",
+        "Dating Safety Tips",
+        "Safe Sexual Practice Tips"
+    ],
+    "DisasterSafety": [
+        "Hurricane Safety",
+        "Tornado Safety",
+        "Flood Safety",
+        "Blizzard Safety",
+        "Wildfire Safety",
+        "Earthquake Safety"
+    ],
+    "SelfDefense": [
+        "Self Defense Techniques",
+        "What to carry for Self Defense",
+        "Self Defense Essentials"
+    ],
+    "OutdoorSafety": [
+        "Camping Safety Tips",
+        "Outdoor Safety",
+        "What to take Camping",
+        "Camping Gear Essentials"
+    ],
+    "CarSafety": [
+        "Car Theft Prevention Tips",
+        "Defensive Driving Safety Tips",
+        "Car Essential Emergency Items"
+    ]
+}
