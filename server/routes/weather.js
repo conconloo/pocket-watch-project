@@ -37,31 +37,10 @@ async function getWeatherData(req) {
     return response.data; // returns all of the data from the response
 }
 
-async function getWeatherDataCurrent(req) {
-    let latitude = req.query.lat;
-    let longitude = req.query.lon;
-
-    let units = 'imperial';
-    const getWeatherDataCurrent = axios.create({
-        baseURL: 'https://api.openweathermap.org/data/2.5/weather',
-        params: {
-            lat: latitude,
-            lon: longitude,
-            units: units,
-            appid: apiKey
-        }
-    });
-    const response = await getWeatherDataCurrent.get(""); // gets info from Weather API
-    //console.log(response.data);
-    return response.data; // returns all of the data from the response
-}
-
 router.get('/', async (req, res) => {
     const data = await getWeatherData(req);
-    const data2 = await getWeatherDataCurrent(req)
     res.json([
-        data,
-        data2
+        data
     ]);
 })
 
