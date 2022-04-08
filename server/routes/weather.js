@@ -19,7 +19,7 @@ async function getWeatherData(req) {
 
     // temporary coordinates for College Station
     
-    let latitude = req.query.lat; // req.query.keyword
+    let latitude = req.query.lat;
     let longitude = req.query.lon;   
 
     let units = 'imperial';
