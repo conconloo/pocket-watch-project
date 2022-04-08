@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./Card.js";
 import { useState } from "react";
-import image1 from './images/logo.png'
+import image1 from './images/logo.png';
 
 
 const App = () => {
