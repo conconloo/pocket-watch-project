@@ -1,7 +1,8 @@
 import React from "react";
 import { Component } from "react";
+import Popup from "../components/popup.js";
 
-import Popup from "../components/popup.js"
+import infobtn from '../images/info-button.png';
 
 class Home extends Component {
 
@@ -102,7 +103,7 @@ class Home extends Component {
                 <div className="SOS">
                     <h2>SOS Features</h2>
                     <div className="InfoBtn">
-                        <button onClick={this.onShowAlert.bind(this)}>Info</button>
+                        <img src={infobtn} onClick={this.onShowAlert}/>
                     </div>
                 </div>
                 <div className="NoonlightBtn">
@@ -115,7 +116,7 @@ class Home extends Component {
                     >Hold Until Safe</button>
                 </div>
                 <div className="PoliceBtn">
-                    <a href="tel:8063175356"><button title="Dial 911">911</button></a>
+                    <a href="tel:8063175356"><button title="Dial 911">Dial 911</button></a>
                 </div>
                 <Popup title={this.state.title} description={this.state.description} confirm={this.state.confirm} onClose={this.onCloseAlert} open={this.state.show}/>
                 

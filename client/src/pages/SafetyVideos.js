@@ -34,7 +34,7 @@ class SafetyVideos extends Component {
                             <img src = {video.thumbnail.url} alt ="Video"/>
                             <h1>{video.title}</h1>
                             <h2>{video.channelTitle}</h2>
-                            <p>{video.description}</p>                      
+                            <p>{video.description}</p>
                         </a>
                     ))
                 }
