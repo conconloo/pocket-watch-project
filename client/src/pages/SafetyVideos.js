@@ -10,24 +10,43 @@ class SafetyVideos extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            keywords: keywords,
             videos: []
+        }
+        this.handleFilter = this.handleFilter.bind(this);
+    }
+
+    handleFilter = (searchQuery) => {
+        console.log(searchQuery);
+        for (var i = 0; i < searchQuery.length; i++) {
+            this.renderVideos(searchQuery[i].replace(" ", "+"));
         }
     }
 
     componentDidMount() {
-        fetch('api/videos')
+       fetch('api/videos')
+            .then(res => console.log(res));   
+    }
+
+    renderVideos(keyword) {
+        fetch('api/videos?keyword='+keyword)
             .then(res => res.json())
             .then(videos => {
-                this.setState({videos : videos});
+                this.setState({videos: videos})
             });
     }
 
     render(){
         return (
+            <>
+            <div className = "filters">
+                {
+                    Object.keys(this.state.keywords).map(key => (
+                        <button onClick={() => this.handleFilter(this.state.keywords[key])}>{key}</button>
+                    ))
+                }
+            </div>
             <div className="videos">
-                {console.log(keywords)}
-
-
                 {
                     this.state.videos.map(video =>(
                         <a className="video-info" href={WatchVideo + video.videoID} target='_blank' rel="noreferrer">
@@ -39,6 +58,7 @@ class SafetyVideos extends Component {
                     ))
                 }
             </div>
+            </>
         )
     }
 }

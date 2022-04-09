@@ -115,6 +115,15 @@
   text-decoration: none;
 }
 
+.videos .filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 .video-info {
   display: flex;
   flex-direction: column;

@@ -4,7 +4,7 @@ const axios = require('axios');
 const { response } = require('express');
 const router = express.Router();
 
-let apiKey = 'AIzaSyDa5vbk-G5E6JhV_ttsJGvnlxtvsfZsqLY' // remove this before pushing
+let apiKey = 'AIzaSyDgSH071ynMYPIoJ0Q96Rz7mXgkgU-tDLk' // remove this before pushing
 
 // actually get API data stuff
 
@@ -18,8 +18,10 @@ let apiKey = 'AIzaSyDa5vbk-G5E6JhV_ttsJGvnlxtvsfZsqLY' // remove this before pus
     videoID: response.data.items[index].id.videoId
 */
 
-async function getYouTubeData () {
+async function getYouTubeData (req) {
     let maxResults = 25;
+    let searchQuery = req.query.keyword;
+    console.log('Searching: ' + searchQuery);
 
     // Uses Axios to get YouTube API data
     const getYouTubeData = axios.create({
@@ -27,7 +29,7 @@ async function getYouTubeData () {
         params: {
             part: 'snippet',
             maxResults: maxResults,
-            q: 'safety videos',
+            q: searchQuery,
             key: apiKey
         }
     });
@@ -60,7 +62,7 @@ async function getYouTubeData () {
 
 router.get('/', async (req, res) => {
     dataArray = new Array();
-    dataArray = await getYouTubeData();
+    dataArray = await getYouTubeData(req);
     res.json(dataArray);
 })
 
