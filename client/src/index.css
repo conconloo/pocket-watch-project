@@ -139,20 +139,18 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  min-width: 50%;
 }
 
 .logo img {
   float: left;
   height: 75px;
-  width: auto;
   cursor: pointer;
 }
 
 .Navbar {
   display: flex;
+  margin: 0px 12%;
   justify-content: space-between;
-  padding: 5%;
 }
 
 .hamburger {
@@ -163,6 +161,7 @@
   cursor: pointer;
   display: none;
 }
+
 
 .Navbar .links{
   display: flex;
@@ -183,7 +182,7 @@
   content: '';
   display: block;
   width: 0;
-  height: 2px;
+  height: 4px;
   background: #000;
   transition: width 0.5s ease-in-out;
 }
@@ -212,10 +211,12 @@
 
   .Navbar {
     flex-wrap: wrap;
+    margin: 0;
   }
   
   .hamburger {
     display: block;
+    transform: scale(1.8);
   }
 
   .links.show{

@@ -25,15 +25,15 @@ const App = () => {
       <div className="Navbar">
         <div className='logo'>
           <img src={image1} alt='pocket-watch-logo' onClick={() => setActive("home")}/>
-          <h1>Pocket-Watch</h1>
-        </div>
+          <h1>Pocket Watch</h1>
+        </div> 
         <button className="hamburger" id="hamburger" onClick={handleHamburger}>
           <i className="fa fa-bars"></i>
         </button>
         <div className='links' id="links">
           <button onClick={() => setActive("home")} href="/Home">Home</button>
           <button onClick={() => setActive("weatherreport")} href="/Weather">Weather</button>
-          <button onClick={() => setActive("safetyvideos")} href="/SafetyVideos">Safety Videos</button>
+          <button onClick={() => setActive("safetyvideos")} href="/SafetyVideos">Videos</button>
         </div>
       </div>
       <div className="card">
