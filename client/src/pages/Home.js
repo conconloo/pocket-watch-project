@@ -1,7 +1,8 @@
 import React from "react";
 import { Component } from "react";
+import Popup from "../components/popup.js";
 
-import Popup from "../components/popup.js"
+import infobtn from '../images/info-button.png';
 
 class Home extends Component {
 
@@ -25,13 +26,13 @@ class Home extends Component {
         };
     }
 
-    // componentDidMount() {
-    //     fetch('api/users')
-    //         .then(res => res.json())
-    //         .then(users => {
-    //             this.setState({users : users});
-    //         });
-    // }
+    componentDidMount() {
+        fetch('api/users')
+            .then(res => res.json())
+            .then(users => {
+                this.setState({users : users});
+            });
+    }
 
     onCloseAlert() {
         this.setState({
@@ -65,13 +66,13 @@ class Home extends Component {
             seconds: 10,
             okay: false
         })
-        if(this.timer == 0 && this.state.seconds > 0) {
+        if(this.timer === 0 && this.state.seconds > 0) {
             this.timer = setInterval(this.countDown, 1000);
         }
     }
 
     countDown() {
-        if(this.state.okay == false) {
+        if(this.state.okay === false) {
             let seconds = this.state.seconds - 1;
             this.setState({
                 seconds: seconds,
@@ -81,7 +82,7 @@ class Home extends Component {
                 okay: false,
                 show: true
             });
-            if(seconds == -1) {
+            if(seconds === -1) {
                 clearInterval(this.timer);
                 this.emergencyAlert();
                 this.onCloseAlert();
@@ -102,7 +103,7 @@ class Home extends Component {
                 <div className="SOS">
                     <h2>SOS Features</h2>
                     <div className="InfoBtn">
-                        <button onClick={this.onShowAlert.bind(this)}>Info</button>
+                        <img src={infobtn} onClick={() => this.onShowAlert}/>
                     </div>
                 </div>
                 <div className="NoonlightBtn">
@@ -115,7 +116,7 @@ class Home extends Component {
                     >Hold Until Safe</button>
                 </div>
                 <div className="PoliceBtn">
-                    <a href="tel:8063175356"><button title="Dial 911">911</button></a>
+                    <a href="tel:8063175356"><button title="Dial 911">Dial 911</button></a>
                 </div>
                 <Popup title={this.state.title} description={this.state.description} confirm={this.state.confirm} onClose={this.onCloseAlert} open={this.state.show}/>
                 

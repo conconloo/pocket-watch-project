@@ -1,12 +1,12 @@
 *{
   margin: 0px;
-  /*font-family: 'Times New Roman', Times, serif;*/
-  color: white;
+  font-family: 'Verdana', sans-serif;
+  color: rgb(15,15,15);
 }
 
 .App {
   min-height: 100%;
-  background-color: #0c0c17;
+  background-color: rgb(249, 249, 249);
 }
 
 .card {
@@ -20,10 +20,11 @@
   min-height: 100%;
   flex-direction: column;
   align-items: center;
+  background-color: inherit;
 }
 
 .weathercontent {
-  font-family: 'Verdana', sans-serif;
+  /*font-family: 'Verdana', sans-serif;*/
   min-height: 100%;
   margin: 5px;
   padding: 40px;
@@ -38,7 +39,7 @@
 }
 
 .SOS {
-  margin: 0px;
+  padding-bottom: 3%;
   display: flex;
   align-items: center;
 }
@@ -47,23 +48,14 @@
   font-size: 5vh;
 }
 
-.InfoBtn button {
-  background-color: rgba(252, 252, 252, 0.593);
-  width: 20vw;
-  height: 5vh;
-  font-size: 2vh;
+.InfoBtn img {
+  width: 3vh;
+  height: 3vh;
   color: black;
-  margin: 20px 10px;
-  padding: 5px;
-  border: inherit;
-  border-radius: 10%;
-  transition: 0.5s;
+  padding: 25%;
 }
 
-.InfoBtn button:hover {
-  background-color: rgba(252, 252, 252, 0.248);
-  color: white;
-  border-radius: 10%;
+.InfoBtn img:hover {
   cursor: pointer;
 }
 
@@ -75,7 +67,7 @@
   user-select: none;
   font-family: inherit;
   font-size: 7vh;
-  width: 50vw;
+  width: 50vh;
   height: 50vh;
   padding: 5%;
   background-color: #1c8adb;
@@ -86,7 +78,7 @@
 }
 
 .NoonlightBtn button:hover {
-  background-color: #1c8bdb8a;
+  background-color: #145787;
   color: white;
   border-radius: 10%;
   cursor: pointer;
@@ -96,7 +88,7 @@
   margin: 10px 20px;
   font-size: 4vh;
   padding: 10%;
-  width: 80vw;
+  width: 50vh;
   height: auto;
   background-color: red;
   color: inherit;
@@ -106,7 +98,7 @@
 }
 
 .PoliceBtn button:hover {
-  background-color: rgba(255, 0, 0, 0.425);
+  background-color: rgb(139, 0, 0);
   color: white;
   border-radius: 10%;
   cursor: pointer;
@@ -119,24 +111,34 @@
   padding: 2%;
 }
 
+.videos a:link{
+  text-decoration: none;
+}
+
+.videos .filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 .video-info {
   display: flex;
   flex-direction: column;
   align-content: space-around;
-  background-color: #0c0c50;
+  overflow-wrap: break-word;
   margin: 25px;
   padding: 2%;
-  border-radius: 25px;
-  max-width: 80vw;
-  width: 500px;
+  /*border-radius: 25px;*/
+  width: 25vw;
 }
 
 .video-info img{
   min-width: 50%;
-  border-radius: 25px;
+  /*border-radius: 25px;*/
 }
-
-
 
 .video-info:hover{
   cursor: pointer;
@@ -146,30 +148,29 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  min-width: 50%;
 }
 
 .logo img {
   float: left;
   height: 75px;
-  width: auto;
   cursor: pointer;
 }
 
 .Navbar {
   display: flex;
+  margin: 0px 12%;
   justify-content: space-between;
-  padding: 0 5%;
 }
 
 .hamburger {
   background-color: transparent;
   border: 0;
-  color: #fff;
+  color: rgb(15,15,15);
   font-size: 20px;
   cursor: pointer;
   display: none;
 }
+
 
 .Navbar .links{
   display: flex;
@@ -178,22 +179,25 @@
   min-width: 50%;
 }
 
-.Navbar .links button{
+.Navbar .links .link{
   margin: 2%;
   font: inherit;
   font-size: calc(8pt + 1.2vh + 1.2vw);
   background-color: inherit;
-  color: inherit;
-  border: inherit;
-  transition: 0.5s;
-  border-radius: 10%;
+  text-decoration: none;
 }
 
-.Navbar .links button:hover{
-  background-color: white;
-  color: #0c0c17;
-  border-radius: 10%;
-  cursor: pointer;
+.Navbar .links .link::after{
+  content: '';
+  display: block;
+  width: 0;
+  height: 4px;
+  background: #000;
+  transition: width 0.5s ease-in-out;
+}
+
+.Navbar .links .link:hover::after{
+  width: 100%;
 }
 
 @keyframes growDown{
@@ -216,10 +220,12 @@
 
   .Navbar {
     flex-wrap: wrap;
+    margin: 0;
   }
   
   .hamburger {
     display: block;
+    transform: scale(1.8);
   }
 
   .links.show{
