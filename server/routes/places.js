@@ -10,23 +10,17 @@ async function getPlacesList () {
     let latitude = 30.601389;
     let longitude = -96.314445;
 
-    // This method doesn't work right now, other one does
-    // const getPlaceData = axios.create({
-    //     baseURL: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json',
-    //     params: {
-    //         keyword: 'cruise',
-    //         location: `${latitude},${longitude}`,
-    //         radius: '1500'  ,
-    //         type: 'restaurant',
-    //         key: 'apiKey'
-    //     }
-    // });
-
-    // can find nearby police stations
+    // https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=5000&type=police&key=${apiKey}
+    
     const getPlaceData = axios.create({
-        baseURL: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=5000&type=police&key=${apiKey}`,
-        headers: { }
-      });
+        baseURL: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json',
+        params: {
+            location: `${latitude},${longitude}`,
+            radius: '5000',
+            type: 'police',
+            key: apiKey
+        }
+    });
 
     const response = await getPlaceData.get();
     
