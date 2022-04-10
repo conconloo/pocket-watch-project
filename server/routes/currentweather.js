@@ -6,9 +6,6 @@ const router = express.Router();
 let apiKey = '207a527a4d31d2de8a7264f13e8ad6a2'; // remove this before pushing
 
 async function getCurrentWeatherData(req) {
-    // let locationData = await getPosition();
-
-    // temporary coordinates for College Station
 
     let latitude = req.query.lat;
     let longitude = req.query.lon;

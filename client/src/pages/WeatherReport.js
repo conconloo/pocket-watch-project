@@ -13,7 +13,8 @@ class WeatherReport extends Component {
       latitude: 0,
       longitude: 0,
       weather: [],
-      alerts: []
+      alerts: [],
+      currweather: []
     }
   }
 
@@ -31,6 +32,14 @@ class WeatherReport extends Component {
       });
   }
 
+  getCurrWeather = async(latitude, longitude) => {
+    fetch('api/currweather?lat=' + latitude + '&lon=' + longitude)
+        .then(res => res.json())
+        .then(currweather => {
+          this.setState({currweather: currweather});
+        });
+  }
+
   getAlerts = async(latitude, longitude) => {
     fetch('api/weather?lat=' + latitude + '&lon=' + longitude + '&exclude=current,minutely,hourly,daily')
       .then(res => res.json())
@@ -45,12 +54,19 @@ class WeatherReport extends Component {
       this.getWeather(position.coords.latitude, position.coords.longitude)
     })
     .catch((err) => console.log(err.message));
+
+    this.getPosition()
+        .then((position) => {
+          this.getCurrWeather(position.coords.latitude, position.coords.longitude)
+        })
+        .catch((err) => console.log(err.message));
+
   }
 
   render(){
     return(
       <div className='weathercontent'>
-        
+
         <div className='weatherRes'>
           {this.state.weather.map(obj => (
             <>
@@ -71,11 +87,9 @@ class WeatherReport extends Component {
               <p>{alert.description ? alert.description : ''}</p>
               </>
             ))}
-            
             </>
           ))}
         </div>
-
       </div>
     )
   }
