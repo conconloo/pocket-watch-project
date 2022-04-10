@@ -7,27 +7,36 @@ let apiKey = 'AIzaSyAEZeR4pdli80dwbZNLbly_Da9bG-jk1k0';
 
 // Invalid request right now?
 async function getPlacesList () {
-    let latitude = 30.6280;
-    let longitude = -96.3344;
+    let latitude = 30.601389;
+    let longitude = -96.314445;
 
+    // This method doesn't work right now, other one does
+    // const getPlaceData = axios.create({
+    //     baseURL: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json',
+    //     params: {
+    //         keyword: 'cruise',
+    //         location: `${latitude},${longitude}`,
+    //         radius: '1500'  ,
+    //         type: 'restaurant',
+    //         key: 'apiKey'
+    //     }
+    // });
+
+    // can find nearby police stations
     const getPlaceData = axios.create({
-        baseURL: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json',
-        params: {
-            location: `${latitude}, ${longitude}`, // ',' doesn't become %2C :(
-            keyword: 'hospital',
-            type: 'hospital', // hospital, pharmacy, doctor, etc.
-            key: apiKey // API key
-        }
-    });
+        baseURL: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=5000&type=police&key=${apiKey}`,
+        headers: { }
+      });
 
     const response = await getPlaceData.get();
     
-    return response;
+    return response.data.results;
 }
 
 router.get('/', async (req, res) => {
     places = await getPlacesList();
     console.log(places);
+    res.json(places);
 })
 
 module.exports = router;
