@@ -179,15 +179,15 @@
   min-width: 50%;
 }
 
-.Navbar .links button{
+.Navbar .links .link{
   margin: 2%;
   font: inherit;
   font-size: calc(8pt + 1.2vh + 1.2vw);
   background-color: inherit;
-  border: inherit;
+  text-decoration: none;
 }
 
-.Navbar .links button::after{
+.Navbar .links .link::after{
   content: '';
   display: block;
   width: 0;
@@ -196,7 +196,7 @@
   transition: width 0.5s ease-in-out;
 }
 
-.Navbar .links button:hover::after{
+.Navbar .links .link:hover::after{
   width: 100%;
 }
 
