@@ -66,13 +66,13 @@ class Home extends Component {
             seconds: 10,
             okay: false
         })
-        if(this.timer == 0 && this.state.seconds > 0) {
+        if(this.timer === 0 && this.state.seconds > 0) {
             this.timer = setInterval(this.countDown, 1000);
         }
     }
 
     countDown() {
-        if(this.state.okay == false) {
+        if(this.state.okay === false) {
             let seconds = this.state.seconds - 1;
             this.setState({
                 seconds: seconds,
@@ -82,7 +82,7 @@ class Home extends Component {
                 okay: false,
                 show: true
             });
-            if(seconds == -1) {
+            if(seconds === -1) {
                 clearInterval(this.timer);
                 this.emergencyAlert();
                 this.onCloseAlert();
@@ -103,7 +103,7 @@ class Home extends Component {
                 <div className="SOS">
                     <h2>SOS Features</h2>
                     <div className="InfoBtn">
-                        <img src={infobtn} onClick={this.onShowAlert}/>
+                        <img src={infobtn} onClick={() => this.onShowAlert}/>
                     </div>
                 </div>
                 <div className="NoonlightBtn">
