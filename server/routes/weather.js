@@ -18,7 +18,7 @@ async function getWeatherData(req) {
     // let locationData = await getPosition();
 
     // temporary coordinates for College Station
-    
+    console.log(req);
     let latitude = req.query.lat;
     let longitude = req.query.lon;   
 
