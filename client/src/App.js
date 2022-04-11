@@ -48,6 +48,7 @@ const App = () => {
             <div className='links' id="links">
               <Link className="link" to="/weather">Weather</Link>
               <Link className="link" to="/videos">Videos</Link>
+              <Link className="link" to="/map">Map</Link>
               <Link className="link" to="/">Home</Link>
             </div>
           </div>
