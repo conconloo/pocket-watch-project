@@ -17,48 +17,6 @@ class WeatherReport extends Component {
     }
   }
 
-  /*
-
-  getCity = async(latitude, longitude) => {
-    var key = '207a527a4d31d2de8a7264f13e8ad6a2';
-    fetch('https://api.openweathermap.org/geo/1.0/reverse?lat=' + latitude + '&lon=' + longitude + '&limit=' + '1' + '&appid=' + key)
-    .then(function(resp) { return resp.json() })
-    .then(function(data) {
-      this.drawCity(data);
-    })
-  }
-
-  cityWeather = async(latitude, longitude) => {
-    var key = '207a527a4d31d2de8a7264f13e8ad6a2';
-    fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + '&appid=' + key)
-    .then(function(resp) { return resp.json() })
-    .then(function(data) {
-      this.drawWeather(data);
-    })
-    .catch(function() {
-
-    });
-  }
-
-  drawWeather = (d) => {
-    var celsius = Math.round(parseFloat(d.main.temp)-273.15);
-    var fahrenheit = Math.round(((parseFloat(d.main.temp)-273.15)*1.8) + 32);
-    var description = d.weather[0].description;
-
-    document.getElementById('description').innerHTML = description;
-    document.getElementById('temp').innerHTML = fahrenheit + '&deg;';
-  }
-
-  drawCity = (d) => {
-    var city = d[0].name;
-    var country = d[0].country;
-
-    document.getElementById('city').innerHTML = city;
-    document.getElementById('country').innerHTML = country;
-  }
-
-  */
-
   getPosition = () => {
     return new Promise(function (resolve, reject) {
       navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -117,7 +75,6 @@ class WeatherReport extends Component {
             <p>{alert.description ? alert.description : ''}</p>
             </>
           ))}
-          
           </>
         ))}
       </div>
