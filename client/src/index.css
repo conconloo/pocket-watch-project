@@ -2,6 +2,7 @@
   margin: 0px;
   font-family: 'Verdana', sans-serif;
   color: rgb(15,15,15);
+  background-color: rgb(249,249,249);
 }
 
 .App {
@@ -23,19 +24,59 @@
   background-color: inherit;
 }
 
-.weathercontent {
-  /*font-family: 'Verdana', sans-serif;*/
+.weatherRes {
+  align-items: center;
   min-height: 100%;
-  margin: 5px;
+  margin: auto;
+  width: 70vw;
   padding: 40px;
 }
 
-.weathercontent h1 {
+.weatherRes h1 {
   margin: 10px 0px;
 }
 
-.weathercontent h2 {
+.weatherRes h2 {
   margin: 10px 0px;
+}
+
+.conditions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  background-color: rgb(19,95,151);
+  width: min-content;
+  padding: 0px 3% 1% 2%;
+  border-radius: 15px;
+}
+
+.conditions1 {
+  background-color: rgb(19,95,151);
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.conditions1 img {
+  border-radius: 50%;
+  background-color: inherit;
+}
+
+.conditions1 h2 {
+  background: inherit;
+  color: inherit;
+}
+
+.conditions2 {
+  background-color: rgb(19,95,151);
+  color: white;
+  padding-bottom: 3%;
+}
+
+.conditions2 p {
+  background-color: inherit;
+  color: inherit;
 }
 
 .SOS {
@@ -158,7 +199,7 @@
 
 .Navbar {
   display: flex;
-  margin: 0px 12%;
+  margin: 10px 12%;
   justify-content: space-between;
 }
 
