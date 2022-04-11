@@ -18,6 +18,7 @@ class SafetyVideos extends Component {
 
     handleFilter = (searchQuery) => {
         console.log(searchQuery);
+        this.setState({videos : []});
         for (var i = 0; i < searchQuery.length; i++) {
             this.renderVideos(searchQuery[i].replace(" ", "+"));
         }
@@ -32,7 +33,8 @@ class SafetyVideos extends Component {
         fetch('api/videos?keyword='+keyword)
             .then(res => res.json())
             .then(videos => {
-                this.setState({videos: videos})
+                let myvideos = this.state.videos;
+                this.setState({videos: myvideos.concat(videos)})
             });
     }
 

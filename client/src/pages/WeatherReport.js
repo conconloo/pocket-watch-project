@@ -12,6 +12,7 @@ class WeatherReport extends Component {
     this.state = {
       latitude: 0,
       longitude: 0,
+      location: "",
       weather: [],
       alerts: []
     }
@@ -21,6 +22,14 @@ class WeatherReport extends Component {
     return new Promise(function (resolve, reject) {
       navigator.geolocation.getCurrentPosition(resolve, reject);
     });
+  }
+
+  getCityName = async (latitude, longitude) => {
+    fetch('api/currweather?lat=' + latitude + '&lon=' + longitude)
+      .then(res => res.json())
+      .then(weather => {
+        this.setState({location: weather[0].name});
+      });
   }
 
   getWeather = async (latitude, longitude) => {
@@ -42,7 +51,8 @@ class WeatherReport extends Component {
   componentDidMount(){
     this.getPosition()
     .then((position) => {
-      this.getWeather(position.coords.latitude, position.coords.longitude)
+      this.getWeather(position.coords.latitude, position.coords.longitude);
+      this.getCityName(position.coords.latitude, position.coords.longitude);
     })
     .catch((err) => console.log(err.message));
   }
@@ -53,6 +63,7 @@ class WeatherReport extends Component {
         {this.state.weather.map(obj => (
           <>
           <h1>Weather today in:</h1>
+          <p>{this.state.location}</p>
           <p>{obj.lat}, {obj.lon}</p>
           <p>{Date(obj.current.dt).substring(3,25)}</p>
           <div className='conditions'>
@@ -69,12 +80,12 @@ class WeatherReport extends Component {
           ))}
           </div>
           <h1>Alerts:</h1> 
-          {obj.alerts.map(alert => (
+          {obj.alerts ? obj.alerts.map(alert => (
             <>
             <h1>{alert.sender_name ? 'From the ' + alert.sender_name + ' association: ': ''}</h1>
             <p>{alert.description ? alert.description : ''}</p>
             </>
-          ))}
+          )) : "No Alerts"}
           </>
         ))}
       </div>

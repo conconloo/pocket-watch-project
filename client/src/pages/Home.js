@@ -103,7 +103,7 @@ class Home extends Component {
                 <div className="SOS">
                     <h2>SOS Features</h2>
                     <div className="InfoBtn">
-                        <img src={infobtn} onClick={this.onShowAlert}/>
+                        <img src={infobtn} onClick={() => this.onShowAlert}/>
                     </div>
                 </div>
                 <div className="NoonlightBtn">
