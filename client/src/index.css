@@ -2,12 +2,13 @@
   margin: 0px;
   font-family: 'Verdana', sans-serif;
   color: rgb(15,15,15);
-  background-color: rgb(249,249,249);
+  /* background-color: rgb(249,249,249); */
 }
 
 .App {
   min-height: 100%;
-  background-color: rgb(249, 249, 249);
+  background-color: white;
+  margin: 0px;
 }
 
 .card {
@@ -112,7 +113,7 @@
   height: 50vh;
   padding: 5%;
   background-color: #1c8adb;
-  color: inherit;
+  color: white;
   border: inherit;
   transition: 0.5s;
   border-radius: 50%;
@@ -132,7 +133,7 @@
   width: 50vh;
   height: auto;
   background-color: red;
-  color: inherit;
+  color: white;
   border: inherit;
   transition: 0.5s;
   border-radius: 10%;
@@ -212,6 +213,9 @@
   display: none;
 }
 
+.Navbar a {
+  text-decoration: none;
+}
 
 .Navbar .links{
   display: flex;
