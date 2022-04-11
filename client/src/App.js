@@ -36,18 +36,17 @@ const App = () => {
       <Router>
         <div>
           <div className="Navbar">
-            <a href="/">
-              <div className='logo'>
-                <img src={image1} alt='pocket-watch-logo'/>
-                <h1>Pocket Watch</h1>
-              </div> 
-            </a>
+            <div className='logo'>
+              <img src={image1} alt='pocket-watch-logo'/>
+              <h1>Pocket Watch</h1>
+            </div> 
             <button className="hamburger" id="hamburger" onClick={handleHamburger}>
               <i className="fa fa-bars"></i>
             </button>
             <div className='links' id="links">
               <Link className="link" to="/weather">Weather</Link>
               <Link className="link" to="/videos">Videos</Link>
+              <Link className="link" to="/map">Map</Link>
               <Link className="link" to="/">Home</Link>
             </div>
           </div>
@@ -55,6 +54,7 @@ const App = () => {
               <Route path="/" element={<Card title="home"/>}/>
               <Route path="/weather" element={<Card title="weatherreport"/>} />
               <Route path="/videos" element={<Card title="safetyvideos"/>}/>
+              <Route path="/map" element={<Card title="map"/>}/>
             </Routes>
         </div>
       </Router>
