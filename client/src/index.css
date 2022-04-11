@@ -213,6 +213,9 @@
   display: none;
 }
 
+.Navbar a {
+  text-decoration: none;
+}
 
 .Navbar .links{
   display: flex;
