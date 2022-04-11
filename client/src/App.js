@@ -47,12 +47,14 @@ const App = () => {
               <Link className="link" to="/">Home</Link>
               <Link className="link" to="/weather">Weather</Link>
               <Link className="link" to="/videos">Videos</Link>
+              <Link className="link" to="/map">Map</Link>
             </div>
           </div>
             <Routes>
               <Route path="/" element={<Card title="home"/>}/>
               <Route path="/weather" element={<Card title="weatherreport"/>} />
               <Route path="/videos" element={<Card title="safetyvideos"/>}/>
+              <Route path="/map" element={<Card title="map"/>}/>
             </Routes>
         </div>
       </Router>
