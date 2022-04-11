@@ -157,7 +157,7 @@
   text-decoration: none;
 }
 
-.videos .filters {
+.filters {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -172,8 +172,7 @@
   align-content: space-around;
   overflow-wrap: break-word;
   margin: 25px;
-  padding: 2%;
-  /*border-radius: 25px;*/
+  padding: 1%;
   width: 25vw;
 }
 
@@ -183,6 +182,8 @@
 }
 
 .video-info:hover{
+  background-color: rgba(128, 128, 128, 0.489);
+  transition: 0.2s;
   cursor: pointer;
 }
 

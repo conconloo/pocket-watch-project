@@ -41,7 +41,7 @@ class SafetyVideos extends Component {
     render(){
         return (
             <>
-            <div className = "filters">
+            <div className="filters">
                 {
                     Object.keys(this.state.keywords).map(key => (
                         <button onClick={() => this.handleFilter(this.state.keywords[key])}>{key}</button>
