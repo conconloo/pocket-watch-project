@@ -1,12 +1,4 @@
 # How to run this application locally
-<<<<<<< HEAD
-
-cd into server directory
-
-run node index.js
-
-open a browser and search http://localhost:4000
-=======
 This process requires the client and the server to be run separately but be active at the same time. 
 
 Recommended steps (in order):
@@ -27,5 +19,4 @@ Recommended steps (in order):
 
 5.) open browser and connect to http://localhost:3000
 
->>>>>>> origin/Kile_Branch
 
