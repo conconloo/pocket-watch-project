@@ -69,12 +69,12 @@ class WeatherReport extends Component {
           ))}
           </div>
           <h1>Alerts:</h1> 
-          {obj.alerts.map(alert => (
+          {obj.alerts ? obj.alerts.map(alert => (
             <>
             <h1>{alert.sender_name ? 'From the ' + alert.sender_name + ' association: ': ''}</h1>
             <p>{alert.description ? alert.description : ''}</p>
             </>
-          ))}
+          )) : "No Alerts"}
           </>
         ))}
       </div>
