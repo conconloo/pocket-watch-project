@@ -3,6 +3,7 @@ const app = express();
 const videos = require('./routes/videos');
 const weather = require('./routes/weather');
 const places = require('./routes/places');
+const currWeather = require('./routes/currentweather');
 
 const path = require('path');
 const PORT = process.env.PORT || 4000;
