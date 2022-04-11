@@ -36,10 +36,12 @@ const App = () => {
       <Router>
         <div>
           <div className="Navbar">
-            <div className='logo'>
-              <img src={image1} alt='pocket-watch-logo'/>
-              <h1>Pocket Watch</h1>
-            </div> 
+            <a href="/">
+              <div className='logo'>
+                <img src={image1} alt='pocket-watch-logo'/>
+                <h1>Pocket Watch</h1>
+              </div> 
+            </a>
             <button className="hamburger" id="hamburger" onClick={handleHamburger}>
               <i className="fa fa-bars"></i>
             </button>
