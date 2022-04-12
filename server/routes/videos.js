@@ -4,7 +4,7 @@ const axios = require('axios');
 const { response } = require('express');
 const router = express.Router();
 
-let apiKey = 'AIzaSyDgSH071ynMYPIoJ0Q96Rz7mXgkgU-tDLk' // remove this before pushing
+let apiKey = 'AIzaSyCKCEMgiaLWZNfcMVsDwnVGf8qbkKN2s_g' // remove this before pushing
 
 // actually get API data stuff
 
@@ -61,8 +61,14 @@ async function getYouTubeData (req) {
 }
 
 router.get('/', async (req, res) => {
+    const fs = require('fs');
+
     dataArray = new Array();
     dataArray = await getYouTubeData(req);
+
+    let ytData = JSON.stringify(dataArray);
+    fs.writeFileSync('yt-info.json', ytData);
+
     res.json(dataArray);
 })
 
