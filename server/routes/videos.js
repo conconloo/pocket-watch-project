@@ -4,7 +4,7 @@ const axios = require('axios');
 const { response } = require('express');
 const router = express.Router();
 
-let apiKey = 'AIzaSyDgSH071ynMYPIoJ0Q96Rz7mXgkgU-tDLk' // remove this before pushing
+let apiKey = 'AIzaSyDwzEd2Xqs8iVOaDZcJGcDsuAZof4GqKo8' // remove this before pushing
 
 // actually get API data stuff
 

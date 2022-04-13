@@ -160,10 +160,12 @@
 .filters {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 100%;
   flex-wrap: wrap;
   justify-content: space-around;
+  min-height: 100%;
+  margin: auto;
+  width: 70vw;
+  padding: 40px;
 }
 
 .video-info {

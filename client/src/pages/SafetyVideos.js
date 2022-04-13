@@ -1,8 +1,9 @@
 import React from "react";
 import { Component } from "react";
+import ShowVideo from "../components/ShowVideo";
+import FilterButtons from "../components/FilterButtons";
 
 const keywords = require('../json/VideoSearchList.json');
-
 let WatchVideo = 'https://www.youtube.com/watch?v=';
 
 class SafetyVideos extends Component {
@@ -11,9 +12,13 @@ class SafetyVideos extends Component {
         super(props);
         this.state = {
             keywords: keywords,
-            videos: []
+            videos: [],
+            showFilters: false,
+            showVideos: false
         }
         this.handleFilter = this.handleFilter.bind(this);
+        this.toggleFilters = this.toggleFilters.bind(this);
+        this.toggleVideos = this.toggleVideos.bind(this);
     }
 
     handleFilter = (searchQuery) => {
@@ -34,33 +39,73 @@ class SafetyVideos extends Component {
             .then(res => res.json())
             .then(videos => {
                 let myvideos = this.state.videos;
-                this.setState({videos: myvideos.concat(videos)})
+                this.setState({
+                    videos: myvideos.concat(videos),
+                    showVideos: true
+                })
             });
+    }
+
+    toggleFilters(){
+        this.setState({
+            showFilters: !this.state.showFilters,
+            videos: []
+        });
+    }
+
+    toggleVideos() {
+        this.setState({
+            showVideos: !this.state.showVideos
+        })
     }
 
     render(){
         return (
-            <>
-            <div className="filters">
-                {
+            <div className="videopage">
+                <h1>Safety Videos</h1>
+                <FilterButtons toggleFilters={this.toggleFilters}/>
+                {this.state.showFilters ?
                     Object.keys(this.state.keywords).map(key => (
                         <button onClick={() => this.handleFilter(this.state.keywords[key])}>{key}</button>
                     ))
+                    : ''
                 }
+                <div className="videos">
+                    {this.state.showVideos ?
+                        this.state.videos.map(video =>(
+                            <a className="video-info" href={WatchVideo + video.videoID} target='_blank' rel="noreferrer">
+                                <img src = {video.thumbnail.url} alt ="Video"/>
+                                <h1>{video.title}</h1>
+                                <h2>{video.channelTitle}</h2>
+                                <p>{video.description}</p>
+                            </a>
+                        ))
+                        : ''
+                    }
+                </div>
             </div>
-            <div className="videos">
-                {
-                    this.state.videos.map(video =>(
-                        <a className="video-info" href={WatchVideo + video.videoID} target='_blank' rel="noreferrer">
-                            <img src = {video.thumbnail.url} alt ="Video"/>
-                            <h1>{video.title}</h1>
-                            <h2>{video.channelTitle}</h2>
-                            <p>{video.description}</p>
-                        </a>
-                    ))
-                }
-            </div>
-            </>
+            // <>
+            // <div className="filters">
+            //     <h2>Filter by:</h2>
+            //     {
+            //         Object.keys(this.state.keywords).map(key => (
+            //             <button onClick={() => this.handleFilter(this.state.keywords[key])}>{key}</button>
+            //         ))
+            //     }
+            // </div>
+            // <div className="videos">
+            //     {
+            //         this.state.videos.map(video =>(
+            //             <a className="video-info" href={WatchVideo + video.videoID} target='_blank' rel="noreferrer">
+            //                 <img src = {video.thumbnail.url} alt ="Video"/>
+            //                 <h1>{video.title}</h1>
+            //                 <h2>{video.channelTitle}</h2>
+            //                 <p>{video.description}</p>
+            //             </a>
+            //         ))
+            //     }
+            // </div>
+            // </>
         )
     }
 }
