@@ -34,6 +34,7 @@ class MyMap extends Component {
             <h1>From Query</h1>
             {this.state.query.map(place => (
                 <>
+                {console.log(place)}
                 <p>{place.name}</p>
                 <p>{place.vicinity}</p>
                 <p>{place.rating}</p>

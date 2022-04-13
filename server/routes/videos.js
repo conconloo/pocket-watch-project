@@ -4,19 +4,9 @@ const axios = require('axios');
 const { response } = require('express');
 const router = express.Router();
 
-let apiKey = 'AIzaSyDgSH071ynMYPIoJ0Q96Rz7mXgkgU-tDLk' // remove this before pushing
+let apiKey = 'AIzaSyCKCEMgiaLWZNfcMVsDwnVGf8qbkKN2s_g'
 
 // actually get API data stuff
-
-/*
-    To get important video info:
-
-    title: response.data.items[index].snippet.title
-    description: response.data.items[index].snippet.description
-    thumbnail: response.data.items[index].snippet.thumbnails
-    channelTitle: response.data.items[index].snippet.channelTitle
-    videoID: response.data.items[index].id.videoId
-*/
 
 async function getYouTubeData (req) {
     let maxResults = 25;
@@ -61,8 +51,33 @@ async function getYouTubeData (req) {
 }
 
 router.get('/', async (req, res) => {
-    dataArray = new Array();
-    dataArray = await getYouTubeData(req);
+    const fs = require('fs');
+
+    let dataArray;
+    
+    let currVideos = fs.readdirSync(__dirname + '/../json/'); // gets all currently saved video results
+    let fileFound = false; // file has not been found
+    
+    for (let i = 0; i < currVideos.length; ++i) {
+        if (currVideos[i] == (req.query.keyword + '.json')) {
+            // If file is already saved, don't run the API, instead load it from the saved ata
+            fileFound = true;
+            console.log("Video results are already saved, loading...")
+            dataArray = JSON.parse(fs.readFileSync(__dirname + '/../json/' + req.query.keyword + '.json'));
+            console.log("Done.");
+            break;
+        }
+    }
+    
+    if (!fileFound) {
+        // If the video info has not been saved, then save it and show it
+        dataArray = await getYouTubeData(req);
+        let ytData = JSON.stringify(dataArray);
+        console.log("Video results are not saved, saving...")
+        fs.writeFileSync(__dirname + '/../json/' + req.query.keyword + '.json', ytData); // writes to ../json folder in server
+        console.log("Done.")
+    }
+
     res.json(dataArray);
 })
 
