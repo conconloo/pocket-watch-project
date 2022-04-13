@@ -228,6 +228,7 @@
 .Navbar .links .link{
   margin: 2%;
   font: inherit;
+  font-variant: small-caps;
   font-size: calc(8pt + 1.2vh + 1.2vw);
   background-color: inherit;
   text-decoration: none;
@@ -292,6 +293,7 @@
 .Map-buttons{
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   justify-items: center;
   padding: 0 15%;
@@ -300,6 +302,8 @@
   color: blue;
   background-color: transparent;
   border: 2px solid blue;
+  font-variant: small-caps;
+  border-radius: 20px 20px 0 0;
   font-size: 5vh;
   transition: all 250ms ease-in-out;
 }
@@ -311,9 +315,64 @@
   cursor: pointer;
 }
 
+.hospital {
+  color: red;
+  background-color: transparent;
+  border: 2px solid red;
+  font-variant: small-caps;
+  border-radius: 20px 20px 0 0;
+  font-size: 5vh;
+  transition: all 250ms ease-in-out;
+}
+
+.hospital:hover {
+  color: white;
+  background-color: red;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.pharmacy {
+  color: magenta;
+  background-color: transparent;
+  border: 2px solid magenta;
+  font-variant: small-caps;
+  border-radius: 20px 20px 0 0;
+  font-size: 5vh;
+  transition: all 250ms ease-in-out;
+}
+
+.pharmacy:hover {
+  color: white;
+  background-color: magenta;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
 .places-list {
-  display: flex;
-  flex-direction: column;
+  display: inline-block;
+  overflow: auto;
+  max-height: 50vh;
   padding: 5%;
-  width: 20%;
+  margin: 3%;
+  width: 25%;
+}
+
+.places-list button {
+  background-color: transparent;
+  border: 5px solid black;
+  font-size: 100%;
+  width: 100%;
+  padding: 5%;
+  transition: all 250ms ease-in-out;
+}
+
+.places-list button:hover{
+  border: 5px solid white;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+.places-list button:hover p{
+  color: white;
 }

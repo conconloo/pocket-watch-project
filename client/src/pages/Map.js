@@ -45,8 +45,7 @@ class MyMap extends Component {
             </div>
             <div className="places-list">
                 {this.state.query.map(place => (
-
-                    <button className={this.state.building+"-list"}>
+                    <button>
                     <p>{place.name}</p>
                     <p>{place.vicinity}</p>
                     </button>
