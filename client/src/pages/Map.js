@@ -1,17 +1,20 @@
 import React from "react";
 import {Component } from "react";
+import {
+    Map as GoogleMap,
+    Marker,
+    GoogleApiWrapper,
+
+} from "google-maps-react";
 
 
-class Map extends Component {
+
+class MyMap extends Component {
     constructor(props){
         super(props);
         this.state = {
             query: [],
-            places: [{
-                name: '',
-                address: '',
-
-            }]
+            places: []
         }
     }
 
@@ -21,7 +24,6 @@ class Map extends Component {
           navigator.geolocation.getCurrentPosition(resolve, reject);
         });
       }
-    
 
     componentDidMount(){
         this.getPosition()
@@ -29,15 +31,15 @@ class Map extends Component {
             fetch('api/places?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude)
                 .then((res) => res.json())
                 .then(res => this.setState({query: res}))
-        })
+            })
     }
 
 
 
-    render( ){
+    render(){
         return(
         <div>
-            <h1>Header</h1>
+            <h1>From Query</h1>
             {this.state.query.map(place => (
                 <>
                 <p>{place.name}</p>
@@ -47,14 +49,14 @@ class Map extends Component {
                 <br></br>
                 </>
             ))}
-            <iframe 
-            className="testFrame"
-            src="https://www.google.com/maps/embed/v1/place
-                ?key=AIzaSyAEZeR4pdli80dwbZNLbly_Da9bG-jk1k0
-                &q=place_id:ChIJs--MqP1YwokRBwAhjXWIHn8"></iframe>
+            <GoogleMap google={this.props.google}>
+                <Marker />
+            </GoogleMap>
         </div>
         )
     }
 }
 
-export default Map;
+export default GoogleApiWrapper({
+    apiKey: ('AIzaSyAEZeR4pdli80dwbZNLbly_Da9bG-jk1k0')
+}) (MyMap);
