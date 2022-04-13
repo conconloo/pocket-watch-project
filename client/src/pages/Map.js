@@ -5,8 +5,10 @@ class MyMap extends Component {
     constructor(props){
         super(props);
         this.state = {
-            query: [],
-            places: []
+            latitude: 0,
+            longitude: 0,
+            building: '',
+            query: []
         }
     }
 
@@ -17,12 +19,17 @@ class MyMap extends Component {
         });
       }
 
-    componentDidMount(){
-        this.getPosition()
-        .then((position) => {
-            fetch('api/places?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude)
+    getBuildings = (type) => {
+        this.setState({building: type})
+        fetch('api/places?latitude=' + this.state.latitude + '&longitude=' + this.state.longitude + '&building=' + (type ? type : 'police'))
                 .then((res) => res.json())
                 .then(res => this.setState({query: res}))
+    }
+
+    componentDidMount(props){
+        this.getPosition()
+        .then((position) => {
+                this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude})
             })
     }
 
@@ -31,17 +38,20 @@ class MyMap extends Component {
     render(){
         return(
         <div>
-            <h1>From Query</h1>
-            {this.state.query.map(place => (
-                <>
-                {console.log(place)}
-                <p>{place.name}</p>
-                <p>{place.vicinity}</p>
-                <p>{place.rating}</p>
-                <p>{place.place_id}</p>
-                <br></br>
-                </>
-            ))}
+            <div className="Map-buttons">
+                <button className="police" onClick={() => this.getBuildings('police')}>Police</button>
+                <button className="hospital" onClick={() => this.getBuildings('hospital')}>Hospital</button>
+                <button className="pharmacy" onClick={() => this.getBuildings('pharmacy')}>Pharmacy</button>
+            </div>
+            <div className="places-list">
+                {this.state.query.map(place => (
+
+                    <button className={this.state.building+"-list"}>
+                    <p>{place.name}</p>
+                    <p>{place.vicinity}</p>
+                    </button>
+                ))}
+            </div>
         </div>
         )
     }

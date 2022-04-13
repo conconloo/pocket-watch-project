@@ -288,3 +288,32 @@
   width: 600px;
   left: 25%;
 }
+
+.Map-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  justify-items: center;
+  padding: 0 15%;
+}
+.police {
+  color: blue;
+  background-color: transparent;
+  border: 2px solid blue;
+  font-size: 5vh;
+  transition: all 250ms ease-in-out;
+}
+
+.police:hover {
+  color: white;
+  background-color: blue;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.places-list {
+  display: flex;
+  flex-direction: column;
+  padding: 5%;
+  width: 20%;
+}
