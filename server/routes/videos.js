@@ -68,6 +68,7 @@ router.get('/', async (req, res) => {
             break;
         }
     }
+    
     if (!fileFound) {
         // If the video info has not been saved, then save it and show it
         dataArray = await getYouTubeData(req);
