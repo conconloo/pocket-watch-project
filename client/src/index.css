@@ -283,11 +283,8 @@
 
 }
 
-.testFrame {
-  display: block;
-  position: absolute;
+.GoogleMap {
+  height: 400px;
+  width: 600px;
   left: 25%;
-  width: 50%;
-  height: 600px;
-  border: 2px solid magenta;
 }

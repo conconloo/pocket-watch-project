@@ -49,9 +49,11 @@ class MyMap extends Component {
                 <br></br>
                 </>
             ))}
-            <GoogleMap google={this.props.google}>
-                <Marker />
-            </GoogleMap>
+            <iframe className="GoogleMap">
+                <GoogleMap google={this.props.google}>
+                    <Marker />
+                </GoogleMap>
+            </iframe>
         </div>
         )
     }
