@@ -14,7 +14,8 @@ class SafetyVideos extends Component {
             keywords: keywords,
             videos: [],
             showFilters: false,
-            showVideos: false
+            showVideos: false,
+            myclass: 'filtersbtn'
         }
         this.handleFilter = this.handleFilter.bind(this);
         this.toggleFilters = this.toggleFilters.bind(this);
@@ -24,6 +25,7 @@ class SafetyVideos extends Component {
     handleFilter = (searchQuery) => {
         console.log(searchQuery);
         this.setState({videos : []});
+        this.toggleFilters();
         for (var i = 0; i < searchQuery.length; i++) {
             this.renderVideos(searchQuery[i].replace(" ", "+"));
         }
@@ -50,7 +52,7 @@ class SafetyVideos extends Component {
         this.setState({
             showFilters: !this.state.showFilters,
             videos: []
-        });
+        })
     }
 
     toggleVideos() {
@@ -62,14 +64,20 @@ class SafetyVideos extends Component {
     render(){
         return (
             <div className="videopage">
-                <h1>Safety Videos</h1>
-                <FilterButtons toggleFilters={this.toggleFilters}/>
-                {this.state.showFilters ?
-                    Object.keys(this.state.keywords).map(key => (
-                        <button onClick={() => this.handleFilter(this.state.keywords[key])}>{key}</button>
-                    ))
-                    : ''
-                }
+                <div className="header">
+                    <h1>Safety Videos</h1>
+                    <FilterButtons toggleFilters={this.toggleFilters}/>
+                    <div className='filters'>
+                        {this.state.showFilters ?
+                            Object.keys(this.state.keywords).map(key => (
+                                <>
+                                <button onClick={() => this.handleFilter(this.state.keywords[key])}>{key}</button>
+                                </>
+                            ))
+                            : ''
+                        }
+                    </div>
+                </div>
                 <div className="videos">
                     {this.state.showVideos ?
                         this.state.videos.map(video =>(
