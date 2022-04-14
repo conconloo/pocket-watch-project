@@ -204,8 +204,9 @@
 }
 
 .videos h1 {
+  font-variant: small-caps;
   margin-top: 4px;
-  font-size: medium;
+  font-size: large;
 }
 
 .videos h2 {
