@@ -146,26 +146,81 @@
   cursor: pointer;
 }
 
-.videos {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content:space-evenly;
-  padding: 2%;
+.header {
+  margin: 2% 12%;
 }
 
-.videos a:link{
-  text-decoration: none;
+.filtersbtn {
+  margin: 15px 0px;
+}
+
+.filtersbtn button {
+  background-color: white;
+  border-color: black;
+  border-width: 2px;
+  border-radius: 5px;
+  padding: 1% 3%;
+}
+
+.filtersbtn button:hover {
+  cursor: pointer;
+  color: white;
+  background-color: black;
+  transition: 0.2s;
 }
 
 .filters {
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: space-around;
-  min-height: 100%;
-  margin: auto;
-  width: 70vw;
-  padding: 40px;
+  height: auto;
+}
+
+.filters button {
+  padding: 2%;
+  background-color: white;
+  border-width: 0px;
+  border-bottom-width: 2px;
+  border-color: white;
+  margin-right: 3%;
+  transition: 0.2s;
+}
+
+.filters button:hover {
+  cursor: pointer;
+  border-color: black;
+}
+
+.videopage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 2% 2% 2% 2%;
+}
+
+.videos {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.videos h1 {
+  font-variant: small-caps;
+  margin-top: 4px;
+  font-size: large;
+}
+
+.videos h2 {
+  margin-top: 4px;
+  font-size: small;
+}
+
+.videos p {
+  font-size: smaller;
+  color: rgb(52, 52, 52);
+}
+
+.videos a:link{
+  text-decoration: none;
 }
 
 .video-info {
@@ -173,18 +228,17 @@
   flex-direction: column;
   align-content: space-around;
   overflow-wrap: break-word;
-  margin: 25px;
+  margin: 20px;
   padding: 1%;
   width: 25vw;
 }
 
 .video-info img{
   min-width: 50%;
-  /*border-radius: 25px;*/
 }
 
 .video-info:hover{
-  background-color: rgba(128, 128, 128, 0.489);
+  background-color: rgba(128, 128, 128, 0.156);
   transition: 0.2s;
   cursor: pointer;
 }
