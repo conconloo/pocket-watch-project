@@ -8,9 +8,11 @@ let apiKey = 'AIzaSyAEZeR4pdli80dwbZNLbly_Da9bG-jk1k0';
 async function getPlacesList (req = false) {
     let latitude = req.query.latitude || 30.601389;
     let longitude = req.query.longitude || -96.314445;
+    let building = req.query.building || 'police';
 
     console.log(latitude);
     console.log(longitude);
+    console.log(building);
 
     // https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=5000&type=police&key=${apiKey}
     
@@ -19,7 +21,7 @@ async function getPlacesList (req = false) {
         params: {
             location: `${latitude},${longitude}`,
             radius: '5000',
-            type: 'police',
+            type: building,
             key: apiKey
         }
     });

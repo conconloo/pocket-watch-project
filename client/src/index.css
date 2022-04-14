@@ -230,6 +230,7 @@
 .Navbar .links .link{
   margin: 2%;
   font: inherit;
+  font-variant: small-caps;
   font-size: calc(8pt + 1.2vh + 1.2vw);
   background-color: inherit;
   text-decoration: none;
@@ -285,8 +286,112 @@
 
 }
 
-.GoogleMap {
-  height: 400px;
-  width: 600px;
-  left: 25%;
+.Map-buttons{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  justify-items: center;
+  padding: 0 15%;
+}
+
+.Map-buttons button img {
+  width: 100px;
+  transition: all 250ms ease-in-out, filter 0ms;
+}
+
+.Map-buttons button:hover img {
+  filter: invert(1);
+  
+}
+
+.police {
+  color: blue;
+  background-color: transparent;
+  border: 2px solid blue;
+  font-variant: small-caps;
+  border-radius: 20px 20px 0 0;
+  font-size: 5vh;
+}
+
+.police img{
+  filter: invert(9%) sepia(100%) saturate(5811%) hue-rotate(245deg) brightness(108%) contrast(139%);
+  transition: all 0s;
+}
+
+.police:hover {
+  color: white;
+  background-color: blue;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.hospital {
+  color: red;
+  background-color: transparent;
+  border: 2px solid red;
+  font-variant: small-caps;
+  border-radius: 20px 20px 0 0;
+  font-size: 5vh;
+}
+
+
+.hospital img{
+  filter: invert(17%) sepia(73%) saturate(6266%) hue-rotate(356deg) brightness(101%) contrast(118%);
+}
+
+
+.hospital:hover {
+  color: white;
+  background-color: red;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.pharmacy {
+  color: magenta;
+  background-color: transparent;
+  border: 2px solid magenta;
+  font-variant: small-caps;
+  border-radius: 20px 20px 0 0;
+  font-size: 5vh;
+}
+
+.pharmacy:hover {
+  color: white;
+  background-color: magenta;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.pharmacy img{
+  filter: invert(18%) sepia(49%) saturate(6630%) hue-rotate(293deg) brightness(116%) contrast(126%);
+}
+
+.places-list {
+  display: inline-block;
+  overflow: auto;
+  max-height: 50vh;
+  padding: 5%;
+  margin: 3%;
+  width: 25%;
+}
+
+.places-list button {
+  background-color: transparent;
+  border: 5px solid black;
+  font-size: 100%;
+  width: 100%;
+  padding: 5%;
+  transition: all 250ms ease-in-out;
+}
+
+.places-list button:hover{
+  border: 5px solid white;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+.places-list button:hover p{
+  color: white;
 }

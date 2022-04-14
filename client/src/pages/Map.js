@@ -1,20 +1,17 @@
 import React from "react";
 import {Component } from "react";
-import {
-    Map as GoogleMap,
-    Marker,
-    GoogleApiWrapper,
-
-} from "google-maps-react";
-
-
+import police_image from '../images/police.png';
+import pharmacy_image from '../images/pharmacy.png';
+import hospital_image from '../images/Hospital.png';
 
 class MyMap extends Component {
     constructor(props){
         super(props);
         this.state = {
-            query: [],
-            places: []
+            latitude: 0,
+            longitude: 0,
+            building: '',
+            query: []
         }
     }
 
@@ -25,12 +22,17 @@ class MyMap extends Component {
         });
       }
 
-    componentDidMount(){
-        this.getPosition()
-        .then((position) => {
-            fetch('api/places?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude)
+    getBuildings = (type) => {
+        this.setState({building: type})
+        fetch('api/places?latitude=' + this.state.latitude + '&longitude=' + this.state.longitude + '&building=' + (type ? type : 'police'))
                 .then((res) => res.json())
                 .then(res => this.setState({query: res}))
+    }
+
+    componentDidMount(props){
+        this.getPosition()
+        .then((position) => {
+                this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude})
             })
     }
 
@@ -39,26 +41,31 @@ class MyMap extends Component {
     render(){
         return(
         <div>
-            <h1>From Query</h1>
-            {this.state.query.map(place => (
-                <>
-                <p>{place.name}</p>
-                <p>{place.vicinity}</p>
-                <p>{place.rating}</p>
-                <p>{place.place_id}</p>
-                <br></br>
-                </>
-            ))}
-            <iframe className="GoogleMap">
-                <GoogleMap google={this.props.google}>
-                    <Marker />
-                </GoogleMap>
-            </iframe>
+            <div className="Map-buttons">
+                <button className="police" onClick={() => this.getBuildings('police')}>
+                    Police <br/>
+                    <img src={police_image} />
+                </button>
+                <button className="hospital" onClick={() => this.getBuildings('hospital')}>
+                    Hospital<br/>
+                    <img src={hospital_image} />
+                    </button>
+                <button className="pharmacy" onClick={() => this.getBuildings('pharmacy')}>
+                    Pharmacy<br/>
+                    <img src={pharmacy_image} />
+                    </button>
+            </div>
+            <div className="places-list">
+                {this.state.query.map(place => (
+                    <button>
+                    <p>{place.name}</p>
+                    <p>{place.vicinity}</p>
+                    </button>
+                ))}
+            </div>
         </div>
         )
     }
 }
 
-export default GoogleApiWrapper({
-    apiKey: ('AIzaSyAEZeR4pdli80dwbZNLbly_Da9bG-jk1k0')
-}) (MyMap);
+export default MyMap;
