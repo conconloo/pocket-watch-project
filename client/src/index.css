@@ -284,7 +284,6 @@
 .Navbar .links .link{
   margin: 2%;
   font: inherit;
-  font-variant: small-caps;
   font-size: calc(8pt + 1.2vh + 1.2vw);
   background-color: inherit;
   text-decoration: none;
