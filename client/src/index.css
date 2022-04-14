@@ -146,24 +146,81 @@
   cursor: pointer;
 }
 
+.header {
+  margin: 2% 12%;
+}
+
+.filtersbtn {
+  margin: 15px 0px;
+}
+
+.filtersbtn button {
+  background-color: white;
+  border-color: black;
+  border-width: 2px;
+  border-radius: 5px;
+  padding: 1% 3%;
+}
+
+.filtersbtn button:hover {
+  cursor: pointer;
+  color: white;
+  background-color: black;
+  transition: 0.2s;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+}
+
+.filters button {
+  padding: 2%;
+  background-color: white;
+  border-width: 0px;
+  border-bottom-width: 2px;
+  border-color: white;
+  margin-right: 3%;
+  transition: 0.2s;
+}
+
+.filters button:hover {
+  cursor: pointer;
+  border-color: black;
+}
+
+.videopage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 2% 2% 2% 2%;
+}
+
 .videos {
   display: flex;
   flex-wrap: wrap;
-  justify-content:space-evenly;
-  padding: 2%;
+  width: 100%;
+}
+
+.videos h1 {
+  font-variant: small-caps;
+  margin-top: 4px;
+  font-size: large;
+}
+
+.videos h2 {
+  margin-top: 4px;
+  font-size: small;
+}
+
+.videos p {
+  font-size: smaller;
+  color: rgb(52, 52, 52);
 }
 
 .videos a:link{
   text-decoration: none;
-}
-
-.videos .filters {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  flex-wrap: wrap;
-  justify-content: space-around;
 }
 
 .video-info {
@@ -171,18 +228,18 @@
   flex-direction: column;
   align-content: space-around;
   overflow-wrap: break-word;
-  margin: 25px;
-  padding: 2%;
-  /*border-radius: 25px;*/
+  margin: 20px;
+  padding: 1%;
   width: 25vw;
 }
 
 .video-info img{
   min-width: 50%;
-  /*border-radius: 25px;*/
 }
 
 .video-info:hover{
+  background-color: rgba(128, 128, 128, 0.156);
+  transition: 0.2s;
   cursor: pointer;
 }
 
@@ -280,4 +337,114 @@
   }
 
 
+}
+
+.Map-buttons{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  justify-items: center;
+  padding: 0 15%;
+}
+
+.Map-buttons button img {
+  width: 100px;
+  transition: all 250ms ease-in-out, filter 0ms;
+}
+
+.Map-buttons button:hover img {
+  filter: invert(1);
+  
+}
+
+.police {
+  color: blue;
+  background-color: transparent;
+  border: 2px solid blue;
+  font-variant: small-caps;
+  border-radius: 20px 20px 0 0;
+  font-size: 5vh;
+}
+
+.police img{
+  filter: invert(9%) sepia(100%) saturate(5811%) hue-rotate(245deg) brightness(108%) contrast(139%);
+  transition: all 0s;
+}
+
+.police:hover {
+  color: white;
+  background-color: blue;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.hospital {
+  color: red;
+  background-color: transparent;
+  border: 2px solid red;
+  font-variant: small-caps;
+  border-radius: 20px 20px 0 0;
+  font-size: 5vh;
+}
+
+
+.hospital img{
+  filter: invert(17%) sepia(73%) saturate(6266%) hue-rotate(356deg) brightness(101%) contrast(118%);
+}
+
+
+.hospital:hover {
+  color: white;
+  background-color: red;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.pharmacy {
+  color: magenta;
+  background-color: transparent;
+  border: 2px solid magenta;
+  font-variant: small-caps;
+  border-radius: 20px 20px 0 0;
+  font-size: 5vh;
+}
+
+.pharmacy:hover {
+  color: white;
+  background-color: magenta;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.pharmacy img{
+  filter: invert(18%) sepia(49%) saturate(6630%) hue-rotate(293deg) brightness(116%) contrast(126%);
+}
+
+.places-list {
+  display: inline-block;
+  overflow: auto;
+  max-height: 50vh;
+  padding: 5%;
+  margin: 3%;
+  width: 25%;
+}
+
+.places-list button {
+  background-color: transparent;
+  border: 5px solid black;
+  font-size: 100%;
+  width: 100%;
+  padding: 5%;
+  transition: all 250ms ease-in-out;
+}
+
+.places-list button:hover{
+  border: 5px solid white;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+.places-list button:hover p{
+  color: white;
 }
