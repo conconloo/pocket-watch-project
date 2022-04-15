@@ -65,7 +65,7 @@ class WeatherReport extends Component {
           <h1>Weather today in:</h1>
           <p>{this.state.location}</p>
           <p>{obj.lat}, {obj.lon}</p>
-          <p>{Date(obj.current.dt).substring(3,25)}</p>
+          <p>{new Date(obj.current.dt * 1000).toLocaleDateString()} {new Date(obj.current.dt * 1000).toLocaleTimeString("en-US")}</p>
           <div className='conditions'>
           {obj.current.weather.map(conditions =>(
             <>

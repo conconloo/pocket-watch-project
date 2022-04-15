@@ -26,14 +26,6 @@ class Home extends Component {
         };
     }
 
-    componentDidMount() {
-        fetch('api/users')
-            .then(res => res.json())
-            .then(users => {
-                this.setState({users : users});
-            });
-    }
-
     onCloseAlert() {
         this.setState({
             okay: true,
