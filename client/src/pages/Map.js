@@ -30,7 +30,7 @@ class MyMap extends Component {
                 .then(res => this.setState({query: res}))
     }
 
-    componentDidMount(props){
+    componentDidMount(){
         this.getPosition()
         .then((position) => {
                 this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude})

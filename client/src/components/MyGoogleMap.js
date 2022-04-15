@@ -1,23 +1,33 @@
-import React, { Component } from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import React, {Component} from 'react';
+import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
 
 const containerStyle = { // dimensions of the map
     width: '400px',
     height: '400px'
 }; // TODO: Eventually put this into index.css instead of putting it in the .js file
 
-const center = { // Hard coded latitude and longitude values to be College Station but in the future make them variable based on user location
-    lat: 30.601389,
-    lng: -96.314445
-};
-
-const position = {
-    lat: 30.701389,
-    lng: -96.314445
-}
-
-
 class MyGoogleMap extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            lat: 0,
+            lng: 0
+        }
+    }
+
+    getPosition = () => {
+        return new Promise(function (resolve, reject) {
+            navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
+    }
+
+    componentDidMount() {
+        this.getPosition()
+            .then((position) => {
+                this.setState({lat: position.coords.latitude, lng: position.coords.longitude})
+            })
+    }
+
     render() {
         return (
             <LoadScript
@@ -25,15 +35,13 @@ class MyGoogleMap extends Component {
             >
                 <GoogleMap
                     mapContainerStyle={containerStyle}
-                    center={center}
+                    center={{lat: this.state.lat, lng: this.state.lng}}
                     zoom={12} // How zoomed in the map is when it's loaded. This varies between 0-22
                 >
-                    { /* Child components, such as markers, info windows, etc. */ }
-                    <Marker // Examples for placing markers onto the Google Map given a position
-                        position={center}
-                    />
+                    { /* Child components, such as markers, info windows, etc. */}
                     <Marker
-                        position={position}
+                        onLoad={console.log(this.state.lat, this.state.lng)} // Used for checking if the coords are in the right place
+                        position={{lat: this.state.lat, lng: this.state.lng}}
                     />
                 </GoogleMap>
             </LoadScript>
