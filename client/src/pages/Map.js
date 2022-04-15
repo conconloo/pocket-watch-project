@@ -3,6 +3,7 @@ import {Component } from "react";
 import police_image from '../images/police.png';
 import pharmacy_image from '../images/pharmacy.png';
 import hospital_image from '../images/Hospital.png';
+import GoogleMap from "../components/MyGoogleMap";
 
 class MyMap extends Component {
     constructor(props){
@@ -63,6 +64,8 @@ class MyMap extends Component {
                     </button>
                 ))}
             </div>
+            <GoogleMap/>
+            {/*Testing Google Map component*/}
         </div>
         )
     }
