@@ -342,7 +342,6 @@
 .Map-buttons{
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   width: 100%;
   justify-content: space-between;
   justify-items: center;

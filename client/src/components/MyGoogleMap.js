@@ -36,12 +36,15 @@ class MyGoogleMap extends Component {
                 <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={{lat: this.state.lat, lng: this.state.lng}}
-                    zoom={15} // How zoomed in the map is when it's loaded. This varies between 0-22
+                    zoom={12} // How zoomed in the map is when it's loaded. This varies between 0-22
                 >
                     { /* Child components, such as markers, info windows, etc. */}
                     <Marker
-                        onLoad={console.log(this.state.lat, this.state.lng)} // Used for checking if the coords are in the right place
                         position={{lat: this.state.lat, lng: this.state.lng}}
+                    />
+                    <Marker
+                        onLoad={console.log(this.props.place_position)} // Used for checking if the coords are in the right place
+                        position={this.props.place_position}
                     />
                 </GoogleMap>
             </LoadScript>

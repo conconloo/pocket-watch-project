@@ -3,7 +3,7 @@ import {Component } from "react";
 import police_image from '../images/police.png';
 import pharmacy_image from '../images/pharmacy.png';
 import hospital_image from '../images/Hospital.png';
-import GoogleMap from "../components/MyGoogleMap";
+import MyGoogleMap from "../components/MyGoogleMap";
 
 class MyMap extends Component {
     constructor(props){
@@ -12,7 +12,12 @@ class MyMap extends Component {
             latitude: 0,
             longitude: 0,
             building: '',
-            query: []
+            query: [],
+            place: '',
+            place_position: {
+                latitude: 0,
+                longitude: 0
+            }
         }
     }
 
@@ -37,7 +42,12 @@ class MyMap extends Component {
             })
     }
 
-
+    getGoogleMap(props){
+        console.log(props);
+        console.log(props.place_id, "place_id", props.geometry.location, "geometry")
+        this.setState({place: props.place_id, place_position: props.geometry.location})
+        
+    }
 
     render(){
         return(
@@ -58,14 +68,14 @@ class MyMap extends Component {
             </div>
             <div className="places-list">
                 {this.state.query.map(place => (
-                    <button>
+                    <button key={place.place_id} onClick={() => this.getGoogleMap(place)}>
                     <p>{place.name}</p>
                     <p>{place.vicinity}</p>
                     </button>
                 ))}
             </div>
-            <div className="GoogleMap">
-            <GoogleMap/>
+            <div id="GoogleMap" className="GoogleMap">
+                <MyGoogleMap place={this.state.place} place_position={this.state.place_position}/>
                 {/*Testing Google Map component*/}
             </div>
         </div>
