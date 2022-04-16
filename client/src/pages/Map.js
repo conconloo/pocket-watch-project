@@ -30,7 +30,7 @@ class MyMap extends Component {
       }
 
     getBuildings = (type) => {
-        this.setState({building: type})
+        this.setState(type === this.state.building ? {building: type} : {building: type, place: '', place_name: '', place_position: undefined})
         fetch('api/places?latitude=' + this.state.latitude + '&longitude=' + this.state.longitude + '&building=' + (type ? type : 'police'))
                 .then((res) => res.json())
                 .then(res => this.setState({query: res}))
