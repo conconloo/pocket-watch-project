@@ -33,6 +33,17 @@ class MyGoogleMap extends Component {
             })
     }
 
+    getImage() {
+        switch(this.props.building){
+            case 'police':
+                return police;
+            case 'pharmacy':
+                return pharmacy;
+            case 'hospital':
+                return hospital;
+        }
+    }
+
     render() {
         return (
             <LoadScript
@@ -50,6 +61,7 @@ class MyGoogleMap extends Component {
                         position={{lat: this.state.lat, lng: this.state.lng}}
                     />
                     <Marker
+                        icon={this.getImage()}
                         onLoad={console.log(this.props.place_position)} // Used for checking if the coords are in the right place
                         label={{text: this.props.place_name, fontFamily: 'Verdana, sans-serif', fontSize: '2vh', className: 'marker'}}
                         position={this.props.place_position}
