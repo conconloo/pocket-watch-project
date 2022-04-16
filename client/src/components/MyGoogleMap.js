@@ -1,5 +1,10 @@
 import React, {Component} from 'react';
 import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
+import logo from '../images/logo-40.png';
+import police from '../images/police-40.png';
+import hospital from '../images/Hospital-40.png';
+import pharmacy from '../images/pharmacy-40.png';
+
 
 const containerStyle = { // dimensions of the map
     width: '100%',
@@ -40,6 +45,7 @@ class MyGoogleMap extends Component {
                 >
                     { /* Child components, such as markers, info windows, etc. */}
                     <Marker
+                        icon={logo}
                         label={{text: "Current Location", fontFamily: 'Verdana, sans-serif', fontSize: '2vh', className: 'marker'}}
                         position={{lat: this.state.lat, lng: this.state.lng}}
                     />
