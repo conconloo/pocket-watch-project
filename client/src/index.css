@@ -343,19 +343,27 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  width: 100%;
   justify-content: space-between;
   justify-items: center;
   padding: 0 15%;
 }
 
 .Map-buttons button img {
-  width: 100px;
+  width: 15%;
   transition: all 250ms ease-in-out, filter 0ms;
 }
 
 .Map-buttons button:hover img {
   filter: invert(1);
   
+}
+
+.myMap {
+  display: flex;
+  flex-wrap: wrap;
+  width: 99vw;
+  height: auto;
 }
 
 .police {
@@ -424,8 +432,7 @@
 .places-list {
   display: inline-block;
   overflow: auto;
-  max-height: 50vh;
-  padding: 5%;
+  max-height: 60vh;
   margin: 3%;
   width: 25%;
 }
@@ -447,4 +454,11 @@
 }
 .places-list button:hover p{
   color: white;
+}
+
+.GoogleMap {
+  width: 60%;
+  margin: 3%;
+  height: 60vh;
+  align-content: center;
 }

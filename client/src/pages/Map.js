@@ -41,7 +41,7 @@ class MyMap extends Component {
 
     render(){
         return(
-        <div>
+        <div className="myMap">
             <div className="Map-buttons">
                 <button className="police" onClick={() => this.getBuildings('police')}>
                     Police <br/>
@@ -64,8 +64,10 @@ class MyMap extends Component {
                     </button>
                 ))}
             </div>
+            <div className="GoogleMap">
             <GoogleMap/>
-            {/*Testing Google Map component*/}
+                {/*Testing Google Map component*/}
+            </div>
         </div>
         )
     }

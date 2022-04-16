@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
 
 const containerStyle = { // dimensions of the map
-    width: '400px',
-    height: '400px'
+    width: '100%',
+    height: '100%'
 }; // TODO: Eventually put this into index.css instead of putting it in the .js file
 
 class MyGoogleMap extends Component {
@@ -36,7 +36,7 @@ class MyGoogleMap extends Component {
                 <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={{lat: this.state.lat, lng: this.state.lng}}
-                    zoom={12} // How zoomed in the map is when it's loaded. This varies between 0-22
+                    zoom={15} // How zoomed in the map is when it's loaded. This varies between 0-22
                 >
                     { /* Child components, such as markers, info windows, etc. */}
                     <Marker
