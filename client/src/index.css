@@ -385,7 +385,6 @@
 
 .police img{
   filter: invert(9%) sepia(100%) saturate(5811%) hue-rotate(245deg) brightness(108%) contrast(139%);
-  transition: all 0s;
 }
 
 .police:hover {
