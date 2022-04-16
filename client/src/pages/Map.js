@@ -14,6 +14,7 @@ class MyMap extends Component {
             building: '',
             query: [],
             place: '',
+            place_name: '',
             place_position: {
                 latitude: 0,
                 longitude: 0
@@ -45,7 +46,7 @@ class MyMap extends Component {
     getGoogleMap(props){
         console.log(props);
         console.log(props.place_id, "place_id", props.geometry.location, "geometry")
-        this.setState({place: props.place_id, place_position: props.geometry.location})
+        this.setState({place: props.place_id, place_position: props.geometry.location, place_name: props.name})
         
     }
 
@@ -75,7 +76,7 @@ class MyMap extends Component {
                 ))}
             </div>
             <div id="GoogleMap" className="GoogleMap">
-                <MyGoogleMap place={this.state.place} place_position={this.state.place_position}/>
+                <MyGoogleMap building={this.state.building} place={this.state.place} place_position={this.state.place_position} place_name={this.state.place_name}/>
                 {/*Testing Google Map component*/}
             </div>
         </div>

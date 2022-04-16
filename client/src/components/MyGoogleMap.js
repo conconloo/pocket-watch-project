@@ -40,10 +40,12 @@ class MyGoogleMap extends Component {
                 >
                     { /* Child components, such as markers, info windows, etc. */}
                     <Marker
+                        label={{text: "Current Location", fontFamily: 'Verdana, sans-serif', fontSize: '2vh', className: 'marker'}}
                         position={{lat: this.state.lat, lng: this.state.lng}}
                     />
                     <Marker
                         onLoad={console.log(this.props.place_position)} // Used for checking if the coords are in the right place
+                        label={{text: this.props.place_name, fontFamily: 'Verdana, sans-serif', fontSize: '2vh', className: 'marker'}}
                         position={this.props.place_position}
                     />
                 </GoogleMap>

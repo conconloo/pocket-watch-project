@@ -461,3 +461,12 @@
   height: 60vh;
   align-content: center;
 }
+
+.marker {
+  bottom: 2.2vh;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: white;
+  left: 0;
+  position: relative;
+}
