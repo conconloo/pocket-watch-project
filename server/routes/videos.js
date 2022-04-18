@@ -6,6 +6,8 @@ const router = express.Router();
 
 let apiKey = 'AIzaSyCKCEMgiaLWZNfcMVsDwnVGf8qbkKN2s_g' // remove this before pushing
 
+// Add like an update parameter check, if an update request is sent then force the update
+
 // actually get API data stuff
 
 async function getYouTubeData (req) {
@@ -35,6 +37,9 @@ async function getYouTubeData (req) {
 
     // Used for the next loop
     let lessDataArray = new Array();
+    let currDate = new Date().toISOString(); // gives the JSON a timestamp
+
+    lessDataArray.push({timestamp: currDate});
 
     // Removes any unneccesary video data
     for (let i = 0; i < videoItemArray.length; ++i) {
@@ -56,17 +61,40 @@ router.get('/', async (req, res) => {
     let dataArray;
     
     let currVideos = fs.readdirSync(__dirname + '/../json/'); // gets all currently saved video results
-    let fileFound = false; // file has not been found
+    let fileFound = false; // variable for a file not being found
+    let fileOutOfDate = false; // variable for if file is out of date
     
     for (let i = 0; i < currVideos.length; ++i) {
+        // If file is already saved, don't run the API, instead load it from the saved data
         if (currVideos[i] == (req.query.keyword + '.json')) {
-            // If file is already saved, don't run the API, instead load it from the saved ata
             fileFound = true;
             console.log("Video results are already saved, loading...")
             dataArray = JSON.parse(fs.readFileSync(__dirname + '/../json/' + req.query.keyword + '.json'));
             console.log("Done.");
             break;
         }
+    }
+
+    // Timestamp Stuff
+    // Please check: Does it actually update cached things after 24 hours? If so, does that break anything?
+
+    if (fileFound) {
+        let currentTime = new Date(); // gets the current date
+
+        let oldTime = dataArray[0]; // currently breaks the caching
+        let oldDate = new Date(oldTime);
+    
+        let milliSecDif = Math.abs(currentTime - oldDate);
+        let minDif = Math.floor((milliSecDif/1000)/60);
+    
+        if (minDif >= 1440) {
+            console.log("File will be updated as the file is over 24 hours old."); // a day is 1440 minutes
+            fileOutOfDate = true;
+        } else {
+            console.log("File was recently updated under 24 hours ago.")
+        }
+
+        dataArray.shift(); // removes timestamp
     }
     
     if (!fileFound) {
@@ -75,6 +103,15 @@ router.get('/', async (req, res) => {
         let ytData = JSON.stringify(dataArray);
         console.log("Video results are not saved, saving...")
         fs.writeFileSync(__dirname + '/../json/' + req.query.keyword + '.json', ytData); // writes to ../json folder in server
+        dataArray.shift(); // removes timestamp
+        console.log("Done.")
+    } else if (fileOutOfDate) {
+        // You can probably combine this with the !FileFound part
+        dataArray = await getYouTubeData(req);
+        let ytData = JSON.stringify(dataArray);
+        console.log("Video results are older than 24 hours, re-caching...");
+        fs.writeFileSync(__dirname + '/../json/' + req.query.keyword + '.json', ytData); // writes to ../json folder in server
+        dataArray.shift(); // removes timestamp
         console.log("Done.")
     }
 
