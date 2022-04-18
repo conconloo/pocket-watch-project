@@ -15,16 +15,17 @@ class SafetyVideos extends Component {
             videos: [],
             showFilters: false,
             showVideos: false,
-            myclass: 'filtersbtn'
+            myclass: 'filtersbtn',
+            currKey: ''
         }
         this.handleFilter = this.handleFilter.bind(this);
         this.toggleFilters = this.toggleFilters.bind(this);
         this.toggleVideos = this.toggleVideos.bind(this);
     }
 
-    handleFilter = (searchQuery) => {
+    handleFilter = (searchQuery, key) => {
         console.log(searchQuery);
-        this.setState({videos : []});
+        this.setState({videos : [], currKey : key});
         this.toggleFilters();
         for (var i = 0; i < searchQuery.length; i++) {
             this.renderVideos(searchQuery[i].replace(" ", "+"));
@@ -71,13 +72,14 @@ class SafetyVideos extends Component {
                         {this.state.showFilters ?
                             Object.keys(this.state.keywords).map(key => (
                                 <>
-                                <button onClick={() => this.handleFilter(this.state.keywords[key])}>{key}</button>
+                                <button onClick={() => this.handleFilter(this.state.keywords[key], key)}>{key}</button>
                                 </>
                             ))
                             : ''
                         }
                     </div>
                 </div>
+                    <h1>{this.state.currKey ? this.state.currKey : "Select Filter By +" }</h1>
                 <div className="videos">
                     {this.state.showVideos ?
                         this.state.videos.map(video =>(

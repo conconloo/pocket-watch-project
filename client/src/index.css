@@ -2,6 +2,7 @@
   margin: 0px;
   font-family: 'Verdana', sans-serif;
   color: rgb(15,15,15);
+  font-variant: small-caps;
   /* background-color: rgb(249,249,249); */
 }
 
@@ -225,7 +226,6 @@
 }
 
 .videos h1 {
-  font-variant: small-caps;
   margin-top: 4px;
   font-size: large;
 }
@@ -233,11 +233,13 @@
 .videos h2 {
   margin-top: 4px;
   font-size: small;
+  font-variant: normal;
 }
 
 .videos p {
   font-size: smaller;
   color: rgb(52, 52, 52);
+  font-variant: normal;
 }
 
 .videos a:link{
