@@ -69,28 +69,29 @@ router.get('/', async (req, res) => {
         if (currVideos[i] == (req.query.keyword + '.json')) {
             fileFound = true;
             console.log("Video results are already saved, loading...")
-            dataArray = JSON.parse(fs.readFileSync(__dirname + '/../json/' + req.query.keyword + '.json'));
+            dataArray = JSON.parse(fs.readFileSync(__dirname + '/../json/' + req.query.keyword + '.json')); // get video data from JSON file
             console.log("Done.");
             break;
         }
     }
 
     // Timestamp Stuff
-    // Please check: Does it actually update cached things after 24 hours? If so, does that break anything?
 
     if (fileFound) {
         let currentTime = new Date(); // gets the current date
 
-        let oldTime = dataArray[0]; // currently breaks the caching
+        let oldTime = dataArray[0]['timestamp']; // currently breaks the caching
         let oldDate = new Date(oldTime);
     
         let milliSecDif = Math.abs(currentTime - oldDate);
         let minDif = Math.floor((milliSecDif/1000)/60);
     
         if (minDif >= 1440) {
+            // Re-cache the file
             console.log("File will be updated as the file is over 24 hours old."); // a day is 1440 minutes
             fileOutOfDate = true;
         } else {
+            // File does not need to be re-cached
             console.log("File was recently updated under 24 hours ago.")
         }
 
