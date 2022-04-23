@@ -130,7 +130,7 @@ class MyMap extends Component {
                                         <div className='form-group'>
                                             <label htmlFor='ORIGIN'>Origin</label>
                                             <br/>
-                                            <input id='ORIGIN' className='form-control' type='text'
+                                            <input id='ORIGIN' className='form-control' type='text' size={75}
                                                    value={this.state.city_name} readOnly/>
                                         </div>
                                     </div>
@@ -139,7 +139,7 @@ class MyMap extends Component {
                                         <div className='form-group'>
                                             <label htmlFor='DESTINATION'>Destination</label>
                                             <br/>
-                                            <input id='DESTINATION' className='form-control' type='text'
+                                            <input id='DESTINATION' className='form-control' type='text' size={75}
                                                    value={this.state.place_vicinity} readOnly/>
                                         </div>
                                     </div>
@@ -149,7 +149,7 @@ class MyMap extends Component {
                             <div className='map-container'>
                                 <GoogleMap
                                     // required
-                                    id='direction-example'
+                                    id='directions'
                                     // required
                                     mapContainerStyle={containerStyle}
                                     // required
