@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
+import {GoogleMap, LoadScript, Marker, DirectionsRenderer, DirectionsService} from '@react-google-maps/api';
 import logo from '../images/logo-40.png';
 import police from '../images/police-40.png';
 import hospital from '../images/Hospital-40.png';
@@ -15,9 +15,11 @@ class MyGoogleMap extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lat: 0,
-            lng: 0
+            lat: -96.3376557,
+            lng: 30.6262965,
+            response: null
         }
+        this.directionsCallback = this.directionsCallback.bind(this)
     }
 
     getPosition = () => {
@@ -27,9 +29,14 @@ class MyGoogleMap extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props);
         this.getPosition()
             .then((position) => {
-                this.setState({lat: position.coords.latitude, lng: position.coords.longitude})
+                this.setState({lat: position.coords.latitude, lng: position.coords.longitude});
+            })
+            .catch((err) => {
+                console.error(err.message);
+                this.setState({lat: -96.3376557, lng: 30.6262965})
             })
     }
 
@@ -42,6 +49,22 @@ class MyGoogleMap extends Component {
             case 'hospital':
                 return hospital;
         }
+    }
+
+    directionsCallback(response) {
+        if (response !== null) {
+            if (response.status === 'OK') {
+                this.setState(
+                    () => ({response})
+                )
+            } else {
+                console.log('response: ', response)
+            }
+        }
+    }
+
+    componentDidUpdate(){
+        console.log("Updated: \n State: ", this.state, "\n Props: ", this.props)
     }
 
     render() {
@@ -62,10 +85,49 @@ class MyGoogleMap extends Component {
                     />
                     <Marker
                         icon={this.getImage()}
-                        onLoad={console.log(this.props.place_position)} // Used for checking if the coords are in the right place
                         label={{text: this.props.place_name, fontFamily: 'Verdana, sans-serif', fontSize: '2vh', className: 'marker'}}
                         position={this.props.place_position}
                     />
+
+                    {
+                        (this.props.place_position ?
+                        (<DirectionsService
+                            // required
+                            options={{
+                                destination: this.props.place_position,
+                                origin: {lat: this.state.lat, lng: this.state.lng},
+                                travelMode: 'WALKING'
+                            }}
+                            // required
+                            callback={this.directionsCallback}
+                            // optional
+                            onLoad={directionsService => {
+                                console.log('DirectionsService onLoad directionsService: ', directionsService)
+                            }}
+                            // optional
+                            onUnmount={directionsService => {
+                                console.log('DirectionsService onUnmount directionsService: ', directionsService)
+                            }}
+                        />) : <></>) 
+                        }
+                        {
+                        (this.state.response ?
+                        (<DirectionsRenderer
+                            options={{
+                                directions: this.state.response,
+                                suppressMarkers: true
+                            }}
+                            // optional
+                            onLoad={directionsRenderer => {
+                                console.log('DirectionsRenderer onLoad directionsRenderer: ', directionsRenderer)
+                            }}
+                            // optional
+                            onUnmount={directionsRenderer => {
+                                console.log('DirectionsRenderer onUnmount directionsRenderer: ', directionsRenderer)
+                            }}  
+                        />) : <></>)
+                        
+                    }
                 </GoogleMap>
             </LoadScript>
         )

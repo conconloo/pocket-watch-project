@@ -16,8 +16,8 @@ class MyMap extends Component {
             place: '',
             place_name: '',
             place_position: {
-                latitude: 0,
-                longitude: 0
+                lat: 0,
+                lng: 0
             }
         }
     }
@@ -41,6 +41,9 @@ class MyMap extends Component {
         .then((position) => {
                 this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude})
             })
+        .catch((err) => {
+            console.log(err.message)
+        })
     }
 
     getGoogleMap(props){
