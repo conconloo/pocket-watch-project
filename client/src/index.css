@@ -219,6 +219,10 @@
   margin: 2% 2% 2% 2%;
 }
 
+.videopage .selectfilterby h1 {
+  margin-top: 20px;
+}
+
 .videos {
   display: flex;
   flex-wrap: wrap;
@@ -371,11 +375,13 @@
 }
 
 .Map-buttons button {
+  display: flex;
   transition: box-shadow 250ms ease-in-out, background-color 250ms ease-in-out;
   font-variant: small-caps;
   border-radius: 20px 20px 0 0;
   font-size: calc(2.5vh + 1.2vw);
   background-color: transparent;
+  padding: 2%;
 }
 
 .Map-buttons button:hover{
