@@ -78,8 +78,10 @@ class SafetyVideos extends Component {
                             : ''
                         }
                     </div>
+                    <div className="selectfilterby">
+                        <h1>{this.state.currKey ? this.state.currKey : "Select Filter By +" }</h1>
+                    </div>
                 </div>
-                    <h1>{this.state.currKey ? this.state.currKey : "Select Filter By +" }</h1>
                 <div className="videos">
                     {this.state.showVideos ?
                         this.state.videos.map(video =>(
@@ -94,28 +96,6 @@ class SafetyVideos extends Component {
                     }
                 </div>
             </div>
-            // <>
-            // <div className="filters">
-            //     <h2>Filter by:</h2>
-            //     {
-            //         Object.keys(this.state.keywords).map(key => (
-            //             <button onClick={() => this.handleFilter(this.state.keywords[key])}>{key}</button>
-            //         ))
-            //     }
-            // </div>
-            // <div className="videos">
-            //     {
-            //         this.state.videos.map(video =>(
-            //             <a className="video-info" href={WatchVideo + video.videoID} target='_blank' rel="noreferrer">
-            //                 <img src = {video.thumbnail.url} alt ="Video"/>
-            //                 <h1>{video.title}</h1>
-            //                 <h2>{video.channelTitle}</h2>
-            //                 <p>{video.description}</p>
-            //             </a>
-            //         ))
-            //     }
-            // </div>
-            // </>
         )
     }
 }
