@@ -13,7 +13,7 @@ let googleAPIKey = 'AIzaSyAEZeR4pdli80dwbZNLbly_Da9bG-jk1k0'; // Google Geocodin
     4. 
 */
 
-async function getCrimeData() {
+async function getORIData() {
 
     const getORIData = axios.create({
         // Gets FBI reporting agency data (or ORI's as they call them.)
@@ -23,9 +23,15 @@ async function getCrimeData() {
             API_KEY: fbiAPIKey
         }
     });
+
+    const response = await getORIData.get("");
+    let data = response.data;
+
+    return data;
 }
 
 async function getLocationData() {
+    // Also need to get the state name
 
     let testlatlng = '30.6280,-96.3344';
 
@@ -40,35 +46,65 @@ async function getLocationData() {
     let data = response.data;
 
     let county = ""; // will hold the county that the user is in
+    let state = "";
 
     // This finds the county the user is located in and saves it to a variable
     // Potential Issue?: If no county is found, probably rare though
+    county:
     for (let i = 0; i < data.results.length; ++i) {
         for (let j = 0; j < data.results[i].address_components.length; ++j) {
             if (data.results[i].address_components[j].types[0] == 'administrative_area_level_2') {
-                console.log(data.results[i].address_components[j]['long_name'])
                 county = data.results[i].address_components[j]['long_name']
-                return;
+                break county;
             }
         }
     }
-    return county;
+
+    // This finds the state the user is located in and saves it to a variable
+    state:
+    for (let i = 0; i < data.results.length; ++i) {
+        for (let j = 0; j < data.results[i].address_components.length; ++j) {
+            if (data.results[i].address_components[j].types[0] == 'administrative_area_level_1') {
+                state = data.results[i].address_components[j]['short_name']
+                break state;
+            }
+        }
+    }
+
+    return {"county": county, "state": state};
 }
 
 router.get('/', async (req, res) => {
     
-    let countyLocation = await getLocationData();
+    let locationInfo = await getLocationData(); // gets the county location
 
-    console.log(countyLocation); // for some reason this is undefined? gives an issue
-    console.log("Test!");
+    let fbiORI = await getORIData(); // gets all of the ORI data
 
-    if (countyLocation == "Brazos County") {
-        console.log("True");
-    } else {
-        console.log("Something went wrong...");
+    let county = locationInfo['county'];
+
+    // Allows for counties to be compared
+    county = county.replace('County', '');
+    county = county.trim();
+    county = county.toUpperCase();
+
+    let state = locationInfo['state'];
+
+    console.log(county);
+
+    let oriResults = [];
+
+    // Current Issue: Finds counties just fine but there are usually a lot of police stations here
+    // Maybe use the latitude and longitude to find the closest one to the user?
+    for (const [key, value] of Object.entries(fbiORI[state])) {
+        if (fbiORI[state][key]['county_name'] == county) {
+            console.log(fbiORI[state][key]['ori'])
+            let oriString = String(fbiORI[state][key]['ori']);
+            oriResults.push({"ori": oriString, "latitude": fbiORI[state][key]['latitude'], "longitude": fbiORI[state][key]['longitude']});
+        }
     }
 
     res.json([
+        oriResults
     ])
 })
 
