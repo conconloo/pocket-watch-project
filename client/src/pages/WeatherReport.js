@@ -62,30 +62,37 @@ class WeatherReport extends Component {
       <div className='weatherRes'>
         {this.state.weather.map(obj => (
           <>
-          <h1>Weather today in:</h1>
-          <p>{this.state.location}</p>
-          <p>{obj.lat}, {obj.lon}</p>
-          <p>{new Date(obj.current.dt * 1000).toLocaleDateString()} {new Date(obj.current.dt * 1000).toLocaleTimeString("en-US")}</p>
+          <div className='weatherToday'>
+            <h1>Weather today in {this.state.location}</h1>
+          </div>
           <div className='conditions'>
           {obj.current.weather.map(conditions =>(
             <>
             <div className='conditions1'>
+              <div className='dateTime'>
+                <p>{new Date(obj.current.dt * 1000).toLocaleDateString()}</p>
+                <p>{new Date(obj.current.dt * 1000).toLocaleTimeString("en-US")}</p>
+              </div>
               <img src = {IconUrlbeg + conditions.icon + IconUrlend} alt="Conditions"/>
-              <h2>{Math.round(obj.current.temp)}&#176;</h2>
-            </div>
-            <div className='conditions2'>
-              <p>{conditions.description}</p>
+              <div className='conditions2'>
+                <h2>{Math.round(obj.current.temp)}&#176;</h2>
+                <p>{conditions.description}</p>
+              </div>
             </div>
             </>
           ))}
           </div>
-          <h1>Alerts:</h1> 
-          {obj.alerts ? obj.alerts.map(alert => (
-            <>
-            <h1>{alert.sender_name ? 'From the ' + alert.sender_name + ' association: ': ''}</h1>
-            <p>{alert.description ? alert.description : ''}</p>
-            </>
-          )) : "No Alerts"}
+          <div className='weatherToday'>
+            <h1>Alerts</h1>
+          </div>
+          <div className='alerts'>
+            {obj.alerts ? obj.alerts.map(alert => (
+              <>
+              <h1>{alert.sender_name ? 'From the ' + alert.sender_name + ' association: ': ''}</h1>
+              <p>{alert.description ? alert.description : ''}</p>
+              </>
+            )) : "No alerts at this time."}
+          </div>
           </>
         ))}
       </div>

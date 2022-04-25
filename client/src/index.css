@@ -2,6 +2,7 @@
   margin: 0px;
   font-family: 'Verdana', sans-serif;
   color: rgb(15,15,15);
+  font-variant: small-caps;
   /* background-color: rgb(249,249,249); */
 }
 
@@ -25,6 +26,13 @@
   background-color: inherit;
 }
 
+.weatherToday {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid black;
+  margin-bottom: 2%;
+}
+
 .weatherRes {
   align-items: center;
   min-height: 100%;
@@ -46,17 +54,24 @@
   flex-direction: column;
   align-items: center;
   align-content: center;
-  background-color: rgb(19,95,151);
-  width: min-content;
-  padding: 0px 3% 1% 2%;
+  background-color: rgb(255, 255, 255);
+  color: rgb(19,95,151);
+  border: 1px solid rgb(19,95,151);
   border-radius: 15px;
+  padding: 0px 3% 1% 2%;
+  margin-bottom: 4%;
 }
 
 .conditions1 {
-  background-color: rgb(19,95,151);
-  color: white;
+  background-color: rgb(255, 255, 255);
+  color: rgb(19,95,151);
   display: flex;
   align-items: center;
+}
+
+.dateTime p {
+  text-align: right;
+  color: rgb(19,95,151);
 }
 
 .conditions1 img {
@@ -70,14 +85,21 @@
 }
 
 .conditions2 {
-  background-color: rgb(19,95,151);
-  color: white;
-  padding-bottom: 3%;
+  background-color: rgb(255, 255, 255);
+  color: rgb(19,95,151);
 }
 
 .conditions2 p {
   background-color: inherit;
   color: inherit;
+}
+
+.alerts {
+  padding: 3%;
+  background-color: rgb(255, 255, 255);
+  color: rgb(19,95,151);
+  border: 1px solid rgb(19,95,151);
+  border-radius: 15px;
 }
 
 .SOS {
@@ -204,7 +226,6 @@
 }
 
 .videos h1 {
-  font-variant: small-caps;
   margin-top: 4px;
   font-size: large;
 }
@@ -212,11 +233,13 @@
 .videos h2 {
   margin-top: 4px;
   font-size: small;
+  font-variant: normal;
 }
 
 .videos p {
   font-size: smaller;
   color: rgb(52, 52, 52);
+  font-variant: normal;
 }
 
 .videos a:link{
