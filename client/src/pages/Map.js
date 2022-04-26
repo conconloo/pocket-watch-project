@@ -70,7 +70,7 @@ class MyMap extends Component {
             <div className="places-list">
                 {this.state.query.map(place => (
                     <button key={place.place_id} onClick={() => this.getGoogleMap(place)}>
-                    <p>{place.name}</p>
+                    <h3>{place.name}</h3>
                     <p>{place.vicinity}</p>
                     </button>
                 ))}
