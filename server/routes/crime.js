@@ -77,10 +77,11 @@ async function getLocationData() {
 async function getCrimeData(ori, startDate, endDate) {
 
     const getCrimeData = axios.create({
-        // Gets FBI reporting agency data (or ORI's as they call them.)
-        // Might be better to cache this? This data is like 7MB
-        baseURL: `https://api.usa.gov/crime/fbi/sapi/api/summarized/agencies/${ori}/offenses/
-            ${startDate}/${endDate}`
+        // Gets summarized crime data
+        baseURL: `https://api.usa.gov/crime/fbi/sapi/api/summarized/agencies/${ori}/offenses/${startDate}/${endDate}`,
+        params: {
+            API_KEY: fbiAPIKey
+        }
     });
 
     const response = await getCrimeData.get("");
@@ -134,10 +135,10 @@ router.get('/', async (req, res) => {
         }
     }
 
-    // let crimeData = await getCrimeData(closestORI, "2010", "2020");
+    let crimeData = await getCrimeData(closestORI, "2010", "2020");
 
     res.json([
-        closestORI
+        crimeData
     ])
 })
 
