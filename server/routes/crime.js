@@ -74,6 +74,21 @@ async function getLocationData() {
     return {"county": county, "state": state};
 }
 
+async function getCrimeData(ori, startDate, endDate) {
+
+    const getCrimeData = axios.create({
+        // Gets FBI reporting agency data (or ORI's as they call them.)
+        // Might be better to cache this? This data is like 7MB
+        baseURL: `https://api.usa.gov/crime/fbi/sapi/api/summarized/agencies/${ori}/offenses/
+            ${startDate}/${endDate}`
+    });
+
+    const response = await getCrimeData.get("");
+    let data = response.data;
+
+    return data;
+}
+
 router.get('/', async (req, res) => {
     
     let locationInfo = await getLocationData(); // gets the county location
@@ -93,18 +108,36 @@ router.get('/', async (req, res) => {
 
     let oriResults = [];
 
-    // Current Issue: Finds counties just fine but there are usually a lot of police stations here
-    // Maybe use the latitude and longitude to find the closest one to the user?
+    // This will find ORI's depending on the county
+    // Maybe also include more info such as the police station name?
+    // Cache the FBI ORI data
+
     for (const [key, value] of Object.entries(fbiORI[state])) {
         if (fbiORI[state][key]['county_name'] == county) {
-            console.log(fbiORI[state][key]['ori'])
             let oriString = String(fbiORI[state][key]['ori']);
             oriResults.push({"ori": oriString, "latitude": fbiORI[state][key]['latitude'], "longitude": fbiORI[state][key]['longitude']});
         }
     }
 
+    // Find the closest police station using magnitude
+    let magnitude = 1000000; // not the ideal way, but should work
+    let tempMagnitude = 0;
+    let closestORI = "";
+
+    for (let i = 0; i < oriResults.length; ++i) {
+        let oriLat = oriResults[i]['latitude'];
+        let oriLang = oriResults[i]['longitude'];
+        tempMagnitude = Math.pow(oriLat, 2) + Math.pow(oriLang, 2);
+        if (tempMagnitude <= magnitude) {
+            magnitude = tempMagnitude;
+            closestORI = oriResults[i]['ori'];
+        }
+    }
+
+    // let crimeData = await getCrimeData(closestORI, "2010", "2020");
+
     res.json([
-        oriResults
+        closestORI
     ])
 })
 
