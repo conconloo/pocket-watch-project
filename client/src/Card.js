@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import WeatherReport from "./pages/WeatherReport.js";
 import SafetyVideos from "./pages/SafetyVideos.js";
 import MyMap from "./pages/Map.js";
+import Crime from "./pages/Crime.js";
 
 const Card = (props) => {
     if( props.title === "home" ){
@@ -13,6 +14,8 @@ const Card = (props) => {
         return <SafetyVideos />
     } else if (props.title === "map") {
         return <MyMap />
+    } else if (props.title === "crime") {
+        return <Crime />
     }
 }
  
