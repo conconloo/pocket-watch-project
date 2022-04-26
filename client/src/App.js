@@ -48,6 +48,7 @@ const App = () => {
             <div className='links' id="links">
               <Link className="link" to="/weather">Weather</Link>
               <Link className="link" to="/videos">Videos</Link>
+              <Link className="link" to="/crime">Crime</Link>
               <Link className="link" to="/map">Map</Link>
               <Link className="link" to="/">Home</Link>
             </div>
@@ -56,6 +57,7 @@ const App = () => {
               <Route path="/" element={<Card title="home"/>}/>
               <Route path="/weather" element={<Card title="weatherreport"/>} />
               <Route path="/videos" element={<Card title="safetyvideos"/>}/>
+              <Route path="/crime" element={<Card title="crime"/>}/>
               <Route path="/map" element={<Card title="map"/>}/>
             </Routes>
         </div>
