@@ -290,6 +290,9 @@
   display: flex;
   margin: 10px 12%;
   justify-content: space-between;
+  border-radius: 20px;
+  background-color: rgba(0,0,125,0.05);
+  margin: 2%;
 }
 
 .hamburger {
@@ -315,7 +318,7 @@
 .Navbar .links .link{
   margin: 2%;
   font: inherit;
-  font-size: calc(8pt + 1.2vh + 1.2vw);
+  font-size: calc(12pt + 0.6vh + 0.8vw);
   background-color: inherit;
   text-decoration: none;
 }
@@ -406,6 +409,7 @@
 
   .Navbar{
     width: 100%;
+    border-radius: 0;
   }
 
   .Navbar .links{
