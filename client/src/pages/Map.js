@@ -16,8 +16,8 @@ class MyMap extends Component {
             place: '',
             place_name: '',
             place_position: {
-                lat: 0,
-                lng: 0
+                latitude: 0,
+                longitude: 0
             }
         }
     }
@@ -41,9 +41,6 @@ class MyMap extends Component {
         .then((position) => {
                 this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude})
             })
-        .catch((err) => {
-            console.log(err.message)
-        })
     }
 
     getGoogleMap(props){
@@ -57,17 +54,17 @@ class MyMap extends Component {
         return(
         <div className="myMap">
             <div className="Map-buttons">
-                <button className="police" onClick={() => this.getBuildings('police')}>
+                <button className="police" title="Police" onClick={() => this.getBuildings('police')}>
                     <img src={police_image} />
-                    Police <br/>
+                    <h4>Police</h4>
                 </button>
-                <button className="hospital" onClick={() => this.getBuildings('hospital')}>
+                <button className="hospital" title="Hospital" onClick={() => this.getBuildings('hospital')}>
                     <img src={hospital_image} />
-                    Hospital<br/>
+                    <h4>Hospital</h4>
                     </button>
-                <button className="pharmacy" onClick={() => this.getBuildings('pharmacy')}>
+                <button className="pharmacy" title="Pharmacy" onClick={() => this.getBuildings('pharmacy')}>
                     <img src={pharmacy_image} />
-                    Pharmacy<br/>
+                    <h4>Pharmacy</h4>
                     </button>
             </div>
             <div className="places-list">

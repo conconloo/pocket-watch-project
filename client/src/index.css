@@ -345,7 +345,8 @@
   }
 }
 
-@media screen and (max-width: 750px) {
+
+@media screen and (max-width: 1275px) {
   .Navbar .links{
     display: none;
     width: 100%;
@@ -353,11 +354,14 @@
 
   .Navbar {
     flex-wrap: wrap;
-    margin: 0;
+    margin: 0 60px 0 0;
   }
   
   .hamburger {
     display: block;
+    position: absolute;
+    right: 20px;
+    top: 20px;
     transform: scale(1.8);
   }
 
@@ -369,39 +373,113 @@
 
 }
 
+@media screen and (max-width: 750px ){
+  .Map-buttons{
+    padding: 0;
+  }
+
+  .Map-buttons button h4{
+    font-size: 0;
+  }
+
+  .Map-buttons button img{
+    min-height: 50px;
+    min-width: 50px;
+  }
+
+  .myMap{
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .places-list{
+    display: flex;
+    min-width: 350px;
+    height: 250px;
+    overflow: scroll;
+  }
+
+  .GoogleMap {
+    min-width: 350px;
+    max-height: 400px;
+  }
+
+  .Navbar{
+    width: 100%;
+  }
+
+  .Navbar .links{
+    flex-direction: column;
+    align-items: center;
+  }
+
+}
+
+
+
 .Map-buttons{
   display: flex;
-  flex-direction: row;
-  width: 100%;
   justify-content: space-between;
-  justify-items: center;
+  width: 100%;
   padding: 0 15%;
 }
 
 .Map-buttons button {
   display: flex;
-  transition: box-shadow 250ms ease-in-out, background-color 250ms ease-in-out;
-  font-variant: small-caps;
-  border-radius: 20px 20px 0 0;
-  font-size: calc(2.5vh + 1.2vw);
+  flex-direction: column;
+  align-items: center;
+  border: none;
   background-color: transparent;
-  padding: 2%;
+  font-size: calc(2.5vh + 1.2vw);
+}
+
+.Map-buttons button h4{
+  font-weight: inherit;
 }
 
 .Map-buttons button:hover{
-  color: white;
-  border: 2px solid transparent;
   cursor: pointer;
-  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
 }
+
+.Map-buttons button::after{
+  content: '';
+  display: block;
+  width: 0;
+  height: 4px;
+  transition: width 0.5s ease-in-out;
+}
+
+.Map-buttons button:hover::after{
+  width: 100%;
+}
+
+.Map-buttons .police::after{
+  background-color: blue;
+}
+
+.Map-buttons .hospital::after{
+  background-color: red;
+}
+
+.Map-buttons .pharmacy::after{
+  background-color: magenta;
+}
+
+.police h4{
+  color: blue;
+}
+
+.hospital h4{
+  color: red;
+}
+
+.pharmacy h4{
+  color: magenta;
+}
+
 
 .Map-buttons button img {
   width: 15%;
-  transition: all 250ms ease-in-out, filter 0ms;
-}
-
-.Map-buttons button:hover img {
-  filter: invert(1);
 }
 
 .myMap {
@@ -411,22 +489,16 @@
   height: auto;
 }
 
-.police {
+.police{
   color: blue;
-  border: 2px solid blue;
 }
 
 .police img{
   filter: invert(9%) sepia(100%) saturate(5811%) hue-rotate(245deg) brightness(108%) contrast(139%);
 }
 
-.police:hover {
-  background-color: blue;
-}
-
 .hospital {
   color: red;
-  border: 2px solid red;
 }
 
 
@@ -434,18 +506,8 @@
   filter: invert(17%) sepia(73%) saturate(6266%) hue-rotate(356deg) brightness(101%) contrast(118%);
 }
 
-
-.hospital:hover {
-  background-color: red;
-}
-
 .pharmacy {
   color: magenta;
-  border: 2px solid magenta;
-}
-
-.pharmacy:hover {
-  background-color: magenta;
 }
 
 .pharmacy img{

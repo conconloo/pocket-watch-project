@@ -12,6 +12,8 @@ const containerStyle = { // dimensions of the map
 }; // TODO: Eventually put this into index.css instead of putting it in the .js file
 
 class MyGoogleMap extends Component {
+    static zoom = 12;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -75,7 +77,7 @@ class MyGoogleMap extends Component {
                 <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={{lat: this.state.lat, lng: this.state.lng}}
-                    zoom={12} // How zoomed in the map is when it's loaded. This varies between 0-22
+                    zoom={12}
                 >
                     { /* Child components, such as markers, info windows, etc. */}
                     <Marker
@@ -96,7 +98,8 @@ class MyGoogleMap extends Component {
                             options={{
                                 destination: this.props.place_position,
                                 origin: {lat: this.state.lat, lng: this.state.lng},
-                                travelMode: 'WALKING'
+                                travelMode: 'WALKING',
+                                optimizeWaypoints: true
                             }}
                             // required
                             callback={this.directionsCallback}
