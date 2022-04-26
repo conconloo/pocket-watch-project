@@ -35,6 +35,7 @@
 
 # production
 /server/build
+/server/public
 
 # misc
 /server/.DS_Store
