@@ -102,6 +102,10 @@
   border-radius: 15px;
 }
 
+.alerts p {
+  font-variant: normal;
+}
+
 .SOS {
   padding-bottom: 3%;
   display: flex;
