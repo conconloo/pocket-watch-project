@@ -53,6 +53,7 @@ const App = () => {
               <Link className="link" to="/">Home</Link>
             </div>
           </div>
+          <div className="Card">
             <Routes>
               <Route path="/" element={<Card title="home"/>}/>
               <Route path="/weather" element={<Card title="weatherreport"/>} />
@@ -60,6 +61,7 @@ const App = () => {
               <Route path="/crime" element={<Card title="crime"/>}/>
               <Route path="/map" element={<Card title="map"/>}/>
             </Routes>
+            </div>
         </div>
       </Router>
     </div>

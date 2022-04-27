@@ -134,9 +134,9 @@
 .NoonlightBtn button {
   user-select: none;
   font-family: inherit;
-  font-size: 7vh;
-  width: 50vh;
-  height: 50vh;
+  font-size: 6vh;
+  width: 45vh;
+  height: 45vh;
   padding: 5%;
   background-color: #1c8adb;
   color: white;
@@ -153,10 +153,10 @@
 }
 
 .PoliceBtn button {
-  margin: 10px 20px;
+  margin: 4vh 0;
   font-size: 4vh;
-  padding: 10%;
-  width: 50vh;
+  padding: 10% 0 ;
+  width: 45vh;
   height: auto;
   background-color: red;
   color: white;
@@ -288,16 +288,18 @@
 
 .Navbar {
   display: flex;
-  margin: 10px 12%;
   justify-content: space-between;
   border-radius: 20px;
-  background-color: rgba(0,0,125,0.05);
-  margin: 2%;
 }
 
 .hamburger {
-  background-color: transparent;
-  border: 0;
+  position: absolute;
+  right: 18px;
+  top: 20px;
+  background: none;
+
+  width: 30px;
+  border: none;
   color: rgb(15,15,15);
   font-size: 20px;
   cursor: pointer;
@@ -336,18 +338,6 @@
   width: 100%;
 }
 
-@keyframes growDown{
-  0%{
-    transform: scale(0);
-  }
-  80%{
-    transform: scaleY(1.1);
-  }
-  100%{
-    transform: scaleY(1);
-  }
-}
-
 
 @media screen and (max-width: 1275px) {
   .Navbar .links{
@@ -362,21 +352,23 @@
   
   .hamburger {
     display: block;
-    position: absolute;
-    right: 20px;
-    top: 20px;
     transform: scale(1.8);
   }
 
   .links.show{
     display: flex;
     flex-wrap: wrap;
-    animation: growDown 1s ease-in-out forwards;
+    z-index: 1;
   }
 
 }
 
 @media screen and (max-width: 750px ){
+  .Home{
+    width: 390px;
+    align-items: center;
+  }
+
   .Map-buttons{
     padding: 0;
   }
@@ -408,14 +400,36 @@
   }
 
   .Navbar{
+    position: fixed;
     width: 100%;
-    border-radius: 0;
+    background-color: white;
+    z-index: 1;
+  }
+
+  .Card{
+    position: absolute;
+    top: 10%;
   }
 
   .Navbar .links{
+    display: none;
+  }
+
+  .links.show{
+    display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: white;
   }
+
+  .videos{
+    justify-content: center;
+  }
+
+  .video-info{
+    width: 300px;
+  }
+
 
 }
 
