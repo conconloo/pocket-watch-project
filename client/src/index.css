@@ -102,6 +102,10 @@
   border-radius: 15px;
 }
 
+.alerts p {
+  font-variant: normal;
+}
+
 .SOS {
   padding-bottom: 3%;
   display: flex;
@@ -130,9 +134,9 @@
 .NoonlightBtn button {
   user-select: none;
   font-family: inherit;
-  font-size: 7vh;
-  width: 50vh;
-  height: 50vh;
+  font-size: 6vh;
+  width: 45vh;
+  height: 45vh;
   padding: 5%;
   background-color: #1c8adb;
   color: white;
@@ -149,10 +153,10 @@
 }
 
 .PoliceBtn button {
-  margin: 10px 20px;
+  margin: 4vh 0;
   font-size: 4vh;
-  padding: 10%;
-  width: 50vh;
+  padding: 10% 0 ;
+  width: 45vh;
   height: auto;
   background-color: red;
   color: white;
@@ -284,13 +288,18 @@
 
 .Navbar {
   display: flex;
-  margin: 10px 12%;
   justify-content: space-between;
+  border-radius: 20px;
 }
 
 .hamburger {
-  background-color: transparent;
-  border: 0;
+  position: absolute;
+  right: 18px;
+  top: 20px;
+  background: none;
+
+  width: 30px;
+  border: none;
   color: rgb(15,15,15);
   font-size: 20px;
   cursor: pointer;
@@ -311,7 +320,7 @@
 .Navbar .links .link{
   margin: 2%;
   font: inherit;
-  font-size: calc(8pt + 1.2vh + 1.2vw);
+  font-size: calc(12pt + 0.6vh + 0.8vw);
   background-color: inherit;
   text-decoration: none;
 }
@@ -329,19 +338,8 @@
   width: 100%;
 }
 
-@keyframes growDown{
-  0%{
-    transform: scale(0);
-  }
-  80%{
-    transform: scaleY(1.1);
-  }
-  100%{
-    transform: scaleY(1);
-  }
-}
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 1275px) {
   .Navbar .links{
     display: none;
     width: 100%;
@@ -349,7 +347,7 @@
 
   .Navbar {
     flex-wrap: wrap;
-    margin: 0;
+    margin: 0 60px 0 0;
   }
   
   .hamburger {
@@ -360,44 +358,146 @@
   .links.show{
     display: flex;
     flex-wrap: wrap;
-    animation: growDown 1s ease-in-out forwards;
+    z-index: 1;
   }
 
 }
 
+@media screen and (max-width: 750px ){
+  .Home{
+    width: 390px;
+    align-items: center;
+  }
+
+  .Map-buttons{
+    padding: 0;
+  }
+
+  .Map-buttons button h4{
+    font-size: 0;
+  }
+
+  .Map-buttons button img{
+    min-height: 50px;
+    min-width: 50px;
+  }
+
+  .myMap{
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .places-list{
+    display: flex;
+    min-width: 350px;
+    height: 250px;
+    overflow: scroll;
+  }
+
+  .GoogleMap {
+    min-width: 350px;
+    max-height: 400px;
+  }
+
+  .Navbar{
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    z-index: 1;
+  }
+
+  .Card{
+    position: absolute;
+    top: 10%;
+  }
+
+  .Navbar .links{
+    display: none;
+  }
+
+  .links.show{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+  }
+
+  .videos{
+    justify-content: center;
+  }
+
+  .video-info{
+    width: 300px;
+  }
+
+
+}
+
+
+
 .Map-buttons{
   display: flex;
-  flex-direction: row;
-  width: 100%;
   justify-content: space-between;
-  justify-items: center;
+  width: 100%;
   padding: 0 15%;
 }
 
 .Map-buttons button {
   display: flex;
-  transition: box-shadow 250ms ease-in-out, background-color 250ms ease-in-out;
-  font-variant: small-caps;
-  border-radius: 20px 20px 0 0;
-  font-size: calc(2.5vh + 1.2vw);
+  flex-direction: column;
+  align-items: center;
+  border: none;
   background-color: transparent;
-  padding: 2%;
+  font-size: calc(2.5vh + 1.2vw);
+}
+
+.Map-buttons button h4{
+  font-weight: inherit;
 }
 
 .Map-buttons button:hover{
-  color: white;
-  border: 2px solid transparent;
   cursor: pointer;
-  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
 }
+
+.Map-buttons button::after{
+  content: '';
+  display: block;
+  width: 0;
+  height: 4px;
+  transition: width 0.5s ease-in-out;
+}
+
+.Map-buttons button:hover::after{
+  width: 100%;
+}
+
+.Map-buttons .police::after{
+  background-color: blue;
+}
+
+.Map-buttons .hospital::after{
+  background-color: red;
+}
+
+.Map-buttons .pharmacy::after{
+  background-color: magenta;
+}
+
+.police h4{
+  color: blue;
+}
+
+.hospital h4{
+  color: red;
+}
+
+.pharmacy h4{
+  color: magenta;
+}
+
 
 .Map-buttons button img {
   width: 15%;
-  transition: all 250ms ease-in-out, filter 0ms;
-}
-
-.Map-buttons button:hover img {
-  filter: invert(1);
 }
 
 .myMap {
@@ -407,22 +507,16 @@
   height: auto;
 }
 
-.police {
+.police{
   color: blue;
-  border: 2px solid blue;
 }
 
 .police img{
   filter: invert(9%) sepia(100%) saturate(5811%) hue-rotate(245deg) brightness(108%) contrast(139%);
 }
 
-.police:hover {
-  background-color: blue;
-}
-
 .hospital {
   color: red;
-  border: 2px solid red;
 }
 
 
@@ -430,18 +524,8 @@
   filter: invert(17%) sepia(73%) saturate(6266%) hue-rotate(356deg) brightness(101%) contrast(118%);
 }
 
-
-.hospital:hover {
-  background-color: red;
-}
-
 .pharmacy {
   color: magenta;
-  border: 2px solid magenta;
-}
-
-.pharmacy:hover {
-  background-color: magenta;
 }
 
 .pharmacy img{
@@ -458,21 +542,32 @@
 
 .places-list button {
   background-color: transparent;
-  border: 5px solid black;
+  border: transparent;
+  border-bottom: 2px solid black;
   font-size: 100%;
   width: 100%;
   padding: 5%;
   transition: all 250ms ease-in-out;
 }
 
+.places-list button p {
+  color: rgb(78, 78, 78);
+  font-size: 80%;
+  font-variant: normal;
+}
+
 .places-list button:hover{
-  border: 5px solid white;
   background-color: black;
   color: white;
   cursor: pointer;
 }
-.places-list button:hover p{
+
+.places-list button:hover h3{
   color: white;
+}
+
+.places-list button:hover p{
+  color: rgb(170, 170, 170);
 }
 
 .GoogleMap {

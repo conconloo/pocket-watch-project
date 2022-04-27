@@ -16,8 +16,8 @@ class MyMap extends Component {
             place: '',
             place_name: '',
             place_position: {
-                lat: 0,
-                lng: 0
+                latitude: 0,
+                longitude: 0
             }
         }
     }
@@ -41,9 +41,6 @@ class MyMap extends Component {
         .then((position) => {
                 this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude})
             })
-        .catch((err) => {
-            console.log(err.message)
-        })
     }
 
     getGoogleMap(props){
@@ -57,23 +54,23 @@ class MyMap extends Component {
         return(
         <div className="myMap">
             <div className="Map-buttons">
-                <button className="police" onClick={() => this.getBuildings('police')}>
-                    Police <br/>
-                    <img src={police_image} alt={"Police Image"} />
+                <button className="police" title="Police" onClick={() => this.getBuildings('police')}>
+                    <img src={police_image} />
+                    <h4>Police</h4>
                 </button>
-                <button className="hospital" onClick={() => this.getBuildings('hospital')}>
-                    Hospital<br/>
-                    <img src={hospital_image} alt={"Hospital Image"} />
+                <button className="hospital" title="Hospital" onClick={() => this.getBuildings('hospital')}>
+                    <img src={hospital_image} />
+                    <h4>Hospital</h4>
                     </button>
-                <button className="pharmacy" onClick={() => this.getBuildings('pharmacy')}>
-                    Pharmacy<br/>
-                    <img src={pharmacy_image} alt={"Pharmacy Image"} />
+                <button className="pharmacy" title="Pharmacy" onClick={() => this.getBuildings('pharmacy')}>
+                    <img src={pharmacy_image} />
+                    <h4>Pharmacy</h4>
                     </button>
             </div>
             <div className="places-list">
                 {this.state.query.map(place => (
                     <button key={place.place_id} onClick={() => this.getGoogleMap(place)}>
-                    <p>{place.name}</p>
+                    <h3>{place.name}</h3>
                     <p>{place.vicinity}</p>
                     </button>
                 ))}
