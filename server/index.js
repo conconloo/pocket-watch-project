@@ -7,7 +7,7 @@ const currWeather = require('./routes/currentweather');
 const crime = require('./routes/crime')
 
 const path = require('path');
-const PORT = process.env.PORT || 4000;
+const PORT = /* process.env.PORT || */ 4000;
 //app.use(express.static(path.join(__dirname, 'public'))); // for heroku
 
 

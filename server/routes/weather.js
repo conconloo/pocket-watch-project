@@ -19,8 +19,9 @@ async function getWeatherData(req) {
 
     // temporary coordinates for College Station
     console.log(req);
-    let latitude = req.query.lat;
-    let longitude = req.query.lon;   
+    let latitude = req.query.lat || 29.7604;
+    let longitude = req.query.lon || 95.3698; 
+    let ex = req.query.exclude;  
 
     let units = 'imperial';
     const getWeatherData = axios.create({
@@ -28,6 +29,7 @@ async function getWeatherData(req) {
         params: {
             lat: latitude,
             lon: longitude,
+            exclude: ex,
             units: units,
             appid: apiKey
         }

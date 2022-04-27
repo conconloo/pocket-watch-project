@@ -18,6 +18,7 @@ class WeatherReport extends Component {
     }
   }
 
+
   getPosition = () => {
     return new Promise(function (resolve, reject) {
       navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -28,8 +29,9 @@ class WeatherReport extends Component {
     fetch('api/currweather?lat=' + latitude + '&lon=' + longitude)
       .then(res => res.json())
       .then(weather => {
-        this.setState({location: weather[0].name});
-      });
+        this.setState({location: weather[0].city.name});
+      })
+      
   }
 
   getWeather = async (latitude, longitude) => {
@@ -37,14 +39,15 @@ class WeatherReport extends Component {
       .then(res => res.json())
       .then(weather => {
         this.setState({weather: weather});
+        console.log(this.state);
       });
   }
 
   getAlerts = async(latitude, longitude) => {
-    fetch('api/weather?lat=' + latitude + '&lon=' + longitude + '&exclude=current,minutely,hourly,daily')
+    fetch('api/weather?lat=' + latitude + '&lon=' + longitude)
       .then(res => res.json())
-      .then(alerts => {
-        this.setState({alerts: alerts});
+      .then(alert => {
+        this.setState({alerts: alert});
       })
   }
 
@@ -62,6 +65,7 @@ class WeatherReport extends Component {
       <div className='weatherRes'>
         {this.state.weather.map(obj => (
           <>
+          {console.log(obj)}
           <div className='weatherToday'>
             <h1>Weather today in {this.state.location}</h1>
           </div>
@@ -81,6 +85,24 @@ class WeatherReport extends Component {
             </div>
             </>
           ))}
+          {obj.daily.map(forecast => (
+            <>
+            {console.log(forecast.description)}
+            <div className='conditions1'>
+              <div className='dateTime'>
+                <p>{new Date(forecast.dt * 1000).toLocaleDateString()}</p>
+                <p>{new Date(forecast.dt * 1000).toLocaleTimeString("en-US")}</p>
+              </div>
+              <img src = {IconUrlbeg + forecast.weather[0].icon + IconUrlend} alt="Conditions"/>
+              <div className='conditions2'>
+                <h2>{Math.round(forecast.temp.max)}&#176;</h2>
+                <p>{forecast.weather[0].description}</p>
+              </div>
+            </div>
+            </>
+          ))
+            
+          }
           </div>
           <div className='weatherToday'>
             <h1>Alerts</h1>

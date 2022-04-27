@@ -12,7 +12,7 @@ async function getCurrentWeatherData(req) {
 
     let units = 'imperial';
     const getCurrentWeatherData = axios.create({
-        baseURL: 'https://api.openweathermap.org/data/2.5/weather',
+        baseURL: 'https://api.openweathermap.org/data/2.5/forecast',
         params: {
             lat: latitude,
             lon: longitude,
