@@ -59,7 +59,7 @@ class MyGoogleMap extends Component {
                 this.setState(
                     () => ({response})
                 )
-            } else {
+            } else if(response.status === 'OVER_QUERY_LIMIT') {
                 console.log('response: ', response)
             }
         }
@@ -103,6 +103,7 @@ class MyGoogleMap extends Component {
                             }}
                             // required
                             callback={this.directionsCallback}
+
                             // optional
                             onLoad={directionsService => {
                                 console.log('DirectionsService onLoad directionsService: ', directionsService)

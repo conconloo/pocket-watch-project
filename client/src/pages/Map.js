@@ -55,15 +55,15 @@ class MyMap extends Component {
         <div className="myMap">
             <div className="Map-buttons">
                 <button className="police" title="Police" onClick={() => this.getBuildings('police')}>
-                    <img src={police_image} />
+                    <img src={police_image} alt={"Police Image"} />
                     <h4>Police</h4>
                 </button>
                 <button className="hospital" title="Hospital" onClick={() => this.getBuildings('hospital')}>
-                    <img src={hospital_image} />
+                    <img src={hospital_image} alt={"Hospital Image"} />
                     <h4>Hospital</h4>
                     </button>
                 <button className="pharmacy" title="Pharmacy" onClick={() => this.getBuildings('pharmacy')}>
-                    <img src={pharmacy_image} />
+                    <img src={pharmacy_image}  alt={"Pharmacy Image"}/>
                     <h4>Pharmacy</h4>
                     </button>
             </div>
