@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {GoogleMap, LoadScript, Marker, DirectionsRenderer, DirectionsService} from '@react-google-maps/api';
+import {GoogleMap, LoadScript, Marker, DirectionsRenderer, DirectionsService, HeatmapLayer} from '@react-google-maps/api';
 import logo from '../images/logo-40.png';
 import police from '../images/police-40.png';
 import hospital from '../images/Hospital-40.png';
@@ -19,7 +19,8 @@ class MyGoogleMap extends Component {
         this.state = {
             lat: -96.3376557,
             lng: 30.6262965,
-            response: null
+            response: null,
+            crime_data: []
         }
         this.directionsCallback = this.directionsCallback.bind(this)
     }
@@ -28,6 +29,14 @@ class MyGoogleMap extends Component {
         return new Promise(function (resolve, reject) {
             navigator.geolocation.getCurrentPosition(resolve, reject);
         });
+    }
+
+    getCrime = async() => {
+        fetch('api/crimeheatmap')
+            .then(res => res.json())
+            .then(data => {
+                this.setState({crime_data: data})
+            })
     }
 
     componentDidMount() {
@@ -40,6 +49,7 @@ class MyGoogleMap extends Component {
                 console.error(err.message);
                 this.setState({lat: -96.3376557, lng: 30.6262965})
             })
+        this.getCrime();
     }
 
     getImage() {
@@ -132,6 +142,9 @@ class MyGoogleMap extends Component {
                         />) : <></>)
                         
                     }
+                    <HeatmapLayer
+                    data = {this.state.crime_data}
+                    />
                 </GoogleMap>
             </LoadScript>
         )

@@ -13,7 +13,7 @@ Things to parse:
 const results = []; // store the results in an array
 
 async function getParsedData() {
-    let file = '../server/datafiles/NIBRSPublicViewJan-Mar22.csv' // hard coded file & file directory
+    let file = '../pocket-watch/server/datafiles/NIBRSPublicViewJan-Mar22.csv' // hard coded file & file directory
     fs.createReadStream(file)
         .pipe(csv())
         .on('data', (data) => {
