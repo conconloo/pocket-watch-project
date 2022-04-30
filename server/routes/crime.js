@@ -6,13 +6,6 @@ const router = express.Router();
 let fbiAPIKey = 'relXeTTdG5NzRK8Xdd3i2BaDtrjudH84Qvzt3Apd'; // FBI Crime Data Key
 let googleAPIKey = 'AIzaSyAEZeR4pdli80dwbZNLbly_Da9bG-jk1k0'; // Google Geocoding Key
 
-/* Game Plan to Make This Work
-    1. Get the latitude and longitude
-    2. Find the location county
-    3. From there find the county
-    4. 
-*/
-
 async function getORIData() {
 
     const getORIData = axios.create({
@@ -31,8 +24,6 @@ async function getORIData() {
 }
 
 async function getLocationData() {
-    // Also need to get the state name
-
     let testlatlng = '30.6280,-96.3344';
 
     const getLocationData = axios.create({
@@ -77,10 +68,11 @@ async function getLocationData() {
 async function getCrimeData(ori, startDate, endDate) {
 
     const getCrimeData = axios.create({
-        // Gets FBI reporting agency data (or ORI's as they call them.)
-        // Might be better to cache this? This data is like 7MB
-        baseURL: `https://api.usa.gov/crime/fbi/sapi/api/summarized/agencies/${ori}/offenses/
-            ${startDate}/${endDate}`
+        // Gets summarized crime data
+        baseURL: `https://api.usa.gov/crime/fbi/sapi/api/summarized/agencies/${ori}/offenses/${startDate}/${endDate}`,
+        params: {
+            API_KEY: fbiAPIKey
+        }
     });
 
     const response = await getCrimeData.get("");
@@ -134,10 +126,32 @@ router.get('/', async (req, res) => {
         }
     }
 
-    // let crimeData = await getCrimeData(closestORI, "2010", "2020");
+    // Gets the crime data for each year and splits them into crime categories
+    let crimeData = await getCrimeData(closestORI, "2010", "2020"); // response is a JSON file
+
+    let summarizedData = {};
+
+    // Creates an array to hold crime data in it
+    // There's a lot more data from previous years
+    for (let i = 2010; i < 2021; ++i) {
+        summarizedData[i] = 0;
+    }
+
+    for (let i = 0; i < crimeData['results'].length; ++i) {
+        summarizedData[crimeData['results'][i]['data_year']] += crimeData['results'][i]['actual'];
+    }
+
+    /*
+    summarizedData returns the following:
+    {
+        2010: crime_amount,
+        2011: crime_amount,
+        year: numOfCrimes
+    }
+    */
 
     res.json([
-        closestORI
+        summarizedData
     ])
 })
 
