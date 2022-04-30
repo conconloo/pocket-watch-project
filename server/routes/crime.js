@@ -199,9 +199,9 @@ router.get('/', async (req, res) => {
 
     // console.log(crimePercentage);
 
-    res.json([
+    res.json(
         summarizedData
-    ])
+    )
 })
 
 module.exports = router;
