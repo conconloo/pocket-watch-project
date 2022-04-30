@@ -23,17 +23,18 @@ async function getORIData() {
     return data;
 }
 
-async function getLocationData() {
-    let testlatlng = '30.6280,-96.3344';
+async function getLocationData(req = false) {
+    let latitude = req.query.latitude || 30.601389;
+    let longitude = req.query.longitude || -96.314445;
 
     const getLocationData = axios.create({
         baseURL: 'https://maps.googleapis.com/maps/api/geocode/json',
         params: {
-            latlng: testlatlng,
+            latlng: `${latitude},${longitude}`,
             key: googleAPIKey
         }
     });
-    const response = await getLocationData.get("")
+    const response = await getLocationData.get();
     let data = response.data;
 
     let county = ""; // will hold the county that the user is in
@@ -65,9 +66,9 @@ async function getLocationData() {
     return {"county": county, "state": state};
 }
 
-async function getCrimeData(ori, startDate, endDate) {
+async function getORICrimeData(ori, startDate, endDate) {
 
-    const getCrimeData = axios.create({
+    const getORICrimeData = axios.create({
         // Gets summarized crime data
         baseURL: `https://api.usa.gov/crime/fbi/sapi/api/summarized/agencies/${ori}/offenses/${startDate}/${endDate}`,
         params: {
@@ -75,7 +76,23 @@ async function getCrimeData(ori, startDate, endDate) {
         }
     });
 
-    const response = await getCrimeData.get("");
+    const response = await getORICrimeData.get("");
+    let data = response.data;
+
+    return data;
+}
+
+async function getNationalCrimeData(startDate, endDate) {
+
+    const getNationalCrimeData = axios.create({
+        // Gets national crime data
+        baseURL: `https://api.usa.gov/crime/fbi/sapi/api/estimates/national/${startDate}/${endDate}`,
+        params: {
+            API_KEY: fbiAPIKey
+        }
+    });
+
+    const response = await getNationalCrimeData.get("");
     let data = response.data;
 
     return data;
@@ -83,26 +100,23 @@ async function getCrimeData(ori, startDate, endDate) {
 
 router.get('/', async (req, res) => {
     
-    let locationInfo = await getLocationData(); // gets the county location
+    let locationInfo = await getLocationData(req); // gets the county location
 
     let fbiORI = await getORIData(); // gets all of the ORI data
 
     let county = locationInfo['county'];
 
-    // Allows for counties to be compared
+    // Allows for counties to be compared (removes unneeded info)
     county = county.replace('County', '');
     county = county.trim();
     county = county.toUpperCase();
 
     let state = locationInfo['state'];
 
-    console.log(county);
-
     let oriResults = [];
 
     // This will find ORI's depending on the county
-    // Maybe also include more info such as the police station name?
-    // Cache the FBI ORI data
+    // Cache the FBI ORI data later
 
     for (const [key, value] of Object.entries(fbiORI[state])) {
         if (fbiORI[state][key]['county_name'] == county) {
@@ -111,7 +125,7 @@ router.get('/', async (req, res) => {
         }
     }
 
-    // Find the closest police station using magnitude
+    // FINDS THE CLOSEST ORI 
     let magnitude = 1000000; // not the ideal way, but should work
     let tempMagnitude = 0;
     let closestORI = "";
@@ -126,8 +140,14 @@ router.get('/', async (req, res) => {
         }
     }
 
+    // console.log(closestORI);
+
+    let startDate = 2010;
+    let endDate = 2020;
+
+    //----------------------- CRIME DATA RELATED TO ORI -----------------------//
     // Gets the crime data for each year and splits them into crime categories
-    let crimeData = await getCrimeData(closestORI, "2010", "2020"); // response is a JSON file
+    let crimeData = await getORICrimeData(closestORI, startDate, endDate); // response is a JSON file
 
     let summarizedData = {};
 
@@ -150,8 +170,28 @@ router.get('/', async (req, res) => {
     }
     */
 
+    //----------------------- CRIME DATA RELATED TO NATIONAL -----------------------//
+    let nationalCrimeData = await getNationalCrimeData(startDate, endDate);
+
+    // Will return the following information
+    /*
+    {
+        "state_id": stuff,
+        ...: ...,
+        "year": number
+        "population": number
+
+    }
+    */
+
+    // Calculates the change in crime from 2019 to 2020
+    crimePercentage = ((summarizedData['2020'] - summarizedData['2019']) / summarizedData['2019']) * 100;
+    crimePercentage = Math.round(crimePercentage * 100) / 100;
+
+    // console.log(crimePercentage);
+
     res.json([
-        summarizedData
+        crimePercentage
     ])
 })
 
