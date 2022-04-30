@@ -23,17 +23,18 @@ async function getORIData() {
     return data;
 }
 
-async function getLocationData() {
-    let testlatlng = '30.6280,-96.3344';
+async function getLocationData(req = false) {
+    let latitude = req.query.latitude || 30.601389;
+    let longitude = req.query.longitude || -96.314445;
 
     const getLocationData = axios.create({
         baseURL: 'https://maps.googleapis.com/maps/api/geocode/json',
         params: {
-            latlng: testlatlng,
+            latlng: `${latitude},${longitude}`,
             key: googleAPIKey
         }
     });
-    const response = await getLocationData.get("")
+    const response = await getLocationData.get();
     let data = response.data;
 
     let county = ""; // will hold the county that the user is in
@@ -99,7 +100,7 @@ async function getNationalCrimeData(startDate, endDate) {
 
 router.get('/', async (req, res) => {
     
-    let locationInfo = await getLocationData(); // gets the county location
+    let locationInfo = await getLocationData(req); // gets the county location
 
     let fbiORI = await getORIData(); // gets all of the ORI data
 
@@ -139,7 +140,7 @@ router.get('/', async (req, res) => {
         }
     }
 
-    console.log(closestORI);
+    // console.log(closestORI);
 
     let startDate = 2010;
     let endDate = 2020;
@@ -187,7 +188,7 @@ router.get('/', async (req, res) => {
     crimePercentage = ((summarizedData['2020'] - summarizedData['2019']) / summarizedData['2019']) * 100;
     crimePercentage = Math.round(crimePercentage * 100) / 100;
 
-    console.log(crimePercentage);
+    // console.log(crimePercentage);
 
     res.json([
         crimePercentage
