@@ -171,7 +171,8 @@ router.get('/', async (req, res) => {
         2011: crime_amount,
         year: numOfCrimes,
         ...: ...,
-        crime_rate_change: percentage change from 2019-2020
+        "crime_rate_change": percentage change from 2019-2020
+        "station_name": nearest police station name (where data is obtained from)
     }
     */
 
