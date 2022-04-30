@@ -142,9 +142,9 @@ class MyGoogleMap extends Component {
                         />) : <></>)
                         
                     }
-                    <HeatmapLayer
-                    data = {this.state.crime_data}
-                    />
+                    {/*<HeatmapLayer*/}
+                    {/*data = {this.state.crime_data}*/}
+                    {/*/>*/}
                 </GoogleMap>
             </LoadScript>
         )
