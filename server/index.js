@@ -25,4 +25,4 @@ app.get('/api', (req, res) => {
     res.send('hello world from express');
 });
 
-app.listen(PORT);
+app.listen(PORT, console.log(`Server Listening on PORT: ${PORT}`));

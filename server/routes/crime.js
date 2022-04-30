@@ -24,8 +24,8 @@ async function getORIData() {
 }
 
 async function getLocationData(req = false) {
-    let latitude = req.query.latitude || 30.601389;
-    let longitude = req.query.longitude || -96.314445;
+    let latitude = req.query.lat || 30.601389;
+    let longitude = req.query.lng || -96.314445;
 
     const getLocationData = axios.create({
         baseURL: 'https://maps.googleapis.com/maps/api/geocode/json',
@@ -198,9 +198,9 @@ router.get('/', async (req, res) => {
 
     // console.log(crimePercentage);
 
-    res.json([
+    res.json(
         summarizedData
-    ])
+    )
 })
 
 module.exports = router;
