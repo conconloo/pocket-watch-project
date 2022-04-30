@@ -121,7 +121,8 @@ router.get('/', async (req, res) => {
     for (const [key, value] of Object.entries(fbiORI[state])) {
         if (fbiORI[state][key]['county_name'] == county) {
             let oriString = String(fbiORI[state][key]['ori']);
-            oriResults.push({"ori": oriString, "latitude": fbiORI[state][key]['latitude'], "longitude": fbiORI[state][key]['longitude']});
+            oriResults.push({"ori": oriString, "latitude": fbiORI[state][key]['latitude'], "longitude": fbiORI[state][key]['longitude'],
+            "station_name": fbiORI[state][key]['agency_name']});
         }
     }
 
@@ -129,6 +130,7 @@ router.get('/', async (req, res) => {
     let magnitude = 1000000; // not the ideal way, but should work
     let tempMagnitude = 0;
     let closestORI = "";
+    let closestStationName = "";
 
     for (let i = 0; i < oriResults.length; ++i) {
         let oriLat = oriResults[i]['latitude'];
@@ -137,10 +139,11 @@ router.get('/', async (req, res) => {
         if (tempMagnitude <= magnitude) {
             magnitude = tempMagnitude;
             closestORI = oriResults[i]['ori'];
+            closestStationName = oriResults[i]['station_name'];
         }
     }
 
-    // console.log(closestORI);
+    console.log(closestORI);
 
     let startDate = 2010;
     let endDate = 2020;
@@ -166,7 +169,9 @@ router.get('/', async (req, res) => {
     {
         2010: crime_amount,
         2011: crime_amount,
-        year: numOfCrimes
+        year: numOfCrimes,
+        ...: ...,
+        crime_rate_change: percentage change from 2019-2020
     }
     */
 
@@ -183,15 +188,18 @@ router.get('/', async (req, res) => {
 
     }
     */
-
+    
     // Calculates the change in crime from 2019 to 2020
     crimePercentage = ((summarizedData['2020'] - summarizedData['2019']) / summarizedData['2019']) * 100;
     crimePercentage = Math.round(crimePercentage * 100) / 100;
 
+    summarizedData['crime_rate_change'] = crimePercentage;
+    summarizedData['station_name'] = closestStationName;
+
     // console.log(crimePercentage);
 
     res.json([
-        crimePercentage
+        summarizedData
     ])
 })
 
