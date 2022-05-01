@@ -9,7 +9,9 @@ class Crime extends Component {
             lat: 30.601389,
             lng: -96.314445,
             query: undefined,
-            data: [[]]
+            station_name: 0.0,
+            crime_rate_change: 0.0,
+            data: null
         }
     }
 
@@ -26,27 +28,39 @@ class Crime extends Component {
             })
         fetch('api/crime?lat=' + this.state.lat + '&lng=' + this.state.lng)
             .then((res) => res.json())
-            .then(res => this.setState({query: res}))
+            .then(res => {
+                var result = [["Year", "Crimes Committed"]];
+                for(var i in res)
+                    if(i !== "station_name" && i !== "crime_rate_change"){
+                        result.push([i, res[i]]);
+                    }
+                this.setState({data: result})
+                this.setState({
+                    station_name: res["station_name"],
+                    crime_rate_change: res["crime_rate_change"]
+                })}) 
+
     }
 
     componentDidUpdate(){
-        if(this.state.query){
-            Object.keys(this.state.query).map( key => (
-                console.log(key)
-            ))
-        } else
-        {
-            console.log("Empty Query")
-        }
+        console.log(this.state)
     }
 
     render() {
         return (
             <div className="crimepage">
-                    { this.state.query ? Object.keys(this.state.query).map( key => (
-                        <p>{key}</p>
-                    ))
-                    : "No Data"} 
+                <div className="Crime-Chart">
+                    { this.state.data ? 
+                    <Chart
+                        chartType="Bar"
+                        width="100%"
+                        height="400px"
+                        data={this.state.data}
+                        options={{chart: {title: "Crimes Commited near " , subtitle: "Reported by " + this.station_name }}}
+                    />
+                    : <h1>Gathering Data...</h1>} 
+                </div>  
+                    
 
                     
 
