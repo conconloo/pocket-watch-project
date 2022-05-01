@@ -2,6 +2,7 @@ import React from "react";
 import { Component } from "react";
 import { Chart } from "react-google-charts";
 import Popup from "../components/popup"
+import LoadingSpinner from "../components/LoadingSpinner";
 
 class Crime extends Component {
     constructor(props) {
@@ -69,19 +70,36 @@ class Crime extends Component {
         return (
             <div className="crimepage">
                     { this.state.data ? 
+                    <>
+                    <h1>Crimes Committed Near {this.state.city}</h1>
+                    <p>Reported by: {this.state.station_name}</p>
                     <Chart
                         className="Crime-Chart"
-                        chartType="Bar"
+                        chartType="BarChart"
                         data={this.state.data}
-                        options={{chart: {title: "Crimes Commited near " + this.state.city , subtitle: "Reported by " + this.state.station_name }}}
+                        options={{
+                            title: {position: 'none'},
+                            bar: {
+                                groupWidth: "90%",
+                            },
+                            colors: ["#000000"],
+                            hAxis: {
+                                title: "Crimes Committed",
+                                minValue: 0,
+                            },
+                            vAxis: {
+                                title: "Year",
+                            },
+                            legend: {position: 'none'}
+                        }}
                     />
-                    : <h1>Gathering Data...</h1>}
+                    </>
+                    :
+                    <>
+                        <h1 id="gathering-data">Gathering data, please wait...</h1>
+                        <LoadingSpinner/>
+                    </>}
                     <Popup title={"Location Blocked"} description={"Please Share your location and refresh the page"} confirm={"OK"} onClose={() => this.setState({show: false})} open={this.state.show}/> 
-                    
-
-                    
-
-                    
             </div>
         )
     }

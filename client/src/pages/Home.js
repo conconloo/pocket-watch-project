@@ -37,7 +37,7 @@ class Home extends Component {
     onShowAlert() {
         this.setState({
             title: 'Instructions',
-            description: "If you start to feel unsafe, press and hold the blue Hold Until Safe button. Once you let go, you will be asked to confirm that you are safe. If you do not confirm your safety within 10 seconds, your location will be sent to police with an emergency message.",
+            description: "If you start to feel unsafe, press and hold the circular blue Hold Until Safe button. Once you let go, you will be asked to confirm that you are safe. If you do not confirm your safety within 10 seconds, your location will be sent to police with an emergency message.",
             confirm: 'Got it',
             okay: true,
             show: true
@@ -105,10 +105,10 @@ class Home extends Component {
                         onMouseDown={this.handleButtonPress}
                         onMouseUp={this.handleButtonRelease}
                         //onMouseLeave={this.handleButtonRelease}
-                    >Hold Until Safe</button>
+                    >HOLD UNTIL SAFE</button>
                 </div>
                 <div className="PoliceBtn">
-                    <a href="tel:8063175356"><button title="Dial 911">Dial 911</button></a>
+                    <a href="tel:8063175356"><button title="DIAL 911">Dial 911</button></a>
                 </div>
                 <Popup title={this.state.title} description={this.state.description} confirm={this.state.confirm} onClose={this.onCloseAlert} open={this.state.show}/>
                 
