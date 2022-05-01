@@ -67,7 +67,7 @@ class WeatherReport extends Component {
           <>
           {console.log(obj)}
           <div className='weatherToday'>
-            <h1>Weather today in {this.state.location}</h1>
+            <h1>Weather Report for {this.state.location}</h1>
           </div>
           <div className='conditions'>
           {obj.current.weather.map(conditions =>(
