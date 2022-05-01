@@ -13,6 +13,7 @@ class Crime extends Component {
             city: '',
             station_name: 0.0,
             crime_rate_change: 0.0,
+            negative: false,
             data: null,
             show: false,
             loading: false
@@ -55,13 +56,19 @@ class Crime extends Component {
                 console.log(this.state.data)
                 this.setState({
                     station_name: res["station_name"],
-                    crime_rate_change: res["crime_rate_change"],
+                    crime_rate_change: Math.abs(res["crime_rate_change"]),
                     loading: false
-                })}) 
-            } catch(e) {
-                console.log(e.name + ": " + e.message);
-                this.setState({show: true})
-            }
+                })
+                if(res["crime_rate_change"]<0) {
+                    this.setState({negative: true})
+                } else {
+                    this.setState({negative: false})
+                }
+            })
+        } catch(e) {
+            console.log(e.name + ": " + e.message);
+            this.setState({show: true})
+        }
 
     }
 
@@ -73,7 +80,7 @@ class Crime extends Component {
     render() {
         return (
             <div className="crimepage">
-                    { this.state.data ? 
+                { this.state.data ? 
                     <>
                     <h1>Crimes Committed Near {this.state.city}</h1>
                     <p>Reported by: {this.state.station_name}</p>
@@ -97,6 +104,15 @@ class Crime extends Component {
                             legend: {position: 'none'}
                         }}
                     />
+                    {this.state.negative ?
+                    <div class="crimerate">
+                        <p>Crime has <b>decreased</b> by {this.state.crime_rate_change}% from 2019 to 2020.</p>
+                    </div>
+                    :
+                    <div class="crimerate">
+                        <p>Crime has <b>increased</b> by {this.state.crime_rate_change}% from 2019 to 2020.</p>
+                    </div>
+                    }
                     </>
                     :
                     <>

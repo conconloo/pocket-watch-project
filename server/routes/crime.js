@@ -201,6 +201,8 @@ router.get('/', async (req, res) => {
     res.json(
         summarizedData
     )
+
+    // console.log(summarizedData)
 })
 
 module.exports = router;
