@@ -585,3 +585,18 @@
   left: 0;
   position: relative;
 }
+
+.crimepage{
+  display: flex;
+
+  height: 87vh;
+}
+
+.Crime-Chart{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 2%;
+
+
+}

@@ -53,10 +53,10 @@ class Crime extends Component {
                     { this.state.data ? 
                     <Chart
                         chartType="Bar"
-                        width="100%"
-                        height="400px"
+                        width="40vw"
+                        height="40vh"
                         data={this.state.data}
-                        options={{chart: {title: "Crimes Commited near " , subtitle: "Reported by " + this.station_name }}}
+                        options={{chart: {title: "Crimes Commited near " , subtitle: "Reported by " + this.state.station_name }}}
                     />
                     : <h1>Gathering Data...</h1>} 
                 </div>  
