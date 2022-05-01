@@ -298,6 +298,7 @@
 }
 
 .Navbar {
+  padding: 2%;
   display: flex;
   justify-content: space-between;
   border-radius: 20px;
@@ -396,13 +397,6 @@
   .myMap{
     flex-wrap: wrap;
     justify-content: center;
-  }
-
-  .places-list{
-    display: flex;
-    min-width: 350px;
-    height: 250px;
-    overflow: scroll;
   }
 
   .GoogleMap {
@@ -549,6 +543,9 @@
   max-height: 60vh;
   margin: 3%;
   width: 25%;
+  text-transform: uppercase;
+  line-height: 1.6;
+  text-align: center;
 }
 
 .places-list button {
@@ -565,6 +562,7 @@
   color: rgb(78, 78, 78);
   font-size: 80%;
   font-variant: normal;
+  margin-top: 2%;
 }
 
 .places-list button:hover{

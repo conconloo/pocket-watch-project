@@ -67,20 +67,34 @@ class MyMap extends Component {
                     <h4>Pharmacy</h4>
                     </button>
             </div>
-            <div className="places-list">
-                {this.state.loading ?
-                <LoadingSpinner/>
-                : this.state.query.map(place => (
-                    <button key={place.place_id} onClick={() => this.getGoogleMap(place)}>
-                    <h3>{place.name}</h3>
-                    <p>{place.vicinity}</p>
-                    </button>
-                ))}
-            </div>
-            <div id="GoogleMap" className="GoogleMap">
-                <MyGoogleMap building={this.state.building} place={this.state.place} place_position={this.state.place_position} place_name={this.state.place_name}/>
-                {/*Testing Google Map component*/}
-            </div>
+            {this.state.building=='' ?
+                <>
+                <div className="places-list">
+                    <p>Please select an option above to view nearby police stations, hospitals, or pharmacies.</p>
+                </div>
+                <div id="GoogleMap" className="GoogleMap">
+                    <MyGoogleMap building={this.state.building} place={this.state.place} place_position={this.state.place_position} place_name={this.state.place_name}/>
+                    {/*Testing Google Map component*/}
+                </div>
+                </>
+                :
+                <>
+                <div className="places-list">
+                    {this.state.loading ?
+                    <LoadingSpinner/>
+                    : this.state.query.map(place => (
+                        <button key={place.place_id} onClick={() => this.getGoogleMap(place)}>
+                        <h3>{place.name}</h3>
+                        <p>{place.vicinity}</p>
+                        </button>
+                    ))}
+                </div>
+                <div id="GoogleMap" className="GoogleMap">
+                    <MyGoogleMap building={this.state.building} place={this.state.place} place_position={this.state.place_position} place_name={this.state.place_name}/>
+                    {/*Testing Google Map component*/}
+                </div>
+                </>
+            }
         </div>
         )
     }
