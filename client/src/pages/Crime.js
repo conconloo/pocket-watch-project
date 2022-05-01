@@ -60,7 +60,8 @@ class Crime extends Component {
 
     }
 
-/*     componentDidUpdate(){
+/*  Can be used for debugging   
+    componentDidUpdate(){
         console.log(this.state)
     }
  */

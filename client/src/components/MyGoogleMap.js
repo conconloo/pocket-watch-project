@@ -11,7 +11,7 @@ const containerStyle = { // dimensions of the map
     height: '100%'
 }; // TODO: Eventually put this into index.css instead of putting it in the .js file
 
-class MyGoogleMap extends Component {
+class MyGoogleMap extends Component{
     static zoom = 12;
 
     constructor(props) {
@@ -72,10 +72,46 @@ class MyGoogleMap extends Component {
     render() {
         return (
             <LoadScript
-                googleMapsApiKey="AIzaSyAEZeR4pdli80dwbZNLbly_Da9bG-jk1k0"
+                googleMapsApiKey="AIzaSyDwzEd2Xqs8iVOaDZcJGcDsuAZof4GqKo8"
             >
                 <GoogleMap
                     mapContainerStyle={containerStyle}
+                    options={{styles: [
+                        {
+                          "featureType": "administrative",
+                          "elementType": "geometry",
+                          "stylers": [
+                            {
+                              "visibility": "off"
+                            }
+                          ]
+                        },
+                        {
+                          "featureType": "poi",
+                          "stylers": [
+                            {
+                              "visibility": "off"
+                            }
+                          ]
+                        },
+                        {
+                          "featureType": "road",
+                          "elementType": "labels.icon",
+                          "stylers": [
+                            {
+                              "visibility": "off"
+                            }
+                          ]
+                        },
+                        {
+                          "featureType": "transit",
+                          "stylers": [
+                            {
+                              "visibility": "off"
+                            }
+                          ]
+                        }
+                      ]}}
                     center={{lat: this.state.lat, lng: this.state.lng}}
                     zoom={12}
                 >
