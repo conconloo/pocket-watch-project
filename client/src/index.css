@@ -208,6 +208,7 @@
 
 .filters button {
   padding: 2%;
+  text-transform: uppercase;
   background-color: white;
   border-width: 0px;
   border-bottom-width: 2px;
@@ -228,12 +229,17 @@
   margin: 2% 2% 2% 2%;
 }
 
+.videopage .selectfilterby {
+  margin-left: 6%;
+}
+
 .videopage .selectfilterby h1 {
   margin-top: 20px;
 }
 
 .videos {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   width: 100%;
 }

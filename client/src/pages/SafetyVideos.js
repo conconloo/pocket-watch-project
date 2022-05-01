@@ -2,6 +2,7 @@ import React from "react";
 import { Component } from "react";
 import ShowVideo from "../components/ShowVideo";
 import FilterButtons from "../components/FilterButtons";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const keywords = require('../json/VideoSearchList.json');
 let WatchVideo = 'https://www.youtube.com/watch?v=';
@@ -15,6 +16,7 @@ class SafetyVideos extends Component {
             videos: [],
             showFilters: false,
             showVideos: false,
+            loading: false,
             myclass: 'filtersbtn',
             currKey: ''
         }
@@ -25,7 +27,7 @@ class SafetyVideos extends Component {
 
     handleFilter = (searchQuery, key) => {
         console.log(searchQuery);
-        this.setState({videos : [], currKey : key});
+        this.setState({videos : [], currKey : key, loading: true});
         this.toggleFilters();
         for (var i = 0; i < searchQuery.length; i++) {
             this.renderVideos(searchQuery[i].replace(" ", "+"));
@@ -44,15 +46,15 @@ class SafetyVideos extends Component {
                 let myvideos = this.state.videos;
                 this.setState({
                     videos: myvideos.concat(videos),
-                    showVideos: true
+                    showVideos: true,
+                    loading: false
                 })
             });
     }
 
     toggleFilters(){
         this.setState({
-            showFilters: !this.state.showFilters,
-            videos: []
+            showFilters: !this.state.showFilters
         })
     }
 
@@ -78,12 +80,14 @@ class SafetyVideos extends Component {
                             : ''
                         }
                     </div>
-                    <div className="selectfilterby">
-                        <h1>{this.state.currKey ? this.state.currKey : "Select Filter By +" }</h1>
-                    </div>
+                </div>
+                <div className="selectfilterby">
+                    <h1>{this.state.currKey ? this.state.currKey : "" }</h1>
                 </div>
                 <div className="videos">
-                    {this.state.showVideos ?
+                    {this.state.loading ?
+                        <LoadingSpinner/>
+                        :
                         this.state.videos.map(video =>(
                             <a className="video-info" href={WatchVideo + video.videoID} target='_blank' rel="noreferrer">
                                 <img src = {video.thumbnail.url} alt ="Video"/>
@@ -92,7 +96,6 @@ class SafetyVideos extends Component {
                                 <p>{video.description}</p>
                             </a>
                         ))
-                        : ''
                     }
                 </div>
             </div>
