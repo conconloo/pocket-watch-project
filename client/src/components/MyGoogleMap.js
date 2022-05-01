@@ -11,6 +11,7 @@ const containerStyle = { // dimensions of the map
     height: '100%'
 }; // TODO: Eventually put this into index.css instead of putting it in the .js file
 
+
 class MyGoogleMap extends Component{
     static zoom = 12;
 
@@ -66,13 +67,13 @@ class MyGoogleMap extends Component{
     }
 
     componentDidUpdate(){
-        console.log("Updated: \n State: ", this.state, "\n Props: ", this.props)
+        //console.log("Updated: \n State: ", this.state, "\n Props: ", this.props)
     }
 
     render() {
         return (
             <LoadScript
-                googleMapsApiKey="AIzaSyDwzEd2Xqs8iVOaDZcJGcDsuAZof4GqKo8"
+                googleMapsApiKey="AIzaSyAEZeR4pdli80dwbZNLbly_Da9bG-jk1k0"
             >
                 <GoogleMap
                     mapContainerStyle={containerStyle}
