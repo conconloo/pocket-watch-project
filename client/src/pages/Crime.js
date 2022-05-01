@@ -14,7 +14,8 @@ class Crime extends Component {
             station_name: 0.0,
             crime_rate_change: 0.0,
             data: null,
-            show: false
+            show: false,
+            loading: false
         }
     }
 
@@ -34,6 +35,7 @@ class Crime extends Component {
     }
 
     async componentDidMount(){
+        this.setState({loading: true})
         try{
         await this.getPosition()
         .then((position) => {
@@ -50,9 +52,11 @@ class Crime extends Component {
                         result.push([i, res[i]]);
                     }
                 this.setState({data: result})
+                console.log(this.state.data)
                 this.setState({
                     station_name: res["station_name"],
-                    crime_rate_change: res["crime_rate_change"]
+                    crime_rate_change: res["crime_rate_change"],
+                    loading: false
                 })}) 
             } catch(e) {
                 console.log(e.name + ": " + e.message);
@@ -98,7 +102,8 @@ class Crime extends Component {
                     <>
                         <h1 id="gathering-data">Gathering data, please wait...</h1>
                         <LoadingSpinner/>
-                    </>}
+                    </>
+                    }
                     <Popup title={"Location Blocked"} description={"Please Share your location and refresh the page"} confirm={"OK"} onClose={() => this.setState({show: false})} open={this.state.show}/> 
             </div>
         )
