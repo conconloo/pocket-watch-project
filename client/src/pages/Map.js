@@ -4,6 +4,7 @@ import police_image from '../images/police.png';
 import pharmacy_image from '../images/pharmacy.png';
 import hospital_image from '../images/Hospital.png';
 import MyGoogleMap from "../components/MyGoogleMap";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 class MyMap extends Component {
     constructor(props){
@@ -18,7 +19,8 @@ class MyMap extends Component {
             place_position: {
                 latitude: 0,
                 longitude: 0
-            }
+            },
+            loading: false
         }
     }
 
@@ -27,13 +29,14 @@ class MyMap extends Component {
         return new Promise(function (resolve, reject) {
           navigator.geolocation.getCurrentPosition(resolve, reject);
         });
-      }
+    }
 
     getBuildings = (type) => {
+        this.setState({loading: true})
         this.setState(type === this.state.building ? {building: type} : {building: type, place: '', place_name: '', place_position: undefined})
         fetch('api/places?latitude=' + this.state.latitude + '&longitude=' + this.state.longitude + '&building=' + (type ? type : 'police'))
                 .then((res) => res.json())
-                .then(res => this.setState({query: res}))
+                .then(res => this.setState({query: res, loading: false}))
     }
 
     componentDidMount(){
@@ -45,7 +48,6 @@ class MyMap extends Component {
 
     getGoogleMap(props){
         this.setState({place: props.place_id, place_position: props.geometry.location, place_name: props.name})
-        
     }
 
     render(){
@@ -66,7 +68,9 @@ class MyMap extends Component {
                     </button>
             </div>
             <div className="places-list">
-                {this.state.query.map(place => (
+                {this.state.loading ?
+                <LoadingSpinner/>
+                : this.state.query.map(place => (
                     <button key={place.place_id} onClick={() => this.getGoogleMap(place)}>
                     <h3>{place.name}</h3>
                     <p>{place.vicinity}</p>
