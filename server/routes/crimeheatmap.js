@@ -11,14 +11,22 @@ Things to parse:
 */
 
 const results = []; // store the results in an array
-
 async function getParsedData() {
     let file = '../pocket-watch/server/datafiles/NIBRSPublicViewJan-Mar22.csv' // hard coded file & file directory
+    let lat;
+    let lng;
     fs.createReadStream(file)
-        .pipe(csv())
+        .pipe(csv({mapValues: ({value}) => parseFloat(value)}))
         .on('data', (data) => {
-            if(data.MapLatitude !== '' || data.MapLongitude !== '') { // check if a latitude and longitude exist
-                results.push(data) // push the data to the array
+            if(data.lat && data.lng) { // check if a latitude and longitude exist
+
+                // convert values to float to get into LatLng Object format
+                lat = parseFloat(data.lat)
+                lng = parseFloat(data.lng)
+
+                results.push({lat: lat, lng: lng}) // push the data to the array
+                // results.push(new google.maps.LatLng(lat, lng))
+                //TODO: Convert Lat/Lng Literal to just Lat/Lng => HeatMaps don't allow Lat/Lng Literals
             }
         })
         .on('end', () => {

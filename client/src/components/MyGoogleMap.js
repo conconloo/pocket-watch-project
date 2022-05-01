@@ -11,6 +11,8 @@ const containerStyle = { // dimensions of the map
     height: '100%'
 }; // TODO: Eventually put this into index.css instead of putting it in the .js file
 
+const libs = ["visualization"] // libraries needed for Google Maps to allow components to work
+
 class MyGoogleMap extends Component {
     static zoom = 12;
 
@@ -83,11 +85,12 @@ class MyGoogleMap extends Component {
         return (
             <LoadScript
                 googleMapsApiKey="AIzaSyAEZeR4pdli80dwbZNLbly_Da9bG-jk1k0"
+                libraries={libs}
             >
                 <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={{lat: this.state.lat, lng: this.state.lng}}
-                    zoom={12}
+                    zoom={MyGoogleMap.zoom}
                 >
                     { /* Child components, such as markers, info windows, etc. */}
                     <Marker
@@ -122,7 +125,7 @@ class MyGoogleMap extends Component {
                             onUnmount={directionsService => {
                                 console.log('DirectionsService onUnmount directionsService: ', directionsService)
                             }}
-                        />) : <></>) 
+                        />) : <></>)
                         }
                         {
                         (this.state.response ?
@@ -138,13 +141,13 @@ class MyGoogleMap extends Component {
                             // optional
                             onUnmount={directionsRenderer => {
                                 console.log('DirectionsRenderer onUnmount directionsRenderer: ', directionsRenderer)
-                            }}  
+                            }}
                         />) : <></>)
-                        
+
                     }
-                    {/*<HeatmapLayer*/}
-                    {/*data = {this.state.crime_data}*/}
-                    {/*/>*/}
+                    <HeatmapLayer
+                    data = {this.state.crime_data}
+                    />
                 </GoogleMap>
             </LoadScript>
         )
