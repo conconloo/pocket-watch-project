@@ -44,8 +44,6 @@ class MyMap extends Component {
     }
 
     getGoogleMap(props){
-        console.log(props);
-        console.log(props.place_id, "place_id", props.geometry.location, "geometry")
         this.setState({place: props.place_id, place_position: props.geometry.location, place_name: props.name})
         
     }
