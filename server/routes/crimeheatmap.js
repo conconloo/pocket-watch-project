@@ -64,7 +64,7 @@ function getPolygons() {
 
 }
 
-function getParsedData2(file, options) {
+function getParsedData(file, options) {
     return new Promise((resolve, reject) => {
         const data = [];
 
@@ -110,11 +110,11 @@ async function determineBounds(data) {
 
 router.get('/', async (req, res) => {
     let file = '../server/datafiles/NIBRSPublicViewJan-Mar22.csv' // hard coded file & file directory
-    const data = await getParsedData2(
+    const data = await getParsedData(
         file, 
         {headers: true})
     let polygons = await determineBounds(data);
-    console.log(polygons);
+    console.log("To the front-end: ", polygons);
     res.json(polygons);
 })
 
