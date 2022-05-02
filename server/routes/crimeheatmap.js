@@ -69,9 +69,14 @@ function getMagnitude(polygons, data) {
         Then, simply add the number of crimes committed at that location to the magnitude of the object
         the LatLng Lies in.
 
-
-
     */
+   polygons.forEach(polygon => {
+        data.forEach(point => {
+            //if(point.)
+        })
+   });
+
+
    return polygons //Change this to correct
 }
 /*
@@ -121,6 +126,7 @@ async function getParsedData() {
             if(data.lat && data.lng) { // check if a latitude and longitude exist
 
                 // convert values to float to get into LatLng Object format
+
                 lat = parseFloat(data.lat)
                 lng = parseFloat(data.lng)
 
@@ -137,6 +143,7 @@ async function getParsedData() {
 
 router.get('/', async (req, res) => {
     let data = await getParsedData();
+    console.log(data)
     let polygons = getPolygons();
     let result = getMagnitude(polygons, data);
     res.json(result)
