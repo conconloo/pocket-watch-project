@@ -3,6 +3,7 @@ const router = express.Router();
 const csv = require('csv-parser')
 const fs = require('fs');
 const { exit } = require('process');
+const { resolveObjectURL } = require('buffer');
 
 
 /*
@@ -98,8 +99,9 @@ function getPolygons() {
 
                 */
 
+
 async function getParsedData() {
-    const results = await getPolygons();
+    let results = await getPolygons();
     let file = '../server/datafiles/NIBRSPublicViewJan-Mar22.csv' // hard coded file & file directory
 
     fs.createReadStream(file)
@@ -128,15 +130,19 @@ async function getParsedData() {
             }
         })
         .on('end', () => {
-        console.log(results); // check to see if the results are correct
-        return results
+        //console.log(results); // check to see if the results are correct
+       
     }); 
-    
+
+    return results;
 }
 
 router.get('/', async (req, res) => {
-    //console.log(result)
-    res.json( await getParsedData())
+    await getParsedData()
+    .then(results => {
+        res.json(results)
+        console.log(results)
+    })
 })
 
 module.exports = router;
