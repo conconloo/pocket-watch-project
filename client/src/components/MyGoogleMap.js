@@ -166,98 +166,98 @@ class MyGoogleMap extends Component {
                     {this.state.crime_data[0] ? 
                             <Polygon
                                 paths={this.state.crime_data[0].square}
-                                options={{fillColor: `rgba(0,0,255,${this.state.crime_data[0].mag/62577})`}}
+                                options={{fillColor: `rgb(${this.state.crime_data[0].mag/56988*255},${(56988 - this.state.crime_data[0].mag)/56988*255},0)`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[1] ? 
                             <Polygon
                                 paths={this.state.crime_data[1].square}
-                                options={{fillColor: `rgba(0,0,255,${this.state.crime_data[1].mag/62577}`}}
+                                options={{fillColor: `rgb(${this.state.crime_data[1].mag/56988*255},${(56988 - this.state.crime_data[1].mag)/56988*255},0)`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[2] ? 
                             <Polygon
                                 paths={this.state.crime_data[2].square}
-                                options={{fillColor: `rgba(0,0,255,${this.state.crime_data[2].mag/62577}`}}
+                                options={{fillColor: `rgb(${this.state.crime_data[2].mag/56988*255},${(56988 - this.state.crime_data[2].mag)/56988*255},0)`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[3] ? 
                             <Polygon
                                 paths={this.state.crime_data[3].square}
-                                options={{fillColor: `rgba(0,0,255,${this.state.crime_data[3].mag/62577}`}}
+                                options={{fillColor: `rgb(${this.state.crime_data[3].mag/56988*255},${(56988 - this.state.crime_data[3].mag)/56988*255},0)`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[4] ? 
                             <Polygon
                                 paths={this.state.crime_data[4].square}
-                                options={{fillColor: `rgba(0,0,255,${this.state.crime_data[4].mag/62577}`}}
+                                options={{fillColor: `rgb(${this.state.crime_data[4].mag/56988*255},${(56988 - this.state.crime_data[4].mag)/56988*255},0)`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[5] ? 
                             <Polygon
                                 paths={this.state.crime_data[5].square}
-                                options={{fillColor: `rgba(0,0,255,${this.state.crime_data[5].mag/62577}`}}
+                                options={{fillColor: `rgb(${this.state.crime_data[5].mag/56988*255},${(56988 - this.state.crime_data[5].mag)/56988*255},0)`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[6] ? 
                             <Polygon
                                 paths={this.state.crime_data[6].square}
-                                options={{fillColor: `rgba(0,0,255,${this.state.crime_data[6].mag/62577}`}}
+                                options={{fillColor: `rgb(${this.state.crime_data[6].mag/56988*255},${(56988 - this.state.crime_data[6].mag)/56988*255},0)`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[7] ? 
                             <Polygon
                                 paths={this.state.crime_data[7].square}
-                                options={{fillColor: `rgba(0,0,255,${this.state.crime_data[7].mag/62577}`}}
+                                options={{fillColor: `rgb(${this.state.crime_data[7].mag/56988*255},${(56988 - this.state.crime_data[7].mag)/56988*255},0)`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[8] ? 
                             <Polygon
                                 paths={this.state.crime_data[8].square}
-                                options={{fillColor: `rgba(0,0,255,${this.state.crime_data[8].mag/62577}`}}
+                                options={{fillColor: `rgb(${this.state.crime_data[8].mag/56988*255},${(56988 - this.state.crime_data[8].mag)/56988*255},0)`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[9] ? 
                             <Polygon
                                 paths={this.state.crime_data[9].square}
-                                options={{fillColor: `rgba(0,0,255,${this.state.crime_data[9].mag/62577}`}}
+                                options={{fillColor: `rgb(${this.state.crime_data[9].mag/56988*255},${(56988 - this.state.crime_data[9].mag)/56988*255},0)`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[10] ? 
                             <Polygon
                                 paths={this.state.crime_data[10].square}
-                                options={{fillColor: `rgba(0,0,255,${this.state.crime_data[10].mag/62577}`}}
+                                options={{fillColor: `rgb(${this.state.crime_data[10].mag/56988*255},${(56988 - this.state.crime_data[10].mag)/56988*255},0)`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[11] ? 
                             <Polygon
                                 paths={this.state.crime_data[11].square}
-                                options={{fillColor: `rgba(0,0,255,${this.state.crime_data[11].mag/62577}`}}
+                                options={{fillColor: `rgb(${this.state.crime_data[11].mag/56988*255},${(56988 - this.state.crime_data[11].mag)/56988*255},0)`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[12] ? 
                             <Polygon
                                 paths={this.state.crime_data[12].square}
-                                options={{fillColor: `rgba(0,0,255,${this.state.crime_data[12].mag/62577}`}}
+                                options={{fillColor: `rgb(${this.state.crime_data[12].mag/56988*255},${(56988 - this.state.crime_data[12].mag)/56988*255},0)`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[13] ? 
                             <Polygon
                                 paths={this.state.crime_data[13].square}
-                                options={{fillColor: `rgba(0,0,255,${this.state.crime_data[13].mag/62577}`}}
+                                options={{fillColor: `rgb(${this.state.crime_data[13].mag/56988*255},${(56988 - this.state.crime_data[13].mag)/56988*255},0)`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[14] ? 
                             <Polygon
                                 paths={this.state.crime_data[14].square}
-                                options={{fillColor: `rgba(0,0,255,${this.state.crime_data[14].mag/62577}`}}
+                                options={{fillColor: `rgb(${this.state.crime_data[14].mag/56988*255},${(56988 - this.state.crime_data[14].mag)/56988*255},0)`}}
 
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[15] ? 
                             <Polygon
                                 paths={this.state.crime_data[15].square}
-                                options={{fillColor: `rgba(0,0,255,${this.state.crime_data[15].mag/62577}`}}
+                                options={{fillColor: `rgb(${this.state.crime_data[15].mag/56988*255},${(56988 - this.state.crime_data[15].mag)/56988*255},0)`}}
                             />
                         
                         : console.log("undefined")}

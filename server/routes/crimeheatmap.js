@@ -16,14 +16,14 @@ Things to parse:
 function getPolygons() {
     let Count = 16
     let ParentPolygon = [
-        {lat: 30.118713, lng: -95.812735 }, // Top Left
-        {lat: 30.118713, lng: -95.034621 }, // Top Right
-        {lat: 29.49764, lng:  -95.034621}, // Bottom Right
-        {lat: 29.49764, lng: -95.812735 } // Bottom Left
+        {lat: 29.9567, lng: -95.682735 }, // Top Left
+        {lat: 29.9567, lng: -95.134621 }, // Top Right
+        {lat: 29.6, lng:  -95.134621}, // Bottom Right
+        {lat: 29.6, lng: -95.682735 } // Bottom Left
     ]
 
-    length = Math.abs(30.11873 - 29.49764)
-    width = Math.abs(-95.812735 + 95.034621)
+    length = 29.9567 - 29.6
+    width = -95.134621 - -95.682735 
 
     length_cut = length/Math.sqrt(Count)
     width_cut = width/Math.sqrt(Count)
@@ -38,8 +38,8 @@ function getPolygons() {
             let ChildPolygon = [
                 {lat: point.lat, lng: point.lng  }, //Top left
                 {lat: point.lat, lng: point.lng + width_cut}, //Top Right
-                {lat: point.lat - length_cut, lng: point.lng + width_cut},  //Bottom Right
-                {lat: point.lat - length_cut, lng: point.lng} //Bottom Left
+                {lat: point.lat - length_cut, lng: point.lng + width_cut}, //Bottom Left
+                {lat: point.lat - length_cut, lng: point.lng}  //Bottom Right
             ]
             if(FindNewChild){
                 FirstChildBottomLeft = ChildPolygon[3]
