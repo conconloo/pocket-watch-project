@@ -83,24 +83,24 @@ function getParsedData2(file, options) {
 async function determineBounds(data) {
     let polygons = getPolygons();
 
-    let point = ({lng: parseFloat(data.lat), lat: parseFloat(data.lng), mag: parseFloat(data.mag)})
-    for (let i = 0; i < 2; ++i) {
+    // let point = ({lng: parseFloat(data.lat), lat: parseFloat(data.lng), mag: parseFloat(data.mag)})
+    for (let i = 0; i < 14; ++i) {
         let top = polygons[i].square[0].lat;
         let bottom = polygons[i].square[2].lat;
         let left = polygons[i].square[0].lng;
         let right = polygons[i].square[2].lng;
         
-        console.log("top ", top);
-        console.log("bottom ", bottom);
-        console.log("left ", left);
-        console.log("right ", right);
+        // console.log("top ", top);
+        // console.log("bottom ", bottom);
+        // console.log("left ", left);
+        // console.log("right ", right);
 
         for (let j = 0; j < data.length; ++j) {
             if ((top >= data[j]['lat']) && (data[j]['lat'] >= bottom)) {
                 if (left <= right && left <= data[j]['lng'] && data[j]['lng'] <= right) {
-                    polygons[i].mag += point.mag;
+                    polygons[i].mag += parseFloat(data[j].mag);
                 } else if (left > right && (left <= data[j]['lng'] || data[j]['lng'] <= right)) {
-                    polygons[i].mag += point.mag;
+                    polygons[i].mag += parseFloat(data[j].mag);
                 }
             }
         }
@@ -115,7 +115,7 @@ router.get('/', async (req, res) => {
         {headers: true})
     let polygons = await determineBounds(data);
     console.log(polygons);
-    res.json();
+    res.json(polygons);
 })
 
 module.exports = router;
