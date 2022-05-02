@@ -336,6 +336,7 @@
   flex-direction: row-reverse;
   justify-content: space-around;
   min-width: 50%;
+  margin-right: 2%;
 }
 
 .Navbar .links .link{
@@ -344,6 +345,17 @@
   font-size: calc(12pt + 0.6vh + 0.8vw);
   background-color: inherit;
   text-decoration: none;
+}
+
+.NavbarLink {
+  display: flex;
+  align-items: center;
+}
+
+.Navbar .links .link img {
+  height: 30px;
+  vertical-align: bottom;
+  margin-right: 2%;
 }
 
 .Navbar .links .link::after{
@@ -358,7 +370,6 @@
 .Navbar .links .link:hover::after{
   width: 100%;
 }
-
 
 @media screen and (max-width: 1275px) {
   .Navbar .links{
