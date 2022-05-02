@@ -103,8 +103,9 @@ function getPolygons() {
 async function getParsedData() {
     let results = await getPolygons();
     let file = '../server/datafiles/NIBRSPublicViewJan-Mar22.csv' // hard coded file & file directory
+    let finalResults;
 
-    await fs.createReadStream(file)
+    fs.createReadStream(file)
         .pipe(csv({mapValues: ({value}) => parseFloat(value)}))
         .on('data', (data) => {
             if(data.lat && data.lng && data.mag) { // check if a latitude and longitude exist
@@ -121,28 +122,26 @@ async function getParsedData() {
                             //console.log("Top Left:" + TopLeft.lat + ", " + TopLeft.lng, "Point: "+ point.lat + ", " + point.lng)
                             //console.log("Bottom Right:" + BottomRight.lat + ", " + BottomRight.lng, "Point: "+ point.lat + ", " + point.lng)
                             //console.log("point Magnitude: ", point.mag, "Polygon mag: ", polygon.mag)
-
                             polygon.mag += point.mag
                         } 
                     }
                 })
-
             }
         })
         .on('end', () => {
-        console.log("What should go to Front-end", results); // check to see if the results are correct
-       
-    }); 
-
-    return results;
+            finalResults = results;
+            console.log("What should go to Front-end", finalResults); // check to see if the results are correct
+            return finalResults;
+    });
 }
 
 router.get('/', async (req, res) => {
-    await getParsedData()
-    .then(results => {
-        console.log("To Front-end" , results)
-        res.json(results)
-    })
+    const data = async () => {
+        let magResults = await getParsedData();
+        return magResults;
+    }
+    console.log("Data: ", await data());
+    res.json();
 })
 
 module.exports = router;
