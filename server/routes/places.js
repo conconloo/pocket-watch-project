@@ -10,9 +10,9 @@ async function getPlacesList (req = false) {
     let longitude = req.query.longitude || -96.314445;
     let building = req.query.building || 'police';
 
-    console.log(latitude);
-    console.log(longitude);
-    console.log(building);
+    // console.log(latitude);
+    // console.log(longitude);
+    // console.log(building);
 
     // https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=5000&type=police&key=${apiKey}
     
@@ -33,7 +33,7 @@ async function getPlacesList (req = false) {
 
 router.get('/', async (req, res) => {
     places = await getPlacesList(req);
-    console.log(places);
+    // console.log(places);
     res.json(places);
 })
 
