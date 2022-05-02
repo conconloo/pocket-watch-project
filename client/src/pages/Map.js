@@ -55,7 +55,7 @@ class MyMap extends Component {
         <div className="myMap">
             <div className="Map-buttons">
                 <button className="police" title="Police" onClick={() => this.getBuildings('police')}>
-                    <img src={police_image} alt={"Police Image"} />
+                    <img src={police_image} alt="Police Image" />
                     <h4>Police</h4>
                 </button>
                 <button className="hospital" title="Hospital" onClick={() => this.getBuildings('hospital')}>
@@ -67,7 +67,7 @@ class MyMap extends Component {
                     <h4>Pharmacy</h4>
                     </button>
             </div>
-            {this.state.building=='' ?
+            {this.state.building==='' ?
                 <>
                 <div className="places-list">
                     <p>Please select an option above to view nearby police stations, hospitals, or pharmacies.</p>

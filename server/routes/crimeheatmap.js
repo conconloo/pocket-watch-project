@@ -63,21 +63,18 @@ function getPolygons() {
 
 }
 
-const results = []; // store the results in an array
-async function getParsedData() {
-    let file = '../server/datafiles/NIBRSPublicViewJan-Mar22.csv' // hard coded file & file directory
-    let lat;
-    let lng; 
-    fs.createReadStream(file)
-        .pipe(csv({mapValues: ({value}) => parseFloat(value)}))
-        .on('data', (data) => {
-            if(data.lat && data.lng) { // check if a latitude and longitude exist
+function getMagnitude(polygons, data) {
+    /*
+        This function will take a LatLng from Data and find the polygon it lies in.
+        Then, simply add the number of crimes committed at that location to the magnitude of the object
+        the LatLng Lies in.
 
-                // convert values to float to get into LatLng Object format
-                lat = parseFloat(data.lat)
-                lng = parseFloat(data.lng)
 
-                /*
+
+    */
+   return polygons //Change this to correct
+}
+/*
                     {
                         {
                             magnitude: 0,
@@ -113,6 +110,20 @@ async function getParsedData() {
 
                 */
 
+const results = []; // store the results in an array
+async function getParsedData() {
+    let file = '../server/datafiles/NIBRSPublicViewJan-Mar22.csv' // hard coded file & file directory
+    let lat;
+    let lng; 
+    fs.createReadStream(file)
+        .pipe(csv({mapValues: ({value}) => parseFloat(value)}))
+        .on('data', (data) => {
+            if(data.lat && data.lng) { // check if a latitude and longitude exist
+
+                // convert values to float to get into LatLng Object format
+                lat = parseFloat(data.lat)
+                lng = parseFloat(data.lng)
+
                 results.push({lat: lat, lng: lng}) // push the data to the array
                 //results.push(new google.maps.latLng(lat, lng).toString())
                 //TODO: Convert Lat/Lng Literal to just Lat/Lng => HeatMaps don't allow Lat/Lng Literals
@@ -127,7 +138,8 @@ async function getParsedData() {
 router.get('/', async (req, res) => {
     let data = await getParsedData();
     let polygons = getPolygons();
-    res.json(polygons)
+    let result = getMagnitude(polygons, data);
+    res.json(result)
 })
 
 module.exports = router;

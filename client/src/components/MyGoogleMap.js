@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {GoogleMap, LoadScript, Marker, DirectionsRenderer, DirectionsService, HeatmapLayer, Polygon} from '@react-google-maps/api';
+import {GoogleMap, LoadScript, Marker, DirectionsRenderer, DirectionsService, Polygon} from '@react-google-maps/api';
 import logo from '../images/logo-40.png';
 import police from '../images/police-40.png';
 import hospital from '../images/Hospital-40.png';
@@ -18,13 +18,11 @@ class MyGoogleMap extends Component {
 
     constructor(props) {
         super(props);
-        this.timer = 0
         this.state = {
             lat: -96.3376557,
             lng: 30.6262965,
             response: null,
             crime_data: [],
-            count: 0,
             show: false
         }
         this.directionsCallback = this.directionsCallback.bind(this)
@@ -93,6 +91,22 @@ class MyGoogleMap extends Component {
                 googleMapsApiKey="AIzaSyAEZeR4pdli80dwbZNLbly_Da9bG-jk1k0"
                 libraries={libs}
             >
+                <button onClick={() => this.setState({lat: 29.7604, lng: -95.3698})}
+                        style={{backgroundColor: '#FFF', 
+                                position: 'absolute',
+                                right: '20vw',
+                                width: '50px',
+                                height: '50px',
+                                border: '2px solid #fff',
+                                borderRadius: '3px',
+                                boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
+                                cursor: "pointer",
+                                marginTop: "8px",
+                                marginBottom: "22px",
+                                textAlign: "center",
+                                title: "Click to recenter the map",
+                                zIndex: "1" }}
+                    >Click for Crime</button>
                 <GoogleMap
                     mapContainerStyle={containerStyle}
                     options={{styles: [
@@ -133,7 +147,9 @@ class MyGoogleMap extends Component {
                       ]}}
                     center={{lat: this.state.lat, lng: this.state.lng}}
                     zoom={MyGoogleMap.zoom}
+                    
                 >
+                    
                     { /* Child components, such as markers, info windows, etc. */}
                     <Marker
                         icon={logo}
