@@ -71,6 +71,8 @@ class MyMap extends Component {
                 <>
                 <div className="places-list">
                     <p>Please select an option above to view nearby police stations, hospitals, or pharmacies.</p>
+                    <br/>
+                    <p>Zoom Out to see Crime in Houston</p>
                 </div>
                 <div id="GoogleMap" className="GoogleMap">
                     <MyGoogleMap building={this.state.building} place={this.state.place} place_position={this.state.place_position} place_name={this.state.place_name}/>

@@ -25,12 +25,13 @@ class MyGoogleMap extends Component {
             response: null,
             crime_data: [],
             total_mag: 0,
+            buttonText: true,
             show: false
         }
         this.directionsCallback = this.directionsCallback.bind(this)
     }
 
-    getPosition = () => {
+    getPosition = async () => {
         return new Promise(function (resolve, reject) {
             navigator.geolocation.getCurrentPosition(resolve, reject);
         });
@@ -94,22 +95,6 @@ class MyGoogleMap extends Component {
                 libraries={libs}
                 loadingElement={<LoadingSpinner/>}
             >
-                <button onClick={() => this.setState({lat: 29.7604, lng: -95.3698})}
-                        style={{backgroundColor: '#FFF', 
-                                position: 'absolute',
-                                right: '20vw',
-                                width: '50px',
-                                height: '50px',
-                                border: '2px solid #fff',
-                                borderRadius: '3px',
-                                boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
-                                cursor: "pointer",
-                                marginTop: "8px",
-                                marginBottom: "22px",
-                                textAlign: "center",
-                                title: "Click to recenter the map",
-                                zIndex: "1" }}
-                    >Click for Crime</button>
                 <GoogleMap
                     mapContainerStyle={containerStyle}
                     options={{styles: [
