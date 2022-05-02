@@ -35,7 +35,7 @@ class MyGoogleMap extends Component {
     }
 
     getCrime = async() => {
-        fetch('api/crimeheatmap')
+        await fetch('api/crimeheatmap')
             .then(res => res.json())
             .then(data => {
                 this.setState({crime_data: data})
@@ -80,7 +80,7 @@ class MyGoogleMap extends Component {
     }
 
     componentDidUpdate(){
-        //console.log("Updated: \n State: ", this.state, "\n Props: ", this.props)
+        console.log("Updated: \n State: ", this.state, "\n Props: ", this.props)
     }
 
 
@@ -165,98 +165,98 @@ class MyGoogleMap extends Component {
                     {this.state.crime_data[0] ? 
                             <Polygon
                                 paths={this.state.crime_data[0].square}
-                                options={{fillColor: `#FF00${(this.state.crime_data[0].magnitude*16).toString(16)}`}}
+                                options={{fillColor: `#FF00${(this.state.crime_data[0].magnitude/62577*255).toString(16)}`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[1] ? 
                             <Polygon
                                 paths={this.state.crime_data[1].square}
-                                options={{fillColor: `#FF00${(this.state.crime_data[1].magnitude*16).toString(16)}`}}
+                                options={{fillColor: `#FF00${(this.state.crime_data[1].magnitude/62577*255).toString(16)}`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[2] ? 
                             <Polygon
                                 paths={this.state.crime_data[2].square}
-                                options={{fillColor: `#FF00${(this.state.crime_data[2].magnitude*16).toString(16)}`}}
+                                options={{fillColor: `#FF00${(this.state.crime_data[2].magnitude/62577*255).toString(16)}`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[3] ? 
                             <Polygon
                                 paths={this.state.crime_data[3].square}
-                                options={{fillColor: `#FF00${(this.state.crime_data[3].magnitude*16).toString(16)}`}}
+                                options={{fillColor: `#FF00${(this.state.crime_data[3].magnitude/62577*255).toString(16)}`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[4] ? 
                             <Polygon
                                 paths={this.state.crime_data[4].square}
-                                options={{fillColor: `#FF00${(this.state.crime_data[4].magnitude*16).toString(16)}`}}
+                                options={{fillColor: `#FF00${(this.state.crime_data[4].magnitude/62577*255).toString(16)}`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[5] ? 
                             <Polygon
                                 paths={this.state.crime_data[5].square}
-                                options={{fillColor: `#FF00${(this.state.crime_data[5].magnitude*16).toString(16)}`}}
+                                options={{fillColor: `#FF00${(this.state.crime_data[5].magnitude/62577*255).toString(16)}`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[6] ? 
                             <Polygon
                                 paths={this.state.crime_data[6].square}
-                                options={{fillColor: `#FF00${(this.state.crime_data[6].magnitude*16).toString(16)}`}}
+                                options={{fillColor: `#FF00${(this.state.crime_data[6].magnitude/62577*255).toString(16)}`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[7] ? 
                             <Polygon
                                 paths={this.state.crime_data[7].square}
-                                options={{fillColor: `#FF00${(this.state.crime_data[7].magnitude*16).toString(16)}`}}
+                                options={{fillColor: `#FF00${(this.state.crime_data[7].magnitude/62577*255).toString(16)}`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[8] ? 
                             <Polygon
                                 paths={this.state.crime_data[8].square}
-                                options={{fillColor: `#FF00${(this.state.crime_data[8].magnitude*16).toString(16)}`}}
+                                options={{fillColor: `#FF00${(this.state.crime_data[8].magnitude/62577*255).toString(16)}`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[9] ? 
                             <Polygon
                                 paths={this.state.crime_data[9].square}
-                                options={{fillColor: `#FF00${(this.state.crime_data[9].magnitude*16).toString(16)}`}}
+                                options={{fillColor: `#FF00${(this.state.crime_data[9].magnitude/62577*255).toString(16)}`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[10] ? 
                             <Polygon
                                 paths={this.state.crime_data[10].square}
-                                options={{fillColor: `#FF00${(this.state.crime_data[10].magnitude*16).toString(16)}`}}
+                                options={{fillColor: `#FF00${(this.state.crime_data[10].magnitude/62577*255).toString(16)}`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[11] ? 
                             <Polygon
                                 paths={this.state.crime_data[11].square}
-                                options={{fillColor: `#FF00${(this.state.crime_data[11].magnitude*16).toString(16)}`}}
+                                options={{fillColor: `#FF00${(this.state.crime_data[11].magnitude/62577*255).toString(16)}`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[12] ? 
                             <Polygon
                                 paths={this.state.crime_data[12].square}
-                                options={{fillColor: `#FF00${(this.state.crime_data[12].magnitude*16).toString(16)}`}}
+                                options={{fillColor: `#FF00${(this.state.crime_data[12].magnitude/62577*255).toString(16)}`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[13] ? 
                             <Polygon
                                 paths={this.state.crime_data[13].square}
-                                options={{fillColor: `#FF00${(this.state.crime_data[13].magnitude*16).toString(16)}`}}
+                                options={{fillColor: `#FF00${(this.state.crime_data[13].magnitude/62577*255).toString(16)}`}}
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[14] ? 
                             <Polygon
                                 paths={this.state.crime_data[14].square}
-                                options={{fillColor: `#FF00${(this.state.crime_data[14].magnitude*16).toString(16)}`}}
+                                options={{fillColor: `#FF00${(this.state.crime_data[14].magnitude/62577*255).toString(16)}`}}
 
                             />
                         
                         : console.log("undefined")}{this.state.crime_data[15] ? 
                             <Polygon
                                 paths={this.state.crime_data[15].square}
-                                options={{fillColor: `#FF00${(this.state.crime_data[15].magnitude*16).toString(16)}`}}
+                                options={{fillColor: `#FF00${(this.state.crime_data[15].magnitude/62577*255).toString(16)}`}}
                             />
                         
                         : console.log("undefined")}

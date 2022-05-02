@@ -29,7 +29,6 @@ function getPolygons() {
 
     let result = []
     let point = ParentPolygon[0] // Start at top left of Parent Polygon
-    let endLng = ParentPolygon[1].lnng
     for(let j = 0; j < Math.sqrt(Count); j++){
         let FindNewChild = true;
         let FirstChildBottomLeft = {lat: 0, lng: 0}
@@ -100,39 +99,39 @@ function getPolygons() {
                 */
 
 async function getParsedData() {
-    console.log("I'm here Parsing")
-    let results = await getPolygons();
+    const results = await getPolygons();
     let file = '../server/datafiles/NIBRSPublicViewJan-Mar22.csv' // hard coded file & file directory
 
-    await fs.createReadStream(file)
+    fs.createReadStream(file)
         .pipe(csv({mapValues: ({value}) => parseFloat(value)}))
         .on('data', (data) => {
             if(data.lat && data.lng && data.mag) { // check if a latitude and longitude exist
             
-                // convert values to float to get into LatLng Object format
                 let point = ({lng: parseFloat(data.lat), lat: parseFloat(data.lng), mag: parseFloat(data.mag)})
                 results.forEach(polygon => {
                     let TopLeft = polygon.square[0]
                     let BottomRight = polygon.square[2]
+
+                    //Something is wrong with this statement
+                    
                     if(point.lat < TopLeft.lat && point.lng > TopLeft.lng){
-                        if(point.lat > BottomRight.lat && point.lat < BottomRight.lng){
-                            console.log("Top Left:" + TopLeft.lat + ", " + TopLeft.lng, "Point: "+ point.lat + ", " + point.lng)
+                        if(point.lat > BottomRight.lat && point.lng < BottomRight.lng){
+                            //console.log("Top Left:" + TopLeft.lat + ", " + TopLeft.lng, "Point: "+ point.lat + ", " + point.lng)
+                            //console.log("Bottom Right:" + BottomRight.lat + ", " + BottomRight.lng, "Point: "+ point.lat + ", " + point.lng)
+                            //console.log("point Magnitude: ", point.mag, "Polygon mag: ", polygon.mag)
+
                             polygon.mag += point.mag
                         } 
                     }
                 })
 
-
-
-                // push the data to the array
-                //results.push(new google.maps.latLng(lat, lng).toString())
-                //TODO: Convert Lat/Lng Literal to just Lat/Lng => HeatMaps don't allow Lat/Lng Literals
             }
         })
         .on('end', () => {
         console.log(results); // check to see if the results are correct
+        return results
     }); 
-    return results
+    
 }
 
 router.get('/', async (req, res) => {
