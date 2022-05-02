@@ -104,7 +104,7 @@ async function getParsedData() {
     let results = await getPolygons();
     let file = '../server/datafiles/NIBRSPublicViewJan-Mar22.csv' // hard coded file & file directory
 
-    fs.createReadStream(file)
+    await fs.createReadStream(file)
         .pipe(csv({mapValues: ({value}) => parseFloat(value)}))
         .on('data', (data) => {
             if(data.lat && data.lng && data.mag) { // check if a latitude and longitude exist
@@ -130,7 +130,7 @@ async function getParsedData() {
             }
         })
         .on('end', () => {
-        //console.log(results); // check to see if the results are correct
+        console.log("What should go to Front-end", results); // check to see if the results are correct
        
     }); 
 
@@ -140,8 +140,8 @@ async function getParsedData() {
 router.get('/', async (req, res) => {
     await getParsedData()
     .then(results => {
+        console.log("To Front-end" , results)
         res.json(results)
-        console.log(results)
     })
 })
 
