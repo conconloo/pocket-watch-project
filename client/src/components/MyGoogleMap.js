@@ -4,6 +4,7 @@ import logo from '../images/logo-40.png';
 import police from '../images/police-40.png';
 import hospital from '../images/Hospital-40.png';
 import pharmacy from '../images/pharmacy-40.png';
+import LoadingSpinner from './LoadingSpinner';
 
 
 const containerStyle = { // dimensions of the map
@@ -91,6 +92,7 @@ class MyGoogleMap extends Component {
             <LoadScript
                 googleMapsApiKey="AIzaSyAEZeR4pdli80dwbZNLbly_Da9bG-jk1k0"
                 libraries={libs}
+                loadingElement={<LoadingSpinner/>}
             >
                 <button onClick={() => this.setState({lat: 29.7604, lng: -95.3698})}
                         style={{backgroundColor: '#FFF', 
