@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const csv = require('csv-parser')
-const fs = require('fs')
+const fs = require('fs');
+const { exit } = require('process');
 
 
 /*
@@ -16,8 +17,8 @@ function getPolygons() {
     let ParentPolygon = [
         {lat: 30.118713, lng: -95.812735 }, // Top Left
         {lat: 30.118713, lng: -95.034621 }, // Top Right
-        {lat: 29.49764, lng: -95.812735 }, // Bottom Right
-        {lat: 29.49764, lng: -95.034621 } // Bottom Left
+        {lat: 29.49764, lng:  -95.034621}, // Bottom Right
+        {lat: 29.49764, lng: -95.812735 } // Bottom Left
     ]
 
     length = Math.abs(30.11873 - 29.49764)
@@ -53,7 +54,7 @@ function getPolygons() {
                 point = ChildPolygon[1]
             }       
 
-            result.push({magnitude: (j+1)*(i+1), square: ChildPolygon})
+            result.push({mag: 0, square: ChildPolygon})
         }
 
     }
@@ -61,23 +62,6 @@ function getPolygons() {
     return result;
 
 
-}
-
-function getMagnitude(polygons, data) {
-    /*
-        This function will take a LatLng from Data and find the polygon it lies in.
-        Then, simply add the number of crimes committed at that location to the magnitude of the object
-        the LatLng Lies in.
-
-    */
-   polygons.forEach(polygon => {
-        data.forEach(point => {
-            //if(point.)
-        })
-   });
-
-
-   return polygons //Change this to correct
 }
 /*
                     {
@@ -115,22 +99,32 @@ function getMagnitude(polygons, data) {
 
                 */
 
-const results = []; // store the results in an array
 async function getParsedData() {
+    console.log("I'm here Parsing")
+    let results = await getPolygons();
     let file = '../server/datafiles/NIBRSPublicViewJan-Mar22.csv' // hard coded file & file directory
-    let lat;
-    let lng; 
-    fs.createReadStream(file)
+
+    await fs.createReadStream(file)
         .pipe(csv({mapValues: ({value}) => parseFloat(value)}))
         .on('data', (data) => {
-            if(data.lat && data.lng) { // check if a latitude and longitude exist
-
+            if(data.lat && data.lng && data.mag) { // check if a latitude and longitude exist
+            
                 // convert values to float to get into LatLng Object format
+                let point = ({lng: parseFloat(data.lat), lat: parseFloat(data.lng), mag: parseFloat(data.mag)})
+                results.forEach(polygon => {
+                    let TopLeft = polygon.square[0]
+                    let BottomRight = polygon.square[2]
+                    if(point.lat < TopLeft.lat && point.lng > TopLeft.lng){
+                        if(point.lat > BottomRight.lat && point.lat < BottomRight.lng){
+                            console.log("Top Left:" + TopLeft.lat + ", " + TopLeft.lng, "Point: "+ point.lat + ", " + point.lng)
+                            polygon.mag += point.mag
+                        } 
+                    }
+                })
 
-                lat = parseFloat(data.lat)
-                lng = parseFloat(data.lng)
 
-                results.push({lat: lat, lng: lng}) // push the data to the array
+
+                // push the data to the array
                 //results.push(new google.maps.latLng(lat, lng).toString())
                 //TODO: Convert Lat/Lng Literal to just Lat/Lng => HeatMaps don't allow Lat/Lng Literals
             }
@@ -142,11 +136,8 @@ async function getParsedData() {
 }
 
 router.get('/', async (req, res) => {
-    let data = await getParsedData();
-    console.log(data)
-    let polygons = getPolygons();
-    let result = getMagnitude(polygons, data);
-    res.json(result)
+    //console.log(result)
+    res.json( await getParsedData())
 })
 
 module.exports = router;
