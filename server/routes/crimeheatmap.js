@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const csv = require('csv-parser')
+const csv = require('@fast-csv/parse')
 const fs = require('fs');
 const { exit } = require('process');
 const { resolveObjectURL } = require('buffer');
@@ -63,45 +63,47 @@ function getPolygons() {
 
 
 }
-/*
-                    {
-                        {
-                            magnitude: 0,
-                            square: [
-                                {lat: 30, lng: 45},
-                                {lat: 30, lng: 55},
-                                {lat: 40, lng: 45},
-                                {lat: 40, lng: 55}
-                            ]
-                        },
-                        {
-                            magnitude: 0,
-                            square: {
-                                {lat: 30, lng: 45},
-                                {lat: 30, lng: 55},
-                                {lat: 40, lng: 45},
-                                {lat: 40, lng: 55}
-                            }
-                        },
-                        {
-                            magnitude: 0,
-                            square: {
-                                {lat: 30, lng: 45},
-                                {lat: 30, lng: 55},
-                                {lat: 40, lng: 45},
-                                {lat: 40, lng: 55}
-                            }
-                        }
 
+function getParsedData2(file, options) {
+    return new Promise((resolve, reject) => {
+        const data = [];
 
-                    }
+        csv
+            .parseFile(file, options)
+            .on("error", reject)
+            .on("data", (row) => {
+                data.push(row);
+            })
+            .on("end", () => {
+                resolve(data);
+            });
+    });
+}
 
+async function determineBounds(data) {
+    let polygons = getPolygons();
 
-                */
+    let point = ({lng: parseFloat(data.lat), lat: parseFloat(data.lng), mag: parseFloat(data.mag)})
+    polygons.forEach(polygon => {
+        let topLeft = polygon.square[0];
+        // console.log("Top Left: ", topLeft);
+        // let bottomRight = polygon.square[2];
+        console.log("Bottom Right: ", bottomRight);
+        if (topLeft.lat >= data.lat && data.lat >= bottomRight.lat) {
+            if (topLeft.lng <= bottomRight.lng && topLeft.lng <= data.lng && data.lng <= bottomRight.lng) {
+                polygon.mag += point.mag;
+            } else if (topLeft.lng > bottomRight.lng && (topLeft.lng <= data.lng || data.lng <= bottomRight.lng)) {
+                polygon.mag += point.mag;
+            }
+        }
+    })
+    console.log("Should come back!: ", polygons);
+    return polygons;
+}
 
 
 async function getParsedData() {
-    let results = await getPolygons();
+    let results = getPolygons();
     let file = '../server/datafiles/NIBRSPublicViewJan-Mar22.csv' // hard coded file & file directory
     let finalResults;
 
@@ -133,14 +135,16 @@ async function getParsedData() {
             console.log("What should go to Front-end", finalResults); // check to see if the results are correct
             return finalResults;
     });
+    return finalResults;
 }
 
 router.get('/', async (req, res) => {
-    const data = async () => {
-        let magResults = await getParsedData();
-        return magResults;
-    }
-    console.log("Data: ", await data());
+    let file = '../server/datafiles/NIBRSPublicViewJan-Mar22.csv' // hard coded file & file directory
+    const data = await getParsedData2(
+        file, 
+        {headers: true})
+    let polygons = await determineBounds(data);
+    console.log(polygons);
     res.json();
 })
 
