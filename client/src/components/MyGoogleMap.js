@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {GoogleMap, LoadScript, Marker, DirectionsRenderer, DirectionsService} from '@react-google-maps/api';
+import {GoogleMap, LoadScript, Marker, DirectionsRenderer, DirectionsService, HeatmapLayer, Polygon} from '@react-google-maps/api';
 import logo from '../images/logo-40.png';
 import police from '../images/police-40.png';
 import hospital from '../images/Hospital-40.png';
@@ -11,16 +11,21 @@ const containerStyle = { // dimensions of the map
     height: '100%'
 }; // TODO: Eventually put this into index.css instead of putting it in the .js file
 
+const libs = ["visualization", "places"] // libraries needed for Google Maps to allow components to work
 
-class MyGoogleMap extends Component{
+class MyGoogleMap extends Component {
     static zoom = 12;
 
     constructor(props) {
         super(props);
+        this.timer = 0
         this.state = {
             lat: -96.3376557,
             lng: 30.6262965,
-            response: null
+            response: null,
+            crime_data: [],
+            count: 0,
+            show: false
         }
         this.directionsCallback = this.directionsCallback.bind(this)
     }
@@ -29,6 +34,14 @@ class MyGoogleMap extends Component{
         return new Promise(function (resolve, reject) {
             navigator.geolocation.getCurrentPosition(resolve, reject);
         });
+    }
+
+    getCrime = async() => {
+        fetch('api/crimeheatmap')
+            .then(res => res.json())
+            .then(data => {
+                this.setState({crime_data: data})
+            })
     }
 
     componentDidMount() {
@@ -41,7 +54,9 @@ class MyGoogleMap extends Component{
                 console.error(err.message);
                 this.setState({lat: -96.3376557, lng: 30.6262965})
             })
+        this.getCrime();
     }
+
 
     getImage() {
         switch(this.props.building){
@@ -60,7 +75,7 @@ class MyGoogleMap extends Component{
                 this.setState(
                     () => ({response})
                 )
-            } else {
+            } else if(response.status === 'OVER_QUERY_LIMIT') {
                 console.log('response: ', response)
             }
         }
@@ -70,10 +85,13 @@ class MyGoogleMap extends Component{
         //console.log("Updated: \n State: ", this.state, "\n Props: ", this.props)
     }
 
+
+
     render() {
         return (
             <LoadScript
                 googleMapsApiKey="AIzaSyAEZeR4pdli80dwbZNLbly_Da9bG-jk1k0"
+                libraries={libs}
             >
                 <GoogleMap
                     mapContainerStyle={containerStyle}
@@ -114,7 +132,7 @@ class MyGoogleMap extends Component{
                         }
                       ]}}
                     center={{lat: this.state.lat, lng: this.state.lng}}
-                    zoom={12}
+                    zoom={MyGoogleMap.zoom}
                 >
                     { /* Child components, such as markers, info windows, etc. */}
                     <Marker
@@ -126,6 +144,122 @@ class MyGoogleMap extends Component{
                         icon={this.getImage()}
                         label={{text: this.props.place_name, fontFamily: 'Verdana, sans-serif', fontSize: '2vh', className: 'marker'}}
                         position={this.props.place_position}
+                    />
+
+                    {this.state.crime_data[0] ? 
+                            <Polygon
+                                paths={this.state.crime_data[0].square}
+                                options={{fillColor: `#FF00${(this.state.crime_data[0].magnitude*16).toString(16)}`}}
+                            />
+                        
+                        : console.log("undefined")}{this.state.crime_data[1] ? 
+                            <Polygon
+                                paths={this.state.crime_data[1].square}
+                                options={{fillColor: `#FF00${(this.state.crime_data[1].magnitude*16).toString(16)}`}}
+                            />
+                        
+                        : console.log("undefined")}{this.state.crime_data[2] ? 
+                            <Polygon
+                                paths={this.state.crime_data[2].square}
+                                options={{fillColor: `#FF00${(this.state.crime_data[2].magnitude*16).toString(16)}`}}
+                            />
+                        
+                        : console.log("undefined")}{this.state.crime_data[3] ? 
+                            <Polygon
+                                paths={this.state.crime_data[3].square}
+                                options={{fillColor: `#FF00${(this.state.crime_data[3].magnitude*16).toString(16)}`}}
+                            />
+                        
+                        : console.log("undefined")}{this.state.crime_data[4] ? 
+                            <Polygon
+                                paths={this.state.crime_data[4].square}
+                                options={{fillColor: `#FF00${(this.state.crime_data[4].magnitude*16).toString(16)}`}}
+                            />
+                        
+                        : console.log("undefined")}{this.state.crime_data[5] ? 
+                            <Polygon
+                                paths={this.state.crime_data[5].square}
+                                options={{fillColor: `#FF00${(this.state.crime_data[5].magnitude*16).toString(16)}`}}
+                            />
+                        
+                        : console.log("undefined")}{this.state.crime_data[6] ? 
+                            <Polygon
+                                paths={this.state.crime_data[6].square}
+                                options={{fillColor: `#FF00${(this.state.crime_data[6].magnitude*16).toString(16)}`}}
+                            />
+                        
+                        : console.log("undefined")}{this.state.crime_data[7] ? 
+                            <Polygon
+                                paths={this.state.crime_data[7].square}
+                                options={{fillColor: `#FF00${(this.state.crime_data[7].magnitude*16).toString(16)}`}}
+                            />
+                        
+                        : console.log("undefined")}{this.state.crime_data[8] ? 
+                            <Polygon
+                                paths={this.state.crime_data[8].square}
+                                options={{fillColor: `#FF00${(this.state.crime_data[8].magnitude*16).toString(16)}`}}
+                            />
+                        
+                        : console.log("undefined")}{this.state.crime_data[9] ? 
+                            <Polygon
+                                paths={this.state.crime_data[9].square}
+                                options={{fillColor: `#FF00${(this.state.crime_data[9].magnitude*16).toString(16)}`}}
+                            />
+                        
+                        : console.log("undefined")}{this.state.crime_data[10] ? 
+                            <Polygon
+                                paths={this.state.crime_data[10].square}
+                                options={{fillColor: `#FF00${(this.state.crime_data[10].magnitude*16).toString(16)}`}}
+                            />
+                        
+                        : console.log("undefined")}{this.state.crime_data[11] ? 
+                            <Polygon
+                                paths={this.state.crime_data[11].square}
+                                options={{fillColor: `#FF00${(this.state.crime_data[11].magnitude*16).toString(16)}`}}
+                            />
+                        
+                        : console.log("undefined")}{this.state.crime_data[12] ? 
+                            <Polygon
+                                paths={this.state.crime_data[12].square}
+                                options={{fillColor: `#FF00${(this.state.crime_data[12].magnitude*16).toString(16)}`}}
+                            />
+                        
+                        : console.log("undefined")}{this.state.crime_data[13] ? 
+                            <Polygon
+                                paths={this.state.crime_data[13].square}
+                                options={{fillColor: `#FF00${(this.state.crime_data[13].magnitude*16).toString(16)}`}}
+                            />
+                        
+                        : console.log("undefined")}{this.state.crime_data[14] ? 
+                            <Polygon
+                                paths={this.state.crime_data[14].square}
+                                options={{fillColor: `#FF00${(this.state.crime_data[14].magnitude*16).toString(16)}`}}
+
+                            />
+                        
+                        : console.log("undefined")}{this.state.crime_data[15] ? 
+                            <Polygon
+                                paths={this.state.crime_data[15].square}
+                                options={{fillColor: `#FF00${(this.state.crime_data[15].magnitude*16).toString(16)}`}}
+                            />
+                        
+                        : console.log("undefined")}
+
+                    <Marker
+                        label="{lat: 29.49764, lng: -95.034621}"
+                        position={{lat: 29.49764, lng: -95.034621}}
+                    />
+                    <Marker
+                        label="{lat: 30.118713, lng: -95.812735}"
+                        position={{lat: 30.118713, lng: -95.81273}}
+                    />
+                    <Marker
+                        label="{lat:29.49764, lng: -95.812735}"
+                        position={{lat:29.49764, lng: -95.812735}}
+                    />
+                    <Marker
+                        label="{lat: 30.118713, lng: -95.034621}"
+                        position={{lat: 30.118713, lng: -95.034621}}
                     />
 
                     {
@@ -140,6 +274,7 @@ class MyGoogleMap extends Component{
                             }}
                             // required
                             callback={this.directionsCallback}
+
                             // optional
                             onLoad={directionsService => {
                                 console.log('DirectionsService onLoad directionsService: ', directionsService)
@@ -148,7 +283,7 @@ class MyGoogleMap extends Component{
                             onUnmount={directionsService => {
                                 console.log('DirectionsService onUnmount directionsService: ', directionsService)
                             }}
-                        />) : <></>) 
+                        />) : <></>)
                         }
                         {
                         (this.state.response ?
@@ -164,9 +299,9 @@ class MyGoogleMap extends Component{
                             // optional
                             onUnmount={directionsRenderer => {
                                 console.log('DirectionsRenderer onUnmount directionsRenderer: ', directionsRenderer)
-                            }}  
+                            }}
                         />) : <></>)
-                        
+
                     }
                 </GoogleMap>
             </LoadScript>
