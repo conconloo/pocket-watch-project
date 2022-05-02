@@ -206,6 +206,9 @@
 }
 
 .filters button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 2%;
   text-transform: uppercase;
   background-color: white;
@@ -219,6 +222,13 @@
 .filters button:hover {
   cursor: pointer;
   border-color: black;
+}
+
+.filters img {
+  height: 30px;
+  width: auto;
+  margin-right: 1%;
+  vertical-align: center;
 }
 
 .videopage {
