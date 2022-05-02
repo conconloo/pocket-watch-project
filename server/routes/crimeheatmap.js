@@ -13,7 +13,7 @@ Things to parse:
 3.) longitude
 */
 
-function getPolygons() {
+async function getPolygons() {
     let Count = 16
     let ParentPolygon = [
         {lat: 30.118713, lng: -95.812735 }, // Top Left
@@ -104,7 +104,7 @@ async function getParsedData() {
     let results = await getPolygons();
     let file = '../server/datafiles/NIBRSPublicViewJan-Mar22.csv' // hard coded file & file directory
 
-    await fs.createReadStream(file)
+    fs.createReadStream(file)
         .pipe(csv({mapValues: ({value}) => parseFloat(value)}))
         .on('data', (data) => {
             if(data.lat && data.lng && data.mag) { // check if a latitude and longitude exist
@@ -130,19 +130,20 @@ async function getParsedData() {
             }
         })
         .on('end', () => {
-        console.log("What should go to Front-end", results); // check to see if the results are correct
-       
+            console.log("What should go to Front-end", results); // check to see if the results are correct
+            return results;
     }); 
 
-    return results;
+    
 }
 
 router.get('/', async (req, res) => {
-    await getParsedData()
-    .then(results => {
-        console.log("To Front-end" , results)
-        res.json(results)
-    })
+    const results = await getParsedData()
+    res.send(results) && console.log(results)
+    /*  getParsedData().then((results) => {
+        console.log(results)
+        res.send(results)
+    }).then(() => console.log("Shit")) */
 })
 
 module.exports = router;
