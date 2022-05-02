@@ -4,8 +4,27 @@ import ShowVideo from "../components/ShowVideo";
 import FilterButtons from "../components/FilterButtons";
 import LoadingSpinner from "../components/LoadingSpinner";
 
+import workicon from "../images/worksafety.png";
+import cpricon from "../images/cpr.png";
+import firstaidicon from "../images/firstaid.png";
+import sexsafetyicon from "../images/sexsafety.png";
+import disastericon from "../images/disaster.png";
+import selfdefenseicon from "../images/selfdefense.png";
+import outdooricon from "../images/outdoor.png";
+import caricon from "../images/car.png";
+
 const keywords = require('../json/VideoSearchList.json');
 let WatchVideo = 'https://www.youtube.com/watch?v=';
+
+var hash = {};
+hash['Work Safety'] = workicon;
+hash['CPR'] = cpricon;
+hash['First Aid'] = firstaidicon;
+hash['Sexual Safety'] = sexsafetyicon;
+hash['Disaster Safety'] = disastericon;
+hash['Self Defense'] = selfdefenseicon;
+hash['Outdoor Safety'] = outdooricon;
+hash['Car Safety'] = caricon;
 
 class SafetyVideos extends Component {
 
@@ -74,7 +93,10 @@ class SafetyVideos extends Component {
                         {this.state.showFilters ?
                             Object.keys(this.state.keywords).map(key => (
                                 <>
-                                <button onClick={() => this.handleFilter(this.state.keywords[key], key)}>{key}</button>
+                                <button onClick={() => this.handleFilter(this.state.keywords[key], key)}>
+                                    <img src={hash[key]}></img>
+                                    {key}
+                                </button>
                                 </>
                             ))
                             : ''
