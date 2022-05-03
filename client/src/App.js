@@ -11,8 +11,11 @@ import {
   Link
 } from "react-router-dom";
 import image1 from './images/logo.png';
-
-
+import homeicon from "./images/home.png";
+import mapicon from "./images/map.png";
+import crimeicon from "./images/handcuff.png";
+import weathericon from "./images/weather.png";
+import videoicon from "./images/videos.png";
 
 const App = () => {  
 
@@ -46,11 +49,36 @@ const App = () => {
               <i className="fa fa-bars"></i>
             </button>
             <div className='links' id="links">
-              <Link className="link" to="/videos">Videos</Link>
-              <Link className="link" to="/weather">Weather</Link>
-              <Link className="link" to="/crime">Crime</Link>
-              <Link className="link" to="/map">Map</Link>
-              <Link className="link" to="/">Home</Link>
+              <Link className="link" to="/videos">
+                <div className="NavbarLink">
+                  <img src={videoicon}></img>
+                  Videos
+                </div>
+              </Link>
+              <Link className="link" to="/weather">
+                <div className="NavbarLink">
+                  <img src={weathericon}></img>
+                  Weather
+                </div>
+              </Link>
+              <Link className="link" to="/crime">
+                <div className="NavbarLink">
+                  <img src={crimeicon}></img>
+                  Crime
+                </div>
+              </Link>
+              <Link className="link" to="/map">
+                <div className="NavbarLink">
+                  <img src={mapicon}></img>
+                  Map
+                </div>
+              </Link>
+              <Link className="link" to="/">
+                <div className="NavbarLink">
+                  <img src={homeicon}></img>
+                  Home
+                </div>
+              </Link>
             </div>
           </div>
           <div className="Card">
