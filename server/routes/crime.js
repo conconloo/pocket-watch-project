@@ -3,8 +3,8 @@ const axios = require('axios');
 const { response } = require('express');
 const router = express.Router();
 
-let fbiAPIKey = 'relXeTTdG5NzRK8Xdd3i2BaDtrjudH84Qvzt3Apd'; // FBI Crime Data Key
-let googleAPIKey = 'AIzaSyAEZeR4pdli80dwbZNLbly_Da9bG-jk1k0'; // Google Geocoding Key
+let fbiAPIKey = ''; // FBI Crime Data Key
+let googleAPIKey = ''; // Google Geocoding Key
 
 async function getORIData() {
 

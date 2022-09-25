@@ -3,7 +3,7 @@ const axios = require('axios');
 const { response } = require('express');
 const router = express.Router();
 
-let apiKey = 'AIzaSyCKCEMgiaLWZNfcMVsDwnVGf8qbkKN2s_g';
+let apiKey = '';
 
 // const {Translate} = require('@google-cloud/translate').v2;
 // const translate = new Translate();

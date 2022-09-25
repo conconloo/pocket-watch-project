@@ -3,7 +3,7 @@ const axios = require('axios');
 const { response } = require('express');
 const router = express.Router();
 
-let apiKey = 'AIzaSyAEZeR4pdli80dwbZNLbly_Da9bG-jk1k0';
+let apiKey = '';
 
 async function getPlacesList (req = false) {
     let latitude = req.query.latitude || 30.601389;

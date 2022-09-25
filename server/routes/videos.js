@@ -4,7 +4,7 @@ const axios = require('axios');
 const { response } = require('express');
 const router = express.Router();
 
-let apiKey = 'AIzaSyCKCEMgiaLWZNfcMVsDwnVGf8qbkKN2s_g' // remove this before pushing
+let apiKey = '' // remove this before pushing
 
 // Add like an update parameter check, if an update request is sent then force the update
 

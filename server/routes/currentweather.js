@@ -3,7 +3,7 @@ const axios = require('axios');
 const { response } = require('express');
 const router = express.Router();
 
-let apiKey = '207a527a4d31d2de8a7264f13e8ad6a2'; // remove this before pushing
+let apiKey = ''; // remove this before pushing
 
 async function getCurrentWeatherData(req) {
 
